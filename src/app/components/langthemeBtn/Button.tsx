@@ -1,8 +1,8 @@
 "use client"
 import { useSession } from "next-auth/react";
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useClickOutside } from "../reusable/ClickOutsideDiv";
-import { modeStyles, languageOptions } from "@/app/data/lang&theme";
+import { modeStyles, languageOptions } from "@/app/data/layoutData";
 import { useTheme } from "@/app/context/ThemeContext";
 import { showToast } from "@/app/components/reusable/Toasters";
 import { HandleResetProps } from "@/app/types/theme";
@@ -67,6 +67,10 @@ export default function StickyButton() {
         }
     }
 
+    useEffect(() => {
+        console.log(showConfig)
+    }, [showConfig])
+
     return (
         <>
             <div
@@ -84,9 +88,7 @@ export default function StickyButton() {
             </div>
 
             {showConfig && (
-                <div className="
-                    fixed z-52 right-0
-                    w-[400px] h-full
+                <div className="fixed z-50 right-0 top-0 w-[400px] h-full
                     flex flex-col 
                     py-7 pl-5 pr-5 
                     bg-gradient-to-b from-gray-100 to-gray-200

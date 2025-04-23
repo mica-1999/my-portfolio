@@ -75,9 +75,9 @@ export default function Navbar() {
                             Home
                         </Link>
                         <Link
-                            href="/pages/projects"
+                            href="/pages/home/projects"
                             className={`text-base font-medium py-2 px-4 rounded-md transition-all relative
-                                ${isActive('/pages/projects')
+                                ${isActive('/pages/home/projects')
                                     ? 'text-white bg-white/10 after:content-[""] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-0.5 after:bg-indigo-500 after:rounded'
                                     : 'text-white/70 hover:text-white hover:bg-white/10'
                                 } md:w-auto w-4/5 mx-auto text-center`}
@@ -85,9 +85,9 @@ export default function Navbar() {
                             Projects
                         </Link>
                         <Link
-                            href="/pages/about"
+                            href="/pages/home/about"
                             className={`text-base font-medium py-2 px-4 rounded-md transition-all relative
-                                ${isActive('/pages/about')
+                                ${isActive('/pages/home/about')
                                     ? 'text-white bg-white/10 after:content-[""] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-0.5 after:bg-indigo-500 after:rounded'
                                     : 'text-white/70 hover:text-white hover:bg-white/10'
                                 } md:w-auto w-4/5 mx-auto text-center`}
@@ -95,9 +95,9 @@ export default function Navbar() {
                             About
                         </Link>
                         <Link
-                            href="/pages/contact"
+                            href="/pages/home/contact"
                             className={`text-base font-medium py-2 px-4 rounded-md transition-all relative
-                                ${isActive('/pages/contact')
+                                ${isActive('/pages/home/contact')
                                     ? 'text-white bg-white/10 after:content-[""] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-5 after:h-0.5 after:bg-indigo-500 after:rounded'
                                     : 'text-white/70 hover:text-white hover:bg-white/10'
                                 } md:w-auto w-4/5 mx-auto text-center`}

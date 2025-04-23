@@ -4,7 +4,8 @@ import 'remixicon/fonts/remixicon.css'; // Import Remix Icon CSS
 import NextAuthSessionProvider from "./sessionWrapper";
 import { ToastContainer } from 'react-toastify'; // Initialize ToastContainer for App
 import { ThemeProvider } from "./context/ThemeContext";
-import StickyButton from "./components/language&theme/Button";
+import StickyButton from "./components/langthemeBtn/Button";
+import LoadingWrapper from "./components/reusable/LoadingWrapper";
 
 export const metadata: Metadata = {
   title: "Micael's Portfolio",
@@ -19,7 +20,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* This script runs before anything else loads */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -47,11 +47,14 @@ export default function RootLayout({
         className="antialiased"
         suppressHydrationWarning
       >
+        {/* NextAuthSessionProvider must be the outermost provider */}
         <NextAuthSessionProvider>
           <ThemeProvider>
-            <ToastContainer />
-            {children}
-            <StickyButton />
+            <LoadingWrapper>
+              <ToastContainer />
+              {children}
+              <StickyButton />
+            </LoadingWrapper>
           </ThemeProvider>
         </NextAuthSessionProvider>
       </body>
