@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
   --background: #ffffff;
@@ -12,15 +13,37 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+}
+
+/* Dark mode implementation using class instead of media query */
+html.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+html.dark body {
+  background-color: #0f172a; /* dark background - tailwind's slate-900 */
+  color: #e2e8f0; /* dark mode text color - tailwind's slate-200 */
+}
+
+/* Overlay styles for modals/dialogs */
+body.overlay-active::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  pointer-events: all;
+}
+
+/* Prevent scrolling when overlay is active */
+body.overlay-active {
+  overflow: hidden;
 }
