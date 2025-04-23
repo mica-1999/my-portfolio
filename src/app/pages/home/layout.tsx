@@ -15,7 +15,7 @@ export default function PagesLayout({
     return (
         <div className="min-h-screen flex flex-col">
             <Navbar />
-            <main className="flex-grow mt-16">
+            <main className="flex-grow mt-16 dark:bg-[#1A1A1A]">
                 {children}
             </main>
             <Footer />

@@ -20,6 +20,40 @@ html.dark body {
   100% { transform: rotate(360deg) }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Add different animation delays for each item */
+.animate-fade-in > div > div:nth-child(1) {
+  animation-delay: 0.1s;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 0.1s forwards;
+}
+
+.animate-fade-in > div > div:nth-child(2) {
+  animation-delay: 0.2s;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 0.2s forwards;
+}
+
+.animate-fade-in > div > div:nth-child(3) {
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out 0.3s forwards;
+}
+
 /* Overlay styles for modals/dialogs */
 body.overlay-active::before {
   content: '';
