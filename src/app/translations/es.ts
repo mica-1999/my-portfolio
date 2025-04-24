@@ -86,6 +86,12 @@ const translations = {
                     company: 'Empresa de Tecnología',
                     period: '2020 - 2021',
                     description: 'Asistí al equipo de desarrollo en la creación y mantenimiento de aplicaciones web, enfocándome en componentes de UI y diseño responsivo.'
+                },
+                {
+                    title: 'Becario en Desarrollo Web',
+                    company: 'Startup de Tecnología',
+                    period: '2019 - 2020',
+                    description: 'Trabajé en tareas de desarrollo frontend mientras aprendía estándares de la industria. Convertí maquetas de diseño en componentes funcionales y ayudé en la implementación de diseños responsivos.'
                 }
             ]
         },
@@ -99,10 +105,16 @@ const translations = {
                     description: 'Enfoque en desarrollo full-stack, algoritmos y principios de arquitectura de software.'
                 },
                 {
-                    degree: 'Bootcamp de Desarrollo Web',
-                    institution: 'Plataforma Online',
-                    period: '2019',
-                    description: 'Programa intensivo de 12 semanas cubriendo tecnologías y prácticas modernas de desarrollo web.'
+                    degree: 'Diploma Técnico en Programación',
+                    institution: 'Escuela Profesional',
+                    period: '2017 - 2020',
+                    description: 'Especialización en fundamentos de programación y desarrollo web. Desarrollé una base sólida en HTML, CSS, JavaScript y tecnologías básicas de backend.'
+                },
+                {
+                    degree: 'Aprendizaje Autodidacta',
+                    institution: 'Plataformas Online y Proyectos Personales',
+                    period: '2018 - Presente',
+                    description: 'Aprendizaje continuo a través de cursos online, documentación y proyectos personales. Temas incluyen frameworks modernos de JavaScript, gestión de estado, principios de UI/UX y estrategias de despliegue.'
                 }
             ]
         }
@@ -177,6 +189,25 @@ const translations = {
             subtitle: '¡Creemos algo increíble juntos!',
             button: 'Programar una Llamada'
         }
+    },
+    login: {
+        welcomeBack: 'Bienvenido de Nuevo',
+        enterDetails: 'Por favor, introduce tus datos',
+        username: 'Nombre de usuario',
+        usernamePlaceholder: 'Ingresa tu nombre de usuario',
+        password: 'Contraseña',
+        passwordPlaceholder: '••••••••',
+        rememberMe: 'Recordarme',
+        forgotPassword: '¿Olvidó la contraseña?',
+        signIn: 'Iniciar sesión',
+        signingIn: 'Iniciando sesión...',
+        continueWith: 'O continuar con',
+        noAccount: '¿No tienes una cuenta?',
+        signUp: 'Registrarse',
+        emptyFields: 'El nombre de usuario y la contraseña son obligatorios',
+        invalidCredentials: 'Credenciales inválidas',
+        success: 'Inicio de sesión exitoso',
+        error: 'Algo salió mal'
     },
     footer: {
         aboutMeTitle: 'Sobre Mí',

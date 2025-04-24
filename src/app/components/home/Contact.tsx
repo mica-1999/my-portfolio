@@ -1,12 +1,52 @@
 "use client";
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { faqs } from '@/app/data/faqData';
 import { useTheme } from '@/app/context/ThemeContext';
+import { useSearchParams } from 'next/navigation';
 
 export default function Contact() {
     const { t } = useTheme();
     const messageFormRef = useRef(null);
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const searchParams = useSearchParams();
+
+    // Smooth scroll function
+    const smoothScrollToForm = () => {
+        if (messageFormRef.current) {
+            const startPosition = window.scrollY;
+            const element = messageFormRef.current as HTMLElement;
+            const yOffset = -90;
+            const endPosition = element.getBoundingClientRect().top + window.scrollY + yOffset;
+
+            const duration = 1000;
+            let startTime = performance.now();
+
+            const animateScroll = (currentTime: number) => {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                const easeInOut = progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                const position = startPosition + (endPosition - startPosition) * easeInOut;
+
+                window.scrollTo(0, position);
+
+                if (elapsedTime < duration) {
+                    requestAnimationFrame(animateScroll);
+                }
+            };
+
+            requestAnimationFrame(animateScroll);
+        }
+    };
+
+    // Check for scrollToForm parameter when component mounts
+    useEffect(() => {
+        if (searchParams.get('scrollToForm') === 'true') {
+            setTimeout(smoothScrollToForm, 300);
+        }
+    }, [searchParams]);
 
     // Toggle FAQ item
     const toggleFaq = (index: number) => {
@@ -16,16 +56,7 @@ export default function Contact() {
     // Scroll to form on button click
     const scrollToForm = (e: React.MouseEvent) => {
         e.preventDefault();
-        if (messageFormRef.current) {
-            const yOffset = -100;
-            const element = messageFormRef.current as HTMLElement;
-            const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
-
-            window.scrollTo({
-                top: y,
-                behavior: 'smooth'
-            });
-        }
+        smoothScrollToForm();
     };
 
     return (
@@ -231,7 +262,7 @@ export default function Contact() {
                     <p className="text-lg mb-6">{t('contact.cta.subtitle')}</p>
                     <button
                         onClick={scrollToForm}
-                        className="bg-white text-[#FF6B35] dark:bg-gray-900 dark:text-[#666cff] px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg flex items-center space-x-2 mx-auto"
+                        className="bg-white text-[#FF6B35] dark:bg-gray-900 dark:text-[#666cff] px-8 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-lg flex items-center space-x-2 mx-auto cursor-pointer"
                     >
                         <i className="ri-calendar-line"></i>
                         <span>{t('contact.cta.button')}</span>

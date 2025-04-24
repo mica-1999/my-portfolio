@@ -26,7 +26,7 @@ const translations = {
     navbar: {
         home: 'Início',
         projects: 'Projetos',
-        about: 'Sobre',
+        about: 'Sobre Mim',
         contact: 'Contacto',
         login: 'Entrar',
         toggleMenu: 'Alternar menu'
@@ -86,6 +86,12 @@ const translations = {
                     company: 'Empresa de Tecnologia',
                     period: '2020 - 2021',
                     description: 'Auxiliei a equipe de desenvolvimento na criação e manutenção de aplicações web, focando em componentes de UI e design responsivo.'
+                },
+                {
+                    title: 'Estagiário em Desenvolvimento Web',
+                    company: 'Startup de Tecnologia',
+                    period: '2019 - 2020',
+                    description: 'Trabalhei em tarefas de desenvolvimento frontend enquanto aprendia padrões da indústria. Converti mockups de design em componentes funcionais e auxiliei na implementação de designs responsivos.'
                 }
             ]
         },
@@ -99,10 +105,16 @@ const translations = {
                     description: 'Foco em desenvolvimento full-stack, algoritmos e princípios de arquitetura de software.'
                 },
                 {
-                    degree: 'Bootcamp de Desenvolvimento Web',
-                    institution: 'Plataforma Online',
-                    period: '2019',
-                    description: 'Programa intensivo de 12 semanas cobrindo tecnologias e práticas modernas de desenvolvimento web.'
+                    degree: 'Diploma Técnico em Programação',
+                    institution: 'Escola Profissional',
+                    period: '2017 - 2020',
+                    description: 'Especialização em fundamentos de programação e desenvolvimento web. Desenvolvi uma base sólida em HTML, CSS, JavaScript e tecnologias básicas de backend.'
+                },
+                {
+                    degree: 'Aprendizagem Autodidata',
+                    institution: 'Plataformas Online & Projetos Pessoais',
+                    period: '2018 - Presente',
+                    description: 'Aprendizagem contínua através de cursos online, documentação e projetos pessoais. Tópicos incluem frameworks JavaScript modernos, gestão de estado, princípios de UI/UX e estratégias de deployment.'
                 }
             ]
         }
@@ -177,6 +189,25 @@ const translations = {
             subtitle: 'Vamos criar algo incrível juntos!',
             button: 'Agendar uma Chamada'
         }
+    },
+    login: {
+        welcomeBack: 'Bem-vindo de Volta',
+        enterDetails: 'Por favor, insira os seus dados',
+        username: 'Nome de utilizador',
+        usernamePlaceholder: 'Insira o seu nome de utilizador',
+        password: 'Palavra-passe',
+        passwordPlaceholder: '••••••••',
+        rememberMe: 'Lembrar-me',
+        forgotPassword: 'Esqueceu a palavra-passe?',
+        signIn: 'Entrar',
+        signingIn: 'A entrar...',
+        continueWith: 'Ou continuar com',
+        noAccount: 'Não tem uma conta?',
+        signUp: 'Registar',
+        emptyFields: 'Nome de utilizador e palavra-passe são obrigatórios',
+        invalidCredentials: 'Credenciais inválidas',
+        success: 'Login bem-sucedido',
+        error: 'Algo correu mal'
     },
     footer: {
         aboutMeTitle: 'Sobre Mim',

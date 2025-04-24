@@ -26,7 +26,7 @@ const translations = {
     navbar: {
         home: 'Home',
         projects: 'Projects',
-        about: 'About',
+        about: 'About Me',
         contact: 'Contact',
         login: 'Login',
         toggleMenu: 'Toggle menu'
@@ -86,6 +86,12 @@ const translations = {
                     company: 'Tech Company',
                     period: '2020 - 2021',
                     description: 'Assisted the development team in creating and maintaining web applications, focusing on UI components and responsive design.'
+                },
+                {
+                    title: 'Web Development Intern',
+                    company: 'Tech Startup',
+                    period: '2019 - 2020',
+                    description: 'Worked on front-end development tasks while learning industry standards. Converted design mockups to functional components and assisted in implementing responsive designs.'
                 }
             ]
         },
@@ -99,10 +105,16 @@ const translations = {
                     description: 'Focusing on full-stack development, algorithms, and software architecture principles.'
                 },
                 {
-                    degree: 'Web Development Bootcamp',
-                    institution: 'Online Platform',
-                    period: '2019',
-                    description: 'Intensive 12-week program covering modern web development technologies and practices.'
+                    degree: 'Technical Diploma in Programming',
+                    institution: 'Professional High School',
+                    period: '2017 - 2020',
+                    description: 'Specialized in programming fundamentals and web development. Developed a strong foundation in HTML, CSS, JavaScript, and basic backend technologies.'
+                },
+                {
+                    degree: 'Self-Directed Learning',
+                    institution: 'Online Platforms & Personal Projects',
+                    period: '2018 - Present',
+                    description: 'Continuously learning through online courses, documentation, and personal projects. Topics include modern JavaScript frameworks, state management, UI/UX design principles, and deployment strategies.'
                 }
             ]
         }
@@ -177,6 +189,25 @@ const translations = {
             subtitle: 'Let\'s create something amazing together!',
             button: 'Schedule a Call'
         }
+    },
+    login: {
+        welcomeBack: 'Welcome Back',
+        enterDetails: 'Please enter your details',
+        username: 'Username',
+        usernamePlaceholder: 'Enter your username',
+        password: 'Password',
+        passwordPlaceholder: '••••••••',
+        rememberMe: 'Remember me',
+        forgotPassword: 'Forgot password?',
+        signIn: 'Sign In',
+        signingIn: 'Signing In...',
+        continueWith: 'Or continue with',
+        noAccount: 'Don\'t have an account?',
+        signUp: 'Sign up',
+        emptyFields: 'Username and password are required',
+        invalidCredentials: 'Invalid credentials',
+        success: 'Login successful',
+        error: 'Something went wrong'
     },
     footer: {
         aboutMeTitle: 'About Me',

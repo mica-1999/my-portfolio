@@ -1,12 +1,18 @@
 "use client";
 import { useState } from 'react';
-import Image from 'next/image';
-import { skills, experiences, education } from '@/app/data/aboutmeData';
+import { skills } from '@/app/data/aboutmeData';
 import { useTheme } from '@/app/context/ThemeContext';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ExperienceItem, EducationItem } from '@/app/types/home';
 
 export default function AboutMe() {
-    const { t } = useTheme();
+    const { t, tArray } = useTheme();
     const [activeTab, setActiveTab] = useState('overview');
+
+    // Fetch experience and education items using tArray
+    const experienceItems = tArray<ExperienceItem>('about.experience.items');
+    const educationItems = tArray<EducationItem>('about.education.items');
 
     return (
         <div className="max-w-[1400px] mx-auto px-4 py-16 md:px-8 lg:px-16">
@@ -74,9 +80,15 @@ export default function AboutMe() {
                             <a href="/path-to-cv.pdf" className="bg-[#FF6B35] hover:bg-[#e55a29] text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md flex items-center gap-2 dark:bg-[#666cff] dark:hover:bg-[#5a5fe6]">
                                 <i className="ri-download-line"></i> {t('about.downloadCV')}
                             </a>
-                            <a href="/pages/contact" className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md flex items-center gap-2 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                            <Link
+                                href={{
+                                    pathname: "/pages/home/contact",
+                                    query: { scrollToForm: 'true' }
+                                }}
+                                className="bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:translate-y-[-2px] hover:shadow-md flex items-center gap-2 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                            >
                                 <i className="ri-mail-line"></i> {t('about.contactMe')}
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -191,23 +203,23 @@ export default function AboutMe() {
                                 <h4 className="text-2xl font-semibold text-[#FF6B35] dark:text-[#666cff] mb-6">{t('about.experience.title')}</h4>
 
                                 <div className="relative pl-8 border-l border-gray-200 dark:border-gray-700/70">
-                                    {experiences.map((exp, index) => (
+                                    {experienceItems.map((exp, index) => (
                                         <div key={index} className="relative mb-10">
                                             <div className="absolute -left-10 top-1 w-4 h-4 rounded-full bg-[#FF6B35] dark:bg-[#666cff] border-[3px] border-white dark:border-gray-800 shadow-[0_0_0_2px] shadow-[#FF6B35]/30 dark:shadow-[#666cff]/30"></div>
                                             <div>
                                                 <h5 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
-                                                    {t(`about.experience.items.${index}.title`) || exp.title}
+                                                    {exp.title}
                                                 </h5>
                                                 <div className="flex justify-between items-center text-sm mb-2">
                                                     <span className="text-[#FF6B35] dark:text-[#666cff] font-medium">
-                                                        {t(`about.experience.items.${index}.company`) || exp.company}
+                                                        {exp.company}
                                                     </span>
                                                     <span className="text-gray-500 dark:text-gray-400">
-                                                        {t(`about.experience.items.${index}.period`) || exp.period}
+                                                        {exp.period}
                                                     </span>
                                                 </div>
                                                 <p className="text-gray-600 dark:text-gray-300">
-                                                    {t(`about.experience.items.${index}.description`) || exp.description}
+                                                    {exp.description}
                                                 </p>
                                             </div>
                                         </div>
@@ -222,23 +234,23 @@ export default function AboutMe() {
                                 <h4 className="text-2xl font-semibold text-[#FF6B35] dark:text-[#666cff] mb-6">{t('about.education.title')}</h4>
 
                                 <div className="relative pl-8 border-l border-gray-200 dark:border-gray-700/70">
-                                    {education.map((edu, index) => (
+                                    {educationItems.map((edu, index) => (
                                         <div key={index} className="relative mb-10">
                                             <div className="absolute -left-10 top-1 w-4 h-4 rounded-full bg-[#FF6B35] dark:bg-[#666cff] border-[3px] border-white dark:border-gray-800 shadow-[0_0_0_2px] shadow-[#FF6B35]/30 dark:shadow-[#666cff]/30"></div>
                                             <div>
                                                 <h5 className="text-lg font-semibold text-gray-800 dark:text-white mb-1">
-                                                    {t(`about.education.items.${index}.degree`) || edu.degree}
+                                                    {edu.degree}
                                                 </h5>
                                                 <div className="flex justify-between items-center text-sm mb-2">
                                                     <span className="text-[#FF6B35] dark:text-[#666cff] font-medium">
-                                                        {t(`about.education.items.${index}.institution`) || edu.institution}
+                                                        {edu.institution}
                                                     </span>
                                                     <span className="text-gray-500 dark:text-gray-400">
-                                                        {t(`about.education.items.${index}.period`) || edu.period}
+                                                        {edu.period}
                                                     </span>
                                                 </div>
                                                 <p className="text-gray-600 dark:text-gray-300">
-                                                    {t(`about.education.items.${index}.description`) || edu.description}
+                                                    {edu.description}
                                                 </p>
                                             </div>
                                         </div>
