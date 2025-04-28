@@ -1,31 +1,21 @@
 "use client";
 import { useState } from 'react';
+import { BankDetails } from '@/app/types/dashmain';
+import { formatNumber } from '../../reusable/Utils';
+import { useTheme } from '@/app/context/ThemeContext';
 
-export default function Banking() {
+export default function Banking({ bankDetails }: { bankDetails: BankDetails }) {
+    // States & Hooks
     const [hidden, setHidden] = useState(false);
-
-    // Mock data for balance information
-    const balanceData = {
-        totalBalance: 8750.25,
-        balanceMonth: 2450.75,
-        withdrawal: 1250.50
-    };
-
-    // Format number with commas and 2 decimal places
-    const formatNumber = (num: number) => {
-        return num.toLocaleString('en-US', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-    };
+    const { t } = useTheme(); // Get translation function from context
 
     return (
-        <div className="flex md:w-1/2 w-full">
+        <div className="flex xl:w-1/2 w-full">
             <div className="w-full rounded-xl bg-white shadow-md dark:bg-[#30334E]">
                 <div className={hidden ? 'blur-sm' : ''}>
                     <div className="p-4 border-b border-gray-200 dark:border-gray-700">
                         <div className="flex items-center justify-between">
-                            <h5 className="text-xl font-semibold text-gray-800 dark:text-[#d7d8ed]">Multibanco</h5>
+                            <h5 className="text-xl font-semibold text-gray-800 dark:text-[#d7d8ed]">{t('banking.title')}</h5>
                             <div>
                                 <button onClick={() => setHidden(!hidden)} className="text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white cursor-pointer">
                                     {hidden ?
@@ -41,7 +31,7 @@ export default function Banking() {
                                 </button>
                             </div>
                         </div>
-                        <h6 className="text-sm text-gray-600 dark:text-[#9698af]">Balance Overview</h6>
+                        <h6 className="text-sm text-gray-600 dark:text-[#9698af]">{t('banking.balanceOverview')}</h6>
                     </div>
                     <div className="flex justify-evenly flex-wrap p-4">
                         <div className="flex gap-2 mb-3">
@@ -49,8 +39,8 @@ export default function Banking() {
                                 <span className="text-[#666CFF] text-lg">€</span>
                             </div>
                             <div>
-                                <h5 className="text-base font-medium mb-0">{formatNumber(balanceData.totalBalance)}</h5>
-                                <p className="text-sm text-gray-600 dark:text-[#9698af] mb-0">Total Balance</p>
+                                <h5 className="text-base font-medium mb-0">{formatNumber(bankDetails.totalBalance)}</h5>
+                                <p className="text-sm text-gray-600 dark:text-[#9698af] mb-0">{t('banking.totalBalance')}</p>
                             </div>
                         </div>
                         <div className="flex gap-2 mb-3">
@@ -60,8 +50,8 @@ export default function Banking() {
                                 </svg>
                             </div>
                             <div>
-                                <h5 className="text-base font-medium mb-0">{formatNumber(balanceData.balanceMonth)}</h5>
-                                <p className="text-sm text-gray-600 dark:text-[#9698af] mb-0">This Month</p>
+                                <h5 className="text-base font-medium mb-0">{formatNumber(bankDetails.depositThisMonth)}</h5>
+                                <p className="text-sm text-gray-600 dark:text-[#9698af] mb-0">{t('banking.thisMonth')}</p>
                             </div>
                         </div>
                         <div className="flex gap-2 mb-3">
@@ -71,8 +61,8 @@ export default function Banking() {
                                 </svg>
                             </div>
                             <div>
-                                <h5 className="text-base font-medium mb-0">{formatNumber(balanceData.withdrawal)}</h5>
-                                <p className="text-sm text-gray-600 dark:text-[#9698af] mb-0">New Transactions</p>
+                                <h5 className="text-base font-medium mb-0">{formatNumber(bankDetails.withdrawThisMonth)}</h5>
+                                <p className="text-sm text-gray-600 dark:text-[#9698af] mb-0">{t('banking.newTransactions')}</p>
                             </div>
                         </div>
                     </div>

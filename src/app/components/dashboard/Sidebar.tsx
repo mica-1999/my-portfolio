@@ -1,12 +1,14 @@
 "use client";
 import Link from 'next/link';
 import { useState, useRef } from 'react';
+import { useTheme } from "@/app/context/ThemeContext";
 import { dashboardMenuData, appsAndPagesData, configsData } from '@/app/data/dashboardMenuData';
 
 export default function Sidebar() {
     const [selectedMenu, setSelectedMenu] = useState('Home');
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+    const { t } = useTheme();
 
     const toggleDropdown = (title: string) => {
         setActiveDropdown(activeDropdown === title ? null : title);
@@ -17,7 +19,7 @@ export default function Sidebar() {
     };
 
     return (
-        <div className='flex flex-col w-64 bg-[#282A42] text-white h-screen'>
+        <div className='hidden lg:flex flex-col w-64 bg-[#282A42] text-white h-screen'>
             {/* Logo Section */}
             <div className='w-full flex items-center px-4 mt-10'>
                 <Link href="/pages/dashboard" className="flex items-center">
@@ -65,7 +67,7 @@ export default function Sidebar() {
                                         >
                                             <div className="flex items-center">
                                                 <i className={`${menuItem.icon} text-xl`}></i>
-                                                <span className='ml-2'>{menuItem.title}</span>
+                                                <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
                                             </div>
                                             <i className={`ri-arrow-right-s-line text-xl transform transition-transform duration-200 ${isDropdownOpen(menuItem.title) ? 'rotate-90' : ''}`}></i>
                                         </div>
@@ -94,7 +96,7 @@ export default function Sidebar() {
                                                                 onClick={() => setSelectedMenu(sublink.title)}
                                                             >
                                                                 <i className="ri-circle-fill text-[0.6rem] text-white ml-1"></i>
-                                                                <span className='ml-4'>{sublink.title}</span>
+                                                                <span className='ml-4'>{t(`sidebar.${sublink.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
                                                             </div>
                                                         </Link>
                                                     </li>
@@ -114,7 +116,7 @@ export default function Sidebar() {
                                             onClick={() => setSelectedMenu(menuItem.title)}
                                         >
                                             <i className={`${menuItem.icon} text-xl`}></i>
-                                            <span className='ml-2'>{menuItem.title}</span>
+                                            <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
                                         </div>
                                     </Link>
                                 )}
@@ -126,7 +128,7 @@ export default function Sidebar() {
                 {/* APPS & PAGES section */}
                 <div>
                     <div className="mb-3 px-3">
-                        <span className="text-[#7b7c95] text-[0.8125rem] font-medium uppercase">APPS & PAGES</span>
+                        <span className="text-[#7b7c95] text-[0.8125rem] font-medium uppercase">{t('sidebar.appsAndPages')}</span>
                     </div>
                     <ul id="appsMenu" className='flex flex-col w-full space-y-1'>
                         {appsAndPagesData.map((menuItem, index) => (
@@ -144,7 +146,7 @@ export default function Sidebar() {
                                         >
                                             <div className="flex items-center">
                                                 <i className={`${menuItem.icon} text-xl`}></i>
-                                                <span className='ml-2'>{menuItem.title}</span>
+                                                <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
                                             </div>
                                             <i className={`ri-arrow-right-s-line text-xl transform transition-transform duration-200 ${isDropdownOpen(menuItem.title) ? 'rotate-90' : ''}`}></i>
                                         </div>
@@ -173,7 +175,7 @@ export default function Sidebar() {
                                                                 onClick={() => setSelectedMenu(sublink.title)}
                                                             >
                                                                 <i className="ri-circle-fill text-[0.6rem] text-white ml-1"></i>
-                                                                <span className='ml-4'>{sublink.title}</span>
+                                                                <span className='ml-4'>{t(`sidebar.${sublink.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
                                                             </div>
                                                         </Link>
                                                     </li>
@@ -193,7 +195,7 @@ export default function Sidebar() {
                                             onClick={() => setSelectedMenu(menuItem.title)}
                                         >
                                             <i className={`${menuItem.icon} text-xl`}></i>
-                                            <span className='ml-2'>{menuItem.title}</span>
+                                            <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
                                         </div>
                                     </Link>
                                 )}
@@ -205,7 +207,7 @@ export default function Sidebar() {
                 {/* CONFIGS section */}
                 <div>
                     <div className="mb-3 px-3">
-                        <span className="text-[#7b7c95] text-[0.8125rem] font-medium uppercase">CONFIGS</span>
+                        <span className="text-[#7b7c95] text-[0.8125rem] font-medium uppercase">{t('sidebar.configs')}</span>
                     </div>
                     <ul id="configsMenu" className='flex flex-col w-full space-y-1'>
                         {configsData.map((menuItem, index) => (
@@ -221,7 +223,7 @@ export default function Sidebar() {
                                         onClick={() => setSelectedMenu(menuItem.title)}
                                     >
                                         <i className={`${menuItem.icon} text-xl`}></i>
-                                        <span className='ml-2'>{menuItem.title}</span>
+                                        <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
                                     </div>
                                 </Link>
                             </li>

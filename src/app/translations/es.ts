@@ -225,6 +225,86 @@ const translations = {
             privacyPolicy: 'Privacidad'
         },
         copyright: 'Micael Ribeiro · Diseño & Desarrollo Web · Madeira - Portugal'
+    },
+    banking: {
+        title: 'Multibanco',
+        balanceOverview: 'Resumen de Balance',
+        totalBalance: 'Balance Total',
+        thisMonth: 'Este Mes',
+        newTransactions: 'Nuevas Transacciones'
+    },
+    header: {
+        searchPlaceholder: 'Buscar (Ctrl+/)',
+        profileIcon: 'Icono de Perfil',
+        guest: 'Invitado',
+        userRole: 'Usuario',
+        myProfile: 'Mi Perfil',
+        settings: 'Configuración',
+        faq: 'Preguntas Frecuentes',
+        logout: 'Cerrar Sesión',
+        signOutSuccess: 'Gracias por tu visita',
+        signOutError: 'Error al cerrar sesión. Por favor, inténtalo de nuevo.'
+    },
+    sidebar: {
+        home: 'Inicio',
+        management: 'Gestión',
+        learning: 'Aprendizaje',
+        projects: 'Proyectos',
+        users: 'Usuarios',
+        timeline: 'Cronología',
+        software: 'Software',
+        hardware: 'Hardware',
+        project1: 'Proyecto 1',
+        project2: 'Proyecto 2',
+        project3: 'Proyecto 3',
+        appsAndPages: 'APPS Y PÁGINAS',
+        homesite: 'Sitio Principal',
+        email: 'Correo',
+        calendar: 'Calendario',
+        music: 'Música',
+        websites: 'Sitios Web',
+        playlists: 'Listas de Reproducción',
+        favoritesongs: 'Canciones Favoritas',
+        learningwebsites: 'Aprendizaje',
+        useful: 'Útiles',
+        configs: 'CONFIGURACIÓN',
+        posts: 'Publicaciones',
+        dashboard: 'Panel'
+    },
+    timeline: {
+        title: "Línea de Tiempo de Actividades"
+    },
+    dashboardFooter: {
+        madeWith: "hecho con",
+        by: "por",
+        license: "Licencia",
+        themes: "Temas",
+        documentation: "Documentación",
+        support: "Soporte"
+    },
+    projectTable: {
+        title: "Proyectos",
+        idHeader: "ID",
+        nameHeader: "Nombre",
+        descriptionHeader: "Descripción",
+        stateHeader: "Estado",
+        activeHeader: "Activo",
+        noProjects: "No se encontraron proyectos",
+        startProject: "Crea tu primer proyecto para comenzar"
+    },
+    usersTable: {
+        title: "Usuarios",
+        userHeader: "Usuario",
+        emailHeader: "Correo",
+        roleHeader: "Rol",
+        statusHeader: "Estado",
+        lastActiveHeader: "Última Actividad"
+    },
+    stats: {
+        ratings: "Calificaciones",
+        sessions: "Sesiones",
+        yearOf: "Año de",
+        lastMonth: "Último Mes"
     }
 }
 

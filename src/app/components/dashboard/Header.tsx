@@ -8,7 +8,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Header() {
-
     // States & Hooks
     const { data: session } = useSession();
     const { t, savedTheme } = useTheme();
@@ -16,23 +15,19 @@ export default function Header() {
 
     const handleSignOut = async () => {
         try {
-            await signOut({ redirect: false });
-            showToast("success", "Thank you for your visit", savedTheme);
+            await signOut({ callbackUrl: "/pages/login" });
+            showToast("success", t('header.signOutSuccess'), savedTheme);
         } catch (error) {
             console.error("Error signing out:", error);
-            showToast("error", "Error signing out. Please try again.", savedTheme);
+            showToast("error", t('header.signOutError'), savedTheme);
         }
     }
 
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
-    };
-
     return (
-        <div className="w-full h-[48px] bg-transparent flex items-center justify-between mt-10 px-4">
-            <div id="searchInput" className="flex flex-grow items-center gap-2 h-full hover:bg-[#33354C] transition-all duration-200 ease-in-out rounded-md px-2 mr-5">
+        <div className="w-full h-[48px] bg-transparent flex items-center justify-between mt-10 px-4 mb-5">
+            <div id="searchInput" className="flex flex-grow items-center gap-2 h-full hover:bg-[#33354C] transition-all duration-200 ease-in-out rounded-md px-2 ml-4 mr-5">
                 <i className="ri-search-line text-[1.5rem] font-black text-[#d7d8ed]"></i>
-                <input type="text" placeholder="Search (Ctrl+/)" className="w-full h-full px-2 rounded-md text-white placeholder:text-[#7b7c95] focus:outline-none" />
+                <input type="text" placeholder={t('header.searchPlaceholder')} className="w-full h-full px-2 rounded-md text-white placeholder:text-[#7b7c95] focus:outline-none" />
             </div>
 
             <div className="flex items-center gap-3 ml-auto mr-10">
@@ -44,11 +39,11 @@ export default function Header() {
                 <div className="relative">
                     <Image
                         src="/images/dashboard/miniIcon.png"
-                        alt="Profile Icon"
+                        alt={t('header.profileIcon')}
                         className="profile-icon dropdown-toggle rounded-full cursor-pointer"
                         width={40}
                         height={40}
-                        onClick={toggleDropdown}
+                        onClick={() => setDropdownOpen(!dropdownOpen)}
                     />
 
                     {dropdownOpen && (
@@ -57,21 +52,21 @@ export default function Header() {
                                 <Image
                                     src="/images/dashboard/miniIcon.png"
                                     className="profile-icon rounded-full"
-                                    alt="Profile Icon"
+                                    alt={t('header.profileIcon')}
                                     width={40}
                                     height={40}
                                 />
                                 <div className="ml-2">
-                                    <p className="mb-0 text-[#d7d8ed]">{session?.user?.firstName || "Guest"} {session?.user?.lastName || ""}</p>
-                                    <small className="text-[#7b7c95]">{session?.user?.role || "User"}</small>
+                                    <p className="mb-0 text-[#d7d8ed]">{session?.user?.firstName || t('header.guest')} {session?.user?.lastName || ""}</p>
+                                    <small className="text-[#7b7c95]">{session?.user?.role || t('header.userRole')}</small>
                                 </div>
                             </li>
                             <hr className="border-[#393B50]" />
-                            <li><Link className="dropdown-item block px-4 py-2 hover:bg-[#373951] cursor-pointer" href={`/pages/dashboard/personal?userId=${session?.user?.id}`}><i className="ri-user-line mr-2"></i>My Profile</Link></li>
-                            <li><Link className="dropdown-item block px-4 py-2 hover:bg-[#373951] cursor-pointer" href="#"><i className="ri-settings-line mr-2"></i>Settings</Link></li>
+                            <li><Link className="dropdown-item block px-4 py-2 hover:bg-[#373951] cursor-pointer" href={`/pages/dashboard/personal?userId=${session?.user?.id}`}><i className="ri-user-line mr-2"></i>{t('header.myProfile')}</Link></li>
+                            <li><Link className="dropdown-item block px-4 py-2 hover:bg-[#373951] cursor-pointer" href="#"><i className="ri-settings-line mr-2"></i>{t('header.settings')}</Link></li>
                             <hr className="border-[#393B50]" />
-                            <li><Link className="dropdown-item block px-4 py-2 hover:bg-[#373951] cursor-pointer" href="#"><i className="ri-question-line mr-2"></i>FAQ</Link></li>
-                            <li><button className="dropdown-item logout-btn bg-red-600 hover:bg-red-700 text-white w-full text-left px-4 py-2 cursor-pointer" onClick={handleSignOut}><i className="ri-logout-box-line mr-2"></i>Logout</button></li>
+                            <li><Link className="dropdown-item block px-4 py-2 hover:bg-[#373951] cursor-pointer" href="#"><i className="ri-question-line mr-2"></i>{t('header.faq')}</Link></li>
+                            <li><button className="dropdown-item logout-btn bg-red-600 hover:bg-red-700 text-white w-full text-left px-4 py-2 cursor-pointer" onClick={handleSignOut}><i className="ri-logout-box-line mr-2"></i>{t('header.logout')}</button></li>
                         </ul>
                     )}
                 </div>

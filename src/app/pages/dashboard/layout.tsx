@@ -24,14 +24,19 @@ export default async function DashboardLayout({
     }
 
     return (
-        <div className="flex h-screen bg-[#282A42]">
-            <Sidebar />
+        <div className="flex h-full bg-[#282A42]">
+            {/* Sticky sidebar */}
+            <div className="sticky top-0 h-screen">
+                <Sidebar />
+            </div>
+
+            {/* Content area with its own scrolling */}
             <div className="flex flex-col flex-1 w-full">
                 <Header />
-                <main className="flex-1 overflow-y-auto p-4 md:p-6">
+                <div className="flex-1 px-4 md:px-6 pb-4 md:pb-6">
                     {children}
-                </main>
-                <Footer />
+                    <Footer />
+                </div>
             </div>
         </div>
     );

@@ -225,6 +225,86 @@ const translations = {
             privacyPolicy: 'Privacy Policy'
         },
         copyright: 'Micael Ribeiro · Web Design & Development · Madeira - Portugal'
+    },
+    banking: {
+        title: 'Multibanco',
+        balanceOverview: 'Balance Overview',
+        totalBalance: 'Total Balance',
+        thisMonth: 'This Month',
+        newTransactions: 'New Transactions'
+    },
+    header: {
+        searchPlaceholder: 'Search (Ctrl+/)',
+        profileIcon: 'Profile Icon',
+        guest: 'Guest',
+        userRole: 'User',
+        myProfile: 'My Profile',
+        settings: 'Settings',
+        faq: 'FAQ',
+        logout: 'Logout',
+        signOutSuccess: 'Thank you for your visit',
+        signOutError: 'Error signing out. Please try again.'
+    },
+    sidebar: {
+        home: 'Home',
+        management: 'Management',
+        learning: 'Learning',
+        projects: 'Projects',
+        users: 'Users',
+        timeline: 'Timeline',
+        software: 'Software',
+        hardware: 'Hardware',
+        project1: 'Project 1',
+        project2: 'Project 2',
+        project3: 'Project 3',
+        appsAndPages: 'APPS & PAGES',
+        homesite: 'Home Site',
+        email: 'Email',
+        calendar: 'Calendar',
+        music: 'Music',
+        websites: 'Websites',
+        playlists: 'Playlists',
+        favoritesongs: 'Favorite Songs',
+        learningwebsites: 'Learning',
+        useful: 'Useful',
+        configs: 'CONFIGS',
+        posts: 'Posts',
+        dashboard: 'Dashboard'
+    },
+    dashboardFooter: {
+        madeWith: "made with",
+        by: "by",
+        license: "License",
+        themes: "Themes",
+        documentation: "Documentation",
+        support: "Support"
+    },
+    projectTable: {
+        title: "Projects",
+        idHeader: "ID",
+        nameHeader: "Name",
+        descriptionHeader: "Description",
+        stateHeader: "State",
+        activeHeader: "Active",
+        noProjects: "No projects found",
+        startProject: "Create your first project to get started"
+    },
+    stats: {
+        ratings: "Ratings",
+        sessions: "Sessions",
+        yearOf: "Year of",
+        lastMonth: "Last Month"
+    },
+    timeline: {
+        title: "Activity Timeline"
+    },
+    usersTable: {
+        title: "Users",
+        userHeader: "User",
+        emailHeader: "Email",
+        roleHeader: "Role",
+        statusHeader: "Status",
+        lastActiveHeader: "Last Active"
     }
 }
 

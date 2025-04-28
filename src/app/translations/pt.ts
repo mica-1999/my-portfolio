@@ -225,6 +225,86 @@ const translations = {
             privacyPolicy: 'Privacidade'
         },
         copyright: 'Micael Ribeiro · Design & Desenvolvimento Web · Madeira - Portugal'
+    },
+    banking: {
+        title: 'Multibanco',
+        balanceOverview: 'Visão Geral do Saldo',
+        totalBalance: 'Saldo Total',
+        thisMonth: 'Este Mês',
+        newTransactions: 'Novas Transações'
+    },
+    header: {
+        searchPlaceholder: 'Pesquisar (Ctrl+/)',
+        profileIcon: 'Ícone de Perfil',
+        guest: 'Convidado',
+        userRole: 'Utilizador',
+        myProfile: 'Meu Perfil',
+        settings: 'Configurações',
+        faq: 'Perguntas Frequentes',
+        logout: 'Sair',
+        signOutSuccess: 'Obrigado pela sua visita',
+        signOutError: 'Erro ao sair. Por favor, tente novamente.'
+    },
+    sidebar: {
+        home: 'Início',
+        management: 'Gestão',
+        learning: 'Aprendizagem',
+        projects: 'Projetos',
+        users: 'Utilizadores',
+        timeline: 'Cronologia',
+        software: 'Software',
+        hardware: 'Hardware',
+        project1: 'Projeto 1',
+        project2: 'Projeto 2',
+        project3: 'Projeto 3',
+        appsAndPages: 'APPS & PÁGINAS',
+        homesite: 'Site Principal',
+        email: 'Email',
+        calendar: 'Calendário',
+        music: 'Música',
+        websites: 'Sites',
+        playlists: 'Playlists',
+        favoritesongs: 'Músicas Favoritas',
+        learningwebsites: 'Aprendizagem',
+        useful: 'Úteis',
+        configs: 'CONFIGURAÇÕES',
+        posts: 'Publicações',
+        dashboard: 'Painel'
+    },
+    timeline: {
+        title: "Linha do Tempo de Atividades"
+    },
+    dashboardFooter: {
+        madeWith: "feito com",
+        by: "por",
+        license: "Licença",
+        themes: "Temas",
+        documentation: "Documentação",
+        support: "Suporte"
+    },
+    projectTable: {
+        title: "Projetos",
+        idHeader: "ID",
+        nameHeader: "Nome",
+        descriptionHeader: "Descrição",
+        stateHeader: "Estado",
+        activeHeader: "Ativo",
+        noProjects: "Nenhum projeto encontrado",
+        startProject: "Crie seu primeiro projeto para começar"
+    },
+    usersTable: {
+        title: "Utilizadores",
+        userHeader: "Utilizador",
+        emailHeader: "Email",
+        roleHeader: "Função",
+        statusHeader: "Estado",
+        lastActiveHeader: "Última Atividade"
+    },
+    stats: {
+        ratings: "Avaliações",
+        sessions: "Sessões",
+        yearOf: "Ano de",
+        lastMonth: "Último Mês"
     }
 }
 
