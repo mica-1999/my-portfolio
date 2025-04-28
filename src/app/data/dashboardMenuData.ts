@@ -8,7 +8,7 @@ export const dashboardMenuData = [
         title: "Management",
         icon: "ri-admin-fill",
         sublinks: [
-            { title: "Users", link: "/management/users" },
+            { title: "Users", link: "/dashboard/userManage" },
             { title: "Projects", link: "/management/projects" },
             { title: "Timeline", link: "/management/timeline" }
         ]
