@@ -9,7 +9,7 @@ export const dashboardMenuData = [
         icon: "ri-admin-fill",
         sublinks: [
             { title: "Users", link: "/dashboard/userManage" },
-            { title: "Projects", link: "/management/projects" },
+            { title: "Projects", link: "/dashboard/projectManage" },
             { title: "Timeline", link: "/management/timeline" }
         ]
     },
@@ -70,8 +70,8 @@ export const appsAndPagesData = [
 // New configuration section data
 export const configsData = [
     {
-        title: "Users",
-        link: "/configs/users",
+        title: "Others",
+        link: "/configs/others",
         icon: "ri-user-settings-fill"
     },
     {

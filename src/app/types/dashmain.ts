@@ -11,6 +11,7 @@ export interface Project {
     state: ProjectState;
     createdAt: string;
     updatedAt: string;
+    tags: string[];
 }
 
 export interface UserProject {

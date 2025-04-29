@@ -1,14 +1,30 @@
 "use client";
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTheme } from "@/app/context/ThemeContext";
 import { dashboardMenuData, appsAndPagesData, configsData } from '@/app/data/dashboardMenuData';
 
 export default function Sidebar() {
-    const [selectedMenu, setSelectedMenu] = useState('Home');
+    // States and Hooks
+    const [selectedMenu, setSelectedMenu] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const storedMenu = localStorage.getItem('selectedMenu');
+            return storedMenu ? JSON.parse(storedMenu) : "Home";
+        }
+        return "Home";
+    });
+
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
     const { t } = useTheme();
+
+    // Create a custom setter that updates both state and localStorage
+    const updateSelectedMenu = (menuTitle: string) => {
+        setSelectedMenu(menuTitle);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('selectedMenu', JSON.stringify(menuTitle));
+        }
+    };
 
     const toggleDropdown = (title: string) => {
         setActiveDropdown(activeDropdown === title ? null : title);
@@ -93,7 +109,7 @@ export default function Sidebar() {
                                                                         : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                                     }
                                                                     rounded-[13px] transition-colors duration-200 px-3`}
-                                                                onClick={() => setSelectedMenu(sublink.title)}
+                                                                onClick={() => updateSelectedMenu(sublink.title)}
                                                             >
                                                                 <i className="ri-circle-fill text-[0.6rem] text-white ml-1"></i>
                                                                 <span className='ml-4'>{t(`sidebar.${sublink.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
@@ -113,7 +129,7 @@ export default function Sidebar() {
                                                     : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                 }
                                                 rounded-[13px] px-3 transition-colors duration-200`}
-                                            onClick={() => setSelectedMenu(menuItem.title)}
+                                            onClick={() => updateSelectedMenu(menuItem.title)}
                                         >
                                             <i className={`${menuItem.icon} text-xl`}></i>
                                             <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
@@ -172,7 +188,7 @@ export default function Sidebar() {
                                                                         : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                                     }
                                                                     rounded-[13px] transition-colors duration-200 px-3`}
-                                                                onClick={() => setSelectedMenu(sublink.title)}
+                                                                onClick={() => updateSelectedMenu(sublink.title)}
                                                             >
                                                                 <i className="ri-circle-fill text-[0.6rem] text-white ml-1"></i>
                                                                 <span className='ml-4'>{t(`sidebar.${sublink.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
@@ -192,7 +208,7 @@ export default function Sidebar() {
                                                     : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                 }
                                                 rounded-[13px] px-3 transition-colors duration-200`}
-                                            onClick={() => setSelectedMenu(menuItem.title)}
+                                            onClick={() => updateSelectedMenu(menuItem.title)}
                                         >
                                             <i className={`${menuItem.icon} text-xl`}></i>
                                             <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
@@ -220,7 +236,7 @@ export default function Sidebar() {
                                                 : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                             }
                                             rounded-[13px] px-3 transition-colors duration-200`}
-                                        onClick={() => setSelectedMenu(menuItem.title)}
+                                        onClick={() => updateSelectedMenu(menuItem.title)}
                                     >
                                         <i className={`${menuItem.icon} text-xl`}></i>
                                         <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>

@@ -86,6 +86,7 @@ model Projects {
   id          Int           @id @default(autoincrement())
   name        String
   description String?
+  tags        String[]
   state       ProjectState  @default(PLANNING)
   createdAt   DateTime      @default(now()) @db.Timestamp(6)
   updatedAt   DateTime      @default(now()) @db.Timestamp(6)

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { useTheme } from '@/app/context/ThemeContext';
-import { UserProject, ProjectState } from '@/app/types/dashmain';
+import { UserProject } from '@/app/types/dashmain';
 
 interface ProjectTableProps {
     projects: UserProject[];

@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { showToast } from "../reusable/Toasters";
 import { useTheme } from "@/app/context/ThemeContext";
+import { useClickOutside } from "../reusable/ClickOutsideDiv";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +13,9 @@ export default function Header() {
     const { data: session } = useSession();
     const { t, savedTheme } = useTheme();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const settingsRef = useRef<HTMLUListElement>(null);
+
+    useClickOutside(settingsRef, setDropdownOpen);
 
     const handleSignOut = async () => {
         try {
@@ -47,7 +51,7 @@ export default function Header() {
                     />
 
                     {dropdownOpen && (
-                        <ul className="absolute right-0 mt-2 bg-[#282A42] border border-[#393B50] rounded-lg shadow-lg z-50 min-w-[200px]">
+                        <ul className="absolute right-0 mt-2 bg-[#282A42] border border-[#393B50] rounded-lg shadow-lg z-50 min-w-[200px]" ref={settingsRef}>
                             <li className="dropdown-header flex items-center p-3">
                                 <Image
                                     src="/images/dashboard/miniIcon.png"

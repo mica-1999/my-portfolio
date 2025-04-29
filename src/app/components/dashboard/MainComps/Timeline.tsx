@@ -1,7 +1,8 @@
 "use client";
 import { useState } from 'react';
 import { useTheme } from '@/app/context/ThemeContext';
-import { TimelineItem, TimelineEventType } from '@/app/types/dashmain';
+import { TimelineItem } from '@/app/types/dashmain';
+import { getTimelineEventColor, formatTimelineEventTitle, formatTimelineTime } from '@/app/components/reusable/UserUI';
 
 interface TimelineProps {
     timeline: TimelineItem[];
@@ -10,66 +11,6 @@ interface TimelineProps {
 export default function Timeline({ timeline = [] }: TimelineProps) {
     const [hidden, setHidden] = useState(false);
     const { t } = useTheme(); // Get translation function
-
-    // Helper function to get state color based on event type
-    const getEventColor = (eventType: TimelineEventType) => {
-        switch (eventType) {
-            case TimelineEventType.ACCOUNT_CREATED:
-            case TimelineEventType.PROJECT_CREATED:
-            case TimelineEventType.NOTE_CREATED:
-                return "bg-[#72E128]"; // green - creation events
-
-            case TimelineEventType.LOGIN:
-            case TimelineEventType.PROJECT_JOINED:
-            case TimelineEventType.TRANSACTION_MADE:
-            case TimelineEventType.MESSAGE_SENT:
-                return "bg-[#666CFF]"; // blue - activity events
-
-            case TimelineEventType.PROFILE_UPDATE:
-            case TimelineEventType.SETTINGS_CHANGED:
-            case TimelineEventType.PROJECT_UPDATED:
-            case TimelineEventType.PASSWORD_CHANGE:
-                return "bg-[#A26CF8]"; // purple - update events
-
-            case TimelineEventType.LOGOUT:
-            case TimelineEventType.SYSTEM_NOTIFICATION:
-                return "bg-[#FF4D49]"; // red - system/alert events
-
-            default:
-                return "bg-gray-400"; // default fallback
-        }
-    };
-
-    // Format the timeline event title based on event type
-    const formatEventTitle = (eventType: TimelineEventType) => {
-        return eventType.replace(/_/g, ' ').toLowerCase()
-            .replace(/\b\w/g, char => char.toUpperCase());
-    };
-
-    // Format timestamp to display time
-    const formatTime = (timestamp: string) => {
-        const date = new Date(timestamp);
-        const today = new Date();
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-
-        const isToday = date.getDate() === today.getDate() &&
-            date.getMonth() === today.getMonth() &&
-            date.getFullYear() === today.getFullYear();
-
-        const isYesterday = date.getDate() === yesterday.getDate() &&
-            date.getMonth() === yesterday.getMonth() &&
-            date.getFullYear() === yesterday.getFullYear();
-
-        if (isToday) {
-            return `Today ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-        } else if (isYesterday) {
-            return `Yesterday ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-        } else {
-            return date.toLocaleDateString([], { month: 'short', day: 'numeric' }) +
-                ` ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-        }
-    };
 
     return (
         <div className="w-full mt-4 xl:w-1/3">
@@ -119,12 +60,12 @@ export default function Timeline({ timeline = [] }: TimelineProps) {
                                         <div className="absolute top-0 left-2 h-full w-0.5 bg-gray-200 dark:bg-gray-700"></div>
 
                                         {/* Timeline point */}
-                                        <div className={`absolute top-1 left-[0.5px] w-4 h-4 rounded-full ${getEventColor(item.eventType)} border-2 border-white dark:border-[#30334E]`}></div>
+                                        <div className={`absolute top-1 left-[0.5px] w-4 h-4 rounded-full ${getTimelineEventColor(item.eventType)} border-2 border-white dark:border-[#30334E]`}></div>
 
                                         {/* Timeline content */}
                                         <div className="mb-2 flex justify-between">
-                                            <h6 className="text-sm font-medium text-gray-800 dark:text-[#d7d8ed]">{formatEventTitle(item.eventType)}</h6>
-                                            <span className="text-xs text-gray-500 dark:text-gray-400">{formatTime(item.createdAt)}</span>
+                                            <h6 className="text-sm font-medium text-gray-800 dark:text-[#d7d8ed]">{formatTimelineEventTitle(item.eventType)}</h6>
+                                            <span className="text-xs text-gray-500 dark:text-gray-400">{formatTimelineTime(item.createdAt)}</span>
                                         </div>
                                         <p className="text-sm text-gray-600 dark:text-[#9698af]">{item.description || 'No description provided'}</p>
                                     </li>

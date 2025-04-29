@@ -286,8 +286,16 @@ const translations = {
         descriptionHeader: "Description",
         stateHeader: "State",
         activeHeader: "Active",
+        actionsHeader: "Actions",
         noProjects: "No projects found",
-        startProject: "Create your first project to get started"
+        startProject: "Create your first project to get started",
+        adjustFilters: "Try adjusting your filters or search terms",
+        edit: "Edit project",
+        delete: "Delete project",
+        projectNotFound: "Project not found",
+        projectDeleted: "Project deleted successfully",
+        errorDeletingProject: "Failed to delete project",
+        fetchError: "Failed to fetch projects. Please try again later."
     },
     stats: {
         ratings: "Ratings",
@@ -304,7 +312,24 @@ const translations = {
         emailHeader: "Email",
         roleHeader: "Role",
         statusHeader: "Status",
-        lastActiveHeader: "Last Active"
+        lastActiveHeader: "Last Active",
+        actionsHeader: "Actions",
+        edit: "Edit user",
+        delete: "Delete user",
+        noUsers: "No users found",
+        adjustFilters: "Try adjusting your filters or search terms"
+    },
+    filters: {
+        roleLabel: "Select a role",
+        statusLabel: "Select a status",
+        timeRangeLabel: "Select a time range",
+        export: "Export",
+        clearFilters: "Clear Filters",
+        searchPlaceholder: "Search User",
+        addNewUser: "Add New User",
+        tagsLabel: "Select tags",
+        addNewProject: "Add New Project",
+        searchProjects: "Search projects..."
     }
 }
 

@@ -67,10 +67,6 @@ export default function StickyButton() {
         }
     }
 
-    useEffect(() => {
-        console.log(showConfig)
-    }, [showConfig])
-
     return (
         <>
             <div

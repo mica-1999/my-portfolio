@@ -289,8 +289,16 @@ const translations = {
         descriptionHeader: "Descrição",
         stateHeader: "Estado",
         activeHeader: "Ativo",
+        actionsHeader: "Ações",
         noProjects: "Nenhum projeto encontrado",
-        startProject: "Crie seu primeiro projeto para começar"
+        startProject: "Crie seu primeiro projeto para começar",
+        adjustFilters: "Tente ajustar seus filtros ou termos de pesquisa",
+        edit: "Editar projeto",
+        delete: "Eliminar projeto",
+        projectNotFound: "Projeto não encontrado",
+        projectDeleted: "Projeto eliminado com sucesso",
+        errorDeletingProject: "Falha ao eliminar projeto",
+        fetchError: "Falha ao buscar projetos. Por favor, tente novamente mais tarde."
     },
     usersTable: {
         title: "Utilizadores",
@@ -298,13 +306,30 @@ const translations = {
         emailHeader: "Email",
         roleHeader: "Função",
         statusHeader: "Estado",
-        lastActiveHeader: "Última Atividade"
+        lastActiveHeader: "Última Atividade",
+        actionsHeader: "Ações",
+        edit: "Editar utilizador",
+        delete: "Eliminar utilizador",
+        noUsers: "Nenhum utilizador encontrado",
+        adjustFilters: "Tente ajustar seus filtros ou termos de pesquisa"
     },
     stats: {
         ratings: "Avaliações",
         sessions: "Sessões",
         yearOf: "Ano de",
         lastMonth: "Último Mês"
+    },
+    filters: {
+        roleLabel: "Selecionar uma função",
+        statusLabel: "Selecionar um estado",
+        timeRangeLabel: "Selecionar um período",
+        export: "Exportar",
+        clearFilters: "Limpar filtros",
+        searchPlaceholder: "Pesquisar Utilizador",
+        addNewUser: "Adicionar Utilizador",
+        tagsLabel: "Selecionar etiquetas",
+        addNewProject: "Adicionar Projeto",
+        searchProjects: "Pesquisar projetos..."
     }
 }
 
