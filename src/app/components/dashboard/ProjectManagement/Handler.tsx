@@ -5,6 +5,7 @@ import { useTheme } from "@/app/context/ThemeContext";
 import FiltersManageProjects from "./Filters";
 import ManageProjectsTable from "./ProjectTable";
 import { Project } from "@/app/types/dashmain";
+import Forms from "../../reusable/FormInsertion";
 
 interface ProjectFilters {
     status: string;
@@ -18,6 +19,7 @@ export default function Handler() {
     const { savedTheme, t } = useTheme();
     const [filters, setFilters] = useState<ProjectFilters>({ status: "", tags: [], timeRange: "", search: "" });
     const [projects, setProjects] = useState<Project[]>([]);
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     // Fetch projects data from API
     useEffect(() => {
@@ -67,7 +69,7 @@ export default function Handler() {
                         </div>
                     </div>
                     <div className="">
-                        <FiltersManageProjects filters={filters} setFilters={setFilters} clearFilters={clearFilters} />
+                        <FiltersManageProjects filters={filters} setFilters={setFilters} clearFilters={clearFilters} setModalOpen={setModalOpen} />
                     </div>
                     <div>
                         <ManageProjectsTable projects={projects} filters={filters} clearFilters={clearFilters} setProjects={setProjects} />

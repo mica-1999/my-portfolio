@@ -7,9 +7,10 @@ interface FiltersProps {
     filters: UserFilters;
     setFilters: React.Dispatch<React.SetStateAction<UserFilters>>;
     clearFilters: () => void;
+    setFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function FiltersManageUsers({ filters, setFilters, clearFilters }: FiltersProps) {
+export default function FiltersManageUsers({ filters, setFilters, clearFilters, setFormOpen }: FiltersProps) {
     const { t } = useTheme();
     const [openDropdown, setOpenDropdown] = useState('');
 
@@ -207,6 +208,7 @@ export default function FiltersManageUsers({ filters, setFilters, clearFilters }
                         <button
                             className="px-6 h-[40px] bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors shadow-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 cursor-pointer"
                             aria-label={t('filters.addNewUser')}
+                            onClick={() => setFormOpen(true)}
                         >
                             {t('filters.addNewUser')}
                         </button>

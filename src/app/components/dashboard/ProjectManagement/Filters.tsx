@@ -16,9 +16,10 @@ interface FiltersProps {
         search: string;
     }>>;
     clearFilters: () => void;
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function FiltersManageProjects({ filters, setFilters, clearFilters }: FiltersProps) {
+export default function Filters({ filters, setFilters, clearFilters, setModalOpen }: FiltersProps) {
     // States & Hooks
     const { t } = useTheme();
     const [openDropdown, setOpenDropdown] = useState('');
@@ -263,6 +264,7 @@ export default function FiltersManageProjects({ filters, setFilters, clearFilter
                         <button
                             className="px-6 h-[40px] bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors shadow-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 cursor-pointer"
                             aria-label={t('filters.addNewProject') || 'Add New Project'}
+                            onClick={() => setModalOpen(true)}
                         >
                             {t('filters.addNewProject') || 'Add New Project'}
                         </button>

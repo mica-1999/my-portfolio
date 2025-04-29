@@ -5,6 +5,7 @@ import { useTheme } from "@/app/context/ThemeContext";
 import FiltersManageUsers from "./Filters";
 import ManageUsersTable from "./UserTable";
 import { User } from "@/app/types/dashmain";
+import Forms from "../../reusable/FormInsertion";
 
 
 export default function Handler() {
@@ -12,7 +13,7 @@ export default function Handler() {
     const { t, savedTheme } = useTheme();
     const [filters, setFilters] = useState({ role: "", status: "", timeRange: "", search: "", });
     const [users, setUsers] = useState<User[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [formOpen, setFormOpen] = useState<boolean>(false);
 
     // Fetch users from API
     useEffect(() => {
@@ -35,8 +36,6 @@ export default function Handler() {
             } catch (error) {
                 console.error("Error fetching users:", error);
                 showToast("error", t("userManagement.errorFetchingUsers"), savedTheme);
-            } finally {
-                setLoading(false);
             }
         }
         fetchUsers();
@@ -63,13 +62,17 @@ export default function Handler() {
                         </div>
                     </div>
                     <div className="">
-                        <FiltersManageUsers filters={filters} setFilters={setFilters} clearFilters={clearFilters} />
+                        <FiltersManageUsers filters={filters} setFilters={setFilters} clearFilters={clearFilters} setFormOpen={setFormOpen} />
                     </div>
                     <div>
                         <ManageUsersTable users={users} filters={filters} clearFilters={clearFilters} setUsers={setUsers} />
                     </div>
                 </div>
             </div>
+
+            {formOpen && (
+                <Forms isOpen={formOpen} setFormOpen={setFormOpen} />
+            )}
         </>
     )
 }
