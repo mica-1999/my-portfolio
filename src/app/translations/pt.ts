@@ -356,6 +356,24 @@ const translations = {
         successMessage: "Utilizador adicionado com sucesso!",
         errorMessage: "Falha ao adicionar utilizador. Por favor, tente novamente.",
         formError: "Ocorreu um erro ao submeter o formulário. Por favor, tente novamente."
+    },
+    projectForm: {
+        title: "Adicionar Projeto",
+        name: "Nome do Projeto",
+        description: "Descrição",
+        tags: "Etiquetas",
+        state: "Estado",
+        statePlanning: "Planeamento",
+        stateInProgress: "Em Progresso",
+        stateCompleted: "Concluído",
+        stateDelayed: "Adiado",
+        submit: "Submeter",
+        submitting: "A submeter...",
+        cancel: "Cancelar",
+        validationRequired: "{field} é obrigatório",
+        successMessage: "Projeto adicionado com sucesso!",
+        errorMessage: "Falha ao adicionar projeto. Por favor, tente novamente.",
+        formError: "Ocorreu um erro ao submeter o formulário. Por favor, tente novamente."
     }
 }
 

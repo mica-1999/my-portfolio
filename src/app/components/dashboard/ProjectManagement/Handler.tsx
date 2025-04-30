@@ -5,7 +5,7 @@ import { useTheme } from "@/app/context/ThemeContext";
 import FiltersManageProjects from "./Filters";
 import ManageProjectsTable from "./ProjectTable";
 import { Project } from "@/app/types/dashmain";
-import Forms from "../../reusable/FormInsertion";
+import FormInsertionProject from "../../reusable/FormInsertionProject";
 
 interface ProjectFilters {
     status: string;
@@ -75,6 +75,10 @@ export default function Handler() {
                     </div>
                 </div>
             </div>
+
+            {modalOpen && (
+                <FormInsertionProject isOpen={modalOpen} setModalOpen={setModalOpen} setProjects={setProjects} />
+            )}
         </>
     )
 }

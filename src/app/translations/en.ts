@@ -356,6 +356,24 @@ const translations = {
         successMessage: "User added successfully!",
         errorMessage: "Failed to add user. Please try again.",
         formError: "An error occurred while submitting the form. Please try again."
+    },
+    projectForm: {
+        title: "Add Project",
+        name: "Project Name",
+        description: "Description",
+        tags: "Tags",
+        state: "State",
+        statePlanning: "Planning",
+        stateInProgress: "In Progress",
+        stateCompleted: "Completed",
+        stateDelayed: "Delayed",
+        submit: "Submit",
+        submitting: "Submitting...",
+        cancel: "Cancel",
+        validationRequired: "{field} is required",
+        successMessage: "Project added successfully!",
+        errorMessage: "Failed to add project. Please try again.",
+        formError: "An error occurred while submitting the form. Please try again."
     }
 }
 

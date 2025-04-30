@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { roleFilters, statusFilters, timeRangeFilters } from '@/app/data/manageFilters';
 import { useTheme } from "@/app/context/ThemeContext";
 import { UserFilters } from '@/app/types/managePages';
+import { useClickOutside } from '../../reusable/ClickOutsideDiv';
 
 interface FiltersProps {
     filters: UserFilters;
@@ -13,6 +14,16 @@ interface FiltersProps {
 export default function FiltersManageUsers({ filters, setFilters, clearFilters, setFormOpen }: FiltersProps) {
     const { t } = useTheme();
     const [openDropdown, setOpenDropdown] = useState('');
+
+    // Create refs for each dropdown container
+    const roleDropdownRef = useRef<HTMLDivElement>(null);
+    const statusDropdownRef = useRef<HTMLDivElement>(null);
+    const timeRangeDropdownRef = useRef<HTMLDivElement>(null);
+
+    // Use the click outside hook for each dropdown
+    useClickOutside(roleDropdownRef, () => { if (openDropdown === 'role') setOpenDropdown(''); });
+    useClickOutside(statusDropdownRef, () => { if (openDropdown === 'status') setOpenDropdown('') });
+    useClickOutside(timeRangeDropdownRef, () => { if (openDropdown === 'timeRange') setOpenDropdown(''); });
 
     // Helper function to format display value
     const getDisplayValue = (currentValue: string, filterType: string) => {
@@ -44,7 +55,7 @@ export default function FiltersManageUsers({ filters, setFilters, clearFilters, 
         <>
             <div className="flex flex-col md:flex-row gap-4 w-full border-[#464963] border-b-1 pb-7 p-4 -mt-3">
                 {/* Role Filter */}
-                <div className="flex-1 relative">
+                <div className="flex-1 relative" ref={roleDropdownRef}>
                     <button
                         type="button"
                         onClick={() => setOpenDropdown(openDropdown === 'role' ? '' : 'role')}
@@ -80,7 +91,7 @@ export default function FiltersManageUsers({ filters, setFilters, clearFilters, 
                 </div>
 
                 {/* Status Filter */}
-                <div className="flex-1 relative">
+                <div className="flex-1 relative" ref={statusDropdownRef}>
                     <button
                         type="button"
                         onClick={() => setOpenDropdown(openDropdown === 'status' ? '' : 'status')}
@@ -116,7 +127,7 @@ export default function FiltersManageUsers({ filters, setFilters, clearFilters, 
                 </div>
 
                 {/* Time Range Filter */}
-                <div className="flex-1 relative">
+                <div className="flex-1 relative" ref={timeRangeDropdownRef}>
                     <button
                         type="button"
                         onClick={() => setOpenDropdown(openDropdown === 'timeRange' ? '' : 'timeRange')}

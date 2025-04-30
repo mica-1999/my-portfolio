@@ -42,5 +42,41 @@ export async function DELETE(req: Request) {
         return NextResponse.json({ error: "Error deleting project" }, { status: 500 });
 
     }
+}
 
+export async function POST(req: Request) {
+    const { name, description, tags, state } = await req.json();
+
+    if (!name || !description || !tags || !state) {
+        return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    }
+
+    try {
+        // Check if project already exists
+        const existingProject = await prisma.projects.findFirst({
+            where: {
+                name: name
+            }
+        });
+
+        if (existingProject) {
+            return NextResponse.json({ error: "Project with this name already exists" }, { status: 409 });
+        }
+
+        // Create new project
+        const newProject = await prisma.projects.create({
+            data: {
+                name,
+                description,
+                tags,
+                state,
+            }
+        });
+
+        return NextResponse.json(newProject, { status: 201 });
+
+    } catch (error) {
+        console.error("Error creating project:", error);
+        return NextResponse.json({ error: "Error creating project" }, { status: 500 });
+    }
 }

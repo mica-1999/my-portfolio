@@ -21,3 +21,11 @@ export interface User {
     lastActive?: string;
     createdAt: string;
 }
+
+// Interface for form data
+export interface ProjectFormData {
+    name: string;
+    description: string;
+    tags: string[];
+    state: string;
+}

@@ -7,11 +7,12 @@ export interface BankDetails {
 export interface Project {
     id: number;
     name: string;
-    description: string | null;
-    state: ProjectState;
+    description?: string;
+    tags: string[];
+    state: string;
     createdAt: string;
     updatedAt: string;
-    tags: string[];
+    users?: any[];
 }
 
 export interface UserProject {
@@ -79,6 +80,12 @@ export interface FormInsertionProps {
     isOpen: boolean;
     setFormOpen: (isOpen: boolean) => void;
     setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+}
+
+export interface FormInsertionProjectProps {
+    isOpen: boolean;
+    setModalOpen: (open: boolean) => void;
+    setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
 }
 
 export enum UserRole {

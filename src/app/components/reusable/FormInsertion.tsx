@@ -1,5 +1,5 @@
 "use client"
-import { useState, useRef, FormEvent, useEffect } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { roleFilters } from '@/app/data/manageFilters';
 import { FormInsertionProps } from '@/app/types/dashmain';
 import { useClickOutside } from './ClickOutsideDiv';
@@ -19,19 +19,7 @@ export default function FormInsertion({ isOpen, setFormOpen, setUsers }: FormIns
 
     // Handle click outside to close the form
     useClickOutside(formRef, setFormOpen);
-
-    // Close dropdown when clicking outside
-    useEffect(() => {
-        function handleClickOutside(event: MouseEvent) {
-            if (roleDropdownRef.current && !roleDropdownRef.current.contains(event.target as Node)) {
-                setRoleDropdownOpen(false);
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [roleDropdownRef]);
+    useClickOutside(roleDropdownRef, setRoleDropdownOpen)
 
     // Handle input changes
     const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

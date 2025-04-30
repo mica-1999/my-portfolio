@@ -356,6 +356,24 @@ const translations = {
         userNotFound: "Usuario no encontrado",
         userDeleted: "Usuario eliminado con éxito",
         errorDeletingUser: "Error al eliminar usuario. Por favor, inténtelo de nuevo."
+    },
+    projectForm: {
+        title: "Añadir Proyecto",
+        name: "Nombre del Proyecto",
+        description: "Descripción",
+        tags: "Etiquetas",
+        state: "Estado",
+        statePlanning: "Planificación",
+        stateInProgress: "En Progreso",
+        stateCompleted: "Completado",
+        stateDelayed: "Retrasado",
+        submit: "Enviar",
+        submitting: "Enviando...",
+        cancel: "Cancelar",
+        validationRequired: "{field} es obligatorio",
+        successMessage: "¡Proyecto añadido con éxito!",
+        errorMessage: "Error al añadir proyecto. Por favor, inténtalo de nuevo.",
+        formError: "Ocurrió un error al enviar el formulario. Por favor, inténtalo de nuevo."
     }
 }
 

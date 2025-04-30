@@ -74,12 +74,6 @@ export default function ManageUsersTable({ projects = [], filters, clearFilters,
         });
     }, [projects, filters]);
 
-    // Handle edit project
-    const handleEditProject = (projectId: number) => {
-        // Implementation for editing a project
-        console.log(`Edit project with ID: ${projectId}`);
-    };
-
     // Handle delete project
     const handleDeleteProject = async (projectId: number) => {
         try {
@@ -137,7 +131,7 @@ export default function ManageUsersTable({ projects = [], filters, clearFilters,
                             <tr key={project.id} className="hover:bg-gray-50 dark:hover:bg-[#282A42] cursor-pointer">
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-[#9698af]">PRJ-{project.id.toString().padStart(3, '0')}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-[#9698af]">{project.name}</td>
-                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-[#9698af] truncate">{project.description || '-'}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-[#9698af] max-w-[260px] whitespace-normal break-words">{project.description || '-'}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getProjectStateBadgeColor(project.state)}`}>
                                         {formatProjectState(project.state)}
@@ -165,7 +159,6 @@ export default function ManageUsersTable({ projects = [], filters, clearFilters,
                                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                                     <div className="flex space-x-2">
                                         <button
-                                            onClick={() => handleEditProject(project.id)}
                                             className="w-8 h-8 flex items-center justify-center rounded-lg bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/30 dark:hover:bg-indigo-800/50 transition-colors cursor-pointer"
                                             title={t('projectTable.edit') || 'Edit project'}
                                         >

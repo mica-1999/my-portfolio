@@ -68,10 +68,6 @@ export default function ManageUsersTable({ users = [], filters, clearFilters, se
         });
     }, [users, filters]);
 
-    // Handle edit user
-    const handleEditUser = (userId: number) => {
-    };
-
     // Handle delete user
     const handleDeleteUser = async (userId: number) => {
         try {
@@ -163,7 +159,6 @@ export default function ManageUsersTable({ users = [], filters, clearFilters, se
                                             <td className="px-6 py-4 whitespace-nowrap text-sm">
                                                 <div className="flex space-x-2">
                                                     <button
-                                                        onClick={() => handleEditUser(user.id)}
                                                         className="w-8 h-8 flex items-center justify-center rounded-lg bg-indigo-100 hover:bg-indigo-200 dark:bg-indigo-900/30 dark:hover:bg-indigo-800/50 transition-colors cursor-pointer"
                                                         title={t('usersTable.edit')}
                                                     >
