@@ -329,7 +329,12 @@ const translations = {
         addNewUser: "Adicionar Utilizador",
         tagsLabel: "Selecionar etiquetas",
         addNewProject: "Adicionar Projeto",
-        searchProjects: "Pesquisar projetos..."
+        searchProjects: "Pesquisar projetos...",
+        categoryLabel: "Selecionar uma categoria",
+        subcategoriesLabel: "Selecionar subcategorias",
+        searchSubcategories: "Pesquisar subcategorias...",
+        searchLearning: "Pesquisar itens...",
+        addNewLearning: "Adicionar Item de Aprendizagem"
     },
     userManagement: {
         noUsersFound: "Nenhum utilizador encontrado",
@@ -374,6 +379,25 @@ const translations = {
         successMessage: "Projeto adicionado com sucesso!",
         errorMessage: "Falha ao adicionar projeto. Por favor, tente novamente.",
         formError: "Ocorreu um erro ao submeter o formulário. Por favor, tente novamente."
+    },
+    learningTable: {
+        title: "Aprendizagem de Software",
+        categoryHeader: "Categoria",
+        subcategoryHeader: "Subcategoria",
+        nameHeader: "Nome",
+        statusHeader: "Estado",
+        progressHeader: "Progresso",
+        lastUpdatedHeader: "Última Atualização",
+        actionsHeader: "Ações",
+        noItems: "Nenhum item de aprendizagem encontrado",
+        startLearning: "Adicione seu primeiro item de aprendizagem para começar",
+        adjustFilters: "Tente ajustar seus filtros ou termos de pesquisa",
+        edit: "Editar item de aprendizagem",
+        delete: "Eliminar item de aprendizagem",
+        itemNotFound: "Item de aprendizagem não encontrado",
+        itemDeleted: "Item de aprendizagem eliminado com sucesso",
+        errorDeletingItem: "Falha ao eliminar item de aprendizagem",
+        fetchError: "Falha ao buscar itens de aprendizagem. Por favor, tente novamente mais tarde."
     }
 }
 

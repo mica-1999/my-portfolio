@@ -17,8 +17,8 @@ export const dashboardMenuData = [
         title: "Learning",
         icon: "ri-git-repository-fill",
         sublinks: [
-            { title: "Software", link: "/management/software" },
-            { title: "Hardware", link: "/management/hardware" },
+            { title: "Software", link: "/dashboard/softwareManage" },
+            { title: "Hardware", link: "/dashboard/hardwareManage" },
         ]
     },
     {

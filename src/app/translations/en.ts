@@ -329,7 +329,12 @@ const translations = {
         addNewUser: "Add New User",
         tagsLabel: "Select tags",
         addNewProject: "Add New Project",
-        searchProjects: "Search projects..."
+        searchProjects: "Search projects...",
+        categoryLabel: "Select a category",
+        subcategoriesLabel: "Select subcategories",
+        searchSubcategories: "Search subcategories...",
+        searchLearning: "Search items...",
+        addNewLearning: "Add Learning Item"
     },
     userManagement: {
         noUsersFound: "No users found",
@@ -374,6 +379,25 @@ const translations = {
         successMessage: "Project added successfully!",
         errorMessage: "Failed to add project. Please try again.",
         formError: "An error occurred while submitting the form. Please try again."
+    },
+    learningTable: {
+        title: "Software Learning",
+        categoryHeader: "Category",
+        subcategoryHeader: "Subcategory",
+        nameHeader: "Name",
+        statusHeader: "Status",
+        progressHeader: "Progress",
+        lastUpdatedHeader: "Last Updated",
+        actionsHeader: "Actions",
+        noItems: "No learning items found",
+        startLearning: "Add your first learning item to get started",
+        adjustFilters: "Try adjusting your filters or search terms",
+        edit: "Edit learning item",
+        delete: "Delete learning item",
+        itemNotFound: "Learning item not found",
+        itemDeleted: "Learning item deleted successfully",
+        errorDeletingItem: "Failed to delete learning item",
+        fetchError: "Failed to fetch learning items. Please try again later."
     }
 }
 

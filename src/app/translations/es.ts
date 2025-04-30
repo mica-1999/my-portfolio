@@ -329,7 +329,31 @@ const translations = {
         addNewUser: "Añadir Nuevo Usuario",
         tagsLabel: "Seleccionar etiquetas",
         addNewProject: "Añadir Nuevo Proyecto",
-        searchProjects: "Buscar proyectos..."
+        searchProjects: "Buscar proyectos...",
+        categoryLabel: "Seleccionar una categoría",
+        subcategoriesLabel: "Seleccionar subcategorías",
+        searchSubcategories: "Buscar subcategorías...",
+        searchLearning: "Buscar elementos...",
+        addNewLearning: "Añadir Elemento de Aprendizaje"
+    },
+    learningTable: {
+        title: "Aprendizaje de Software",
+        categoryHeader: "Categoría",
+        subcategoryHeader: "Subcategoría",
+        nameHeader: "Nombre",
+        statusHeader: "Estado",
+        progressHeader: "Progreso",
+        lastUpdatedHeader: "Última Actualización",
+        actionsHeader: "Acciones",
+        noItems: "No se encontraron elementos de aprendizaje",
+        startLearning: "Añade tu primer elemento de aprendizaje para comenzar",
+        adjustFilters: "Intente ajustar sus filtros o términos de búsqueda",
+        edit: "Editar elemento de aprendizaje",
+        delete: "Eliminar elemento de aprendizaje",
+        itemNotFound: "Elemento de aprendizaje no encontrado",
+        itemDeleted: "Elemento de aprendizaje eliminado con éxito",
+        errorDeletingItem: "Error al eliminar elemento de aprendizaje",
+        fetchError: "Error al obtener elementos de aprendizaje. Por favor, intente de nuevo más tarde."
     },
     userForm: {
         title: "Añadir Usuario",
