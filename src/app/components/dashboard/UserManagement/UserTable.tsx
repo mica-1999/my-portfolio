@@ -51,15 +51,13 @@ export default function ManageUsersTable({ users = [], filters, clearFilters, se
                 const daysDifference = Math.floor((today.getTime() - lastActive.getTime()) / (1000 * 60 * 60 * 24));
 
                 switch (filters.timeRange) {
-                    case 'last7days':
+                    case 'week':
                         return daysDifference <= 7;
-                    case 'last30days':
+                    case 'month':
                         return daysDifference <= 30;
-                    case 'last3months':
-                        return daysDifference <= 90;
-                    case 'last6months':
+                    case 'halfyear':
                         return daysDifference <= 180;
-                    case 'thisYear':
+                    case 'year':
                         return lastActive.getFullYear() === today.getFullYear();
                     default:
                         return true;

@@ -34,6 +34,31 @@ export default function Sidebar() {
         return activeDropdown === title;
     };
 
+    // Check if selected menu is inside a dropdown and open it automatically
+    useEffect(() => {
+        // Check in dashboard menu data
+        for (const menuItem of dashboardMenuData) {
+            if (menuItem.sublinks) {
+                const isSubMenuSelected = menuItem.sublinks.some(sublink => sublink.title === selectedMenu);
+                if (isSubMenuSelected) {
+                    setActiveDropdown(menuItem.title);
+                    break;
+                }
+            }
+        }
+
+        // Check in apps and pages data
+        for (const menuItem of appsAndPagesData) {
+            if (menuItem.sublinks) {
+                const isSubMenuSelected = menuItem.sublinks.some(sublink => sublink.title === selectedMenu);
+                if (isSubMenuSelected) {
+                    setActiveDropdown(menuItem.title);
+                    break;
+                }
+            }
+        }
+    }, [selectedMenu]);
+
     return (
         <div className='hidden lg:flex flex-col w-64 bg-[#282A42] text-white h-screen'>
             {/* Logo Section */}

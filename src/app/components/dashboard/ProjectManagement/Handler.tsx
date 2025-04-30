@@ -48,7 +48,6 @@ export default function Handler() {
         fetchProjects()
     }, []);
 
-
     // Clear all filters
     const clearFilters = () => {
         setFilters({ status: "", tags: [], timeRange: "", search: "" });
