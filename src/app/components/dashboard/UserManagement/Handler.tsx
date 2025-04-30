@@ -71,7 +71,7 @@ export default function Handler() {
             </div>
 
             {formOpen && (
-                <Forms isOpen={formOpen} setFormOpen={setFormOpen} />
+                <Forms isOpen={formOpen} setFormOpen={setFormOpen} setUsers={setUsers} />
             )}
         </>
     )

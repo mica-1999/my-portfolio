@@ -75,6 +75,12 @@ export interface User {
     job?: string;
 }
 
+export interface FormInsertionProps {
+    isOpen: boolean;
+    setFormOpen: (isOpen: boolean) => void;
+    setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+}
+
 export enum UserRole {
     ADMIN = "admin",
     EDITOR = "editor",
@@ -88,3 +94,4 @@ export enum UserStatus {
     PENDING = "pending",
     SUSPENDED = "suspended"
 }
+

@@ -330,6 +330,32 @@ const translations = {
         tagsLabel: "Seleccionar etiquetas",
         addNewProject: "Añadir Nuevo Proyecto",
         searchProjects: "Buscar proyectos..."
+    },
+    userForm: {
+        title: "Añadir Usuario",
+        firstName: "Nombre",
+        lastName: "Apellido",
+        email: "Email",
+        phone: "Teléfono",
+        role: "Rol",
+        linkedProject: "Proyecto Asociado (Opcional)",
+        submit: "Enviar",
+        submitting: "Enviando...",
+        cancel: "Cancelar",
+        reset: "Limpiar",
+        validationRequired: "{field} es obligatorio",
+        validationEmail: "Por favor, introduce una dirección de email válida",
+        validationPhone: "Por favor, introduce un número de teléfono válido de 9 dígitos",
+        successMessage: "¡Usuario añadido con éxito!",
+        errorMessage: "Error al añadir usuario. Por favor, inténtalo de nuevo.",
+        formError: "Ocurrió un error al enviar el formulario. Por favor, inténtalo de nuevo."
+    },
+    userManagement: {
+        noUsersFound: "No se encontraron usuarios",
+        errorFetchingUsers: "Error al obtener usuarios. Por favor, inténtelo de nuevo más tarde.",
+        userNotFound: "Usuario no encontrado",
+        userDeleted: "Usuario eliminado con éxito",
+        errorDeletingUser: "Error al eliminar usuario. Por favor, inténtelo de nuevo."
     }
 }
 

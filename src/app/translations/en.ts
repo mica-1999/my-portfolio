@@ -330,6 +330,32 @@ const translations = {
         tagsLabel: "Select tags",
         addNewProject: "Add New Project",
         searchProjects: "Search projects..."
+    },
+    userManagement: {
+        noUsersFound: "No users found",
+        errorFetchingUsers: "Error fetching users. Please try again later.",
+        userNotFound: "User not found",
+        userDeleted: "User deleted successfully",
+        errorDeletingUser: "Error deleting user. Please try again."
+    },
+    userForm: {
+        title: "Add User",
+        firstName: "First Name",
+        lastName: "Last Name",
+        email: "Email",
+        phone: "Phone",
+        role: "Role",
+        linkedProject: "Linked Project (Optional)",
+        submit: "Submit",
+        submitting: "Submitting...",
+        cancel: "Cancel",
+        reset: "Reset",
+        validationRequired: "{field} is required",
+        validationEmail: "Please enter a valid email address",
+        validationPhone: "Please enter a valid 9-digit phone number",
+        successMessage: "User added successfully!",
+        errorMessage: "Failed to add user. Please try again.",
+        formError: "An error occurred while submitting the form. Please try again."
     }
 }
 

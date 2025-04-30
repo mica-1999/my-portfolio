@@ -71,7 +71,7 @@ export default function StickyButton() {
         <>
             <div
                 className="
-                    fixed right-0 top-40 z-50
+                    fixed right-0 top-40 z-25
                     flex items-center justify-center w-12 h-10
                     pr-2
                     bg-[#FF6B35] text-white rounded-l-lg shadow-lg
