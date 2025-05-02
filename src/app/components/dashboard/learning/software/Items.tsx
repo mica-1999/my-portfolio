@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { LearningItem } from "@/app/types/learning";
 import { getStatusColor, getStatusBgColor, formatDate } from "@/app/components/reusable/Utils";
+import { showToast } from "@/app/components/reusable/Toasters";
 
 interface ItemsProps {
     items: LearningItem[];
@@ -18,7 +19,7 @@ interface ItemsProps {
 }
 
 export default function Items({ items, filters, clearFilters, setItems }: ItemsProps) {
-    const { t } = useTheme();
+    const { t, savedTheme } = useTheme();
     const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
     // Filter items based on the current filters
@@ -72,6 +73,31 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
 
         return true;
     });
+
+    // Handle delete item action
+    const handleDeleteItem = async (id: string) => {
+        try {
+            const response = await fetch(`/api/learning/software?cardId=${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                showToast("error", "Failed to delete item. Please try again later.", savedTheme);
+                return;
+            }
+            else {
+                const updatedItems = items.filter(item => item.id !== id);
+                setItems(updatedItems);
+                showToast("success", "Item deleted successfully.", savedTheme);
+            }
+        } catch (error) {
+            console.error("Error deleting item:", error);
+            showToast("error", "Failed to delete item. Please try again later.", savedTheme);
+        }
+    }
 
     // Toggle item expansion
     const toggleExpand = (id: string) => {
@@ -228,6 +254,16 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
                                     <div className="flex justify-end gap-2 mt-4">
                                         <button className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
                                             Edit
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                if (window.confirm('Are you sure you want to delete this item?')) {
+                                                    handleDeleteItem(item.id);
+                                                }
+                                            }}
+                                            className="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
+                                        >
+                                            Delete
                                         </button>
                                         <Link href={`/dashboard/learning/software/${item.id}`} className="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition-colors">
                                             View Details

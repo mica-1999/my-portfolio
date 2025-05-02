@@ -119,3 +119,25 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "Failed to create learning item. Please try again later." }, { status: 500 });
     }
 }
+
+export async function DELETE(req: Request) {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("cardId") || "";
+
+    if (!id) {
+        return NextResponse.json({ error: "Learning item ID is required" }, { status: 400 });
+    }
+
+    try {
+        const deletedItem = await prisma.softwareNotes.delete({
+            where: {
+                id: parseInt(id),
+            },
+        });
+
+        return NextResponse.json(deletedItem, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting learning item:", error);
+        return NextResponse.json({ error: "Failed to delete learning item. Please try again later." }, { status: 500 });
+    }
+}
