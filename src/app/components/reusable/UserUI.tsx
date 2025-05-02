@@ -1,5 +1,4 @@
 import { UserRole, UserStatus, TimelineEventType } from '@/app/types/dashmain';
-import { tagFilters } from '@/app/data/manageFilters';
 
 // Helper function to get role styles
 export const getRoleStyles = (role: string) => {

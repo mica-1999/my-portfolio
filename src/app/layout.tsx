@@ -4,7 +4,7 @@ import 'remixicon/fonts/remixicon.css'; // Import Remix Icon CSS
 import NextAuthSessionProvider from "./sessionWrapper";
 import { ToastContainer } from 'react-toastify'; // Initialize ToastContainer for App
 import { ThemeProvider } from "./context/ThemeContext";
-import StickyButton from "./components/langthemeBtn/Button";
+import StickyButton from "./components/themebtn/Button";
 import LoadingWrapper from "./components/reusable/LoadingWrapper";
 
 export const metadata: Metadata = {

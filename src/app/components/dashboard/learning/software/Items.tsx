@@ -2,6 +2,7 @@ import { useTheme } from "@/app/context/ThemeContext";
 import { useState } from "react";
 import Link from "next/link";
 import { LearningItem } from "@/app/types/learning";
+import { getStatusColor, getStatusBgColor, formatDate } from "@/app/components/reusable/Utils";
 
 interface ItemsProps {
     items: LearningItem[];
@@ -33,8 +34,8 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
             return false;
         }
 
-        // Filter by category
-        if (filters.category && item.category !== filters.category) {
+        // Filter by category - convert item.category to lowercase for comparison
+        if (filters.category && item.category.toLowerCase() !== filters.category.toLowerCase()) {
             return false;
         }
 
@@ -77,68 +78,26 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
         setExpandedItem(expandedItem === id ? null : id);
     };
 
-    // Get status color
-    const getStatusColor = (status: string): string => {
-        switch (status) {
-            case 'completed':
-                return 'bg-green-500';
-            case 'ongoing':
-                return 'bg-blue-500';
-            case 'planned':
-                return 'bg-yellow-500';
-            case 'paused':
-                return 'bg-gray-500';
-            default:
-                return 'bg-purple-500';
-        }
-    };
-
-    // Get status background color (lighter version)
-    const getStatusBgColor = (status: string): string => {
-        switch (status) {
-            case 'completed':
-                return 'bg-green-100 dark:bg-green-900/30';
-            case 'ongoing':
-                return 'bg-blue-100 dark:bg-blue-900/30';
-            case 'planned':
-                return 'bg-yellow-100 dark:bg-yellow-900/30';
-            case 'paused':
-                return 'bg-gray-100 dark:bg-gray-800/50';
-            default:
-                return 'bg-purple-100 dark:bg-purple-900/30';
-        }
-    };
-
-    // Format date for display
-    const formatDate = (dateString: string): string => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-    };
-
     // Empty state component
     const EmptyState = () => (
-        <div className="flex flex-col items-center justify-center py-10 px-4 text-center">
-            <div className="w-24 h-24 mb-4 text-gray-300 dark:text-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+        <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
+            <i className="ri-book-open-line text-[3rem] text-gray-500 dark:text-[#7B7C95]"></i>
+            <h5 className="mt-3 text-gray-700 dark:text-gray-300 text-[1.25rem] font-medium">
                 {t('learningTable.noItems') || 'No learning items found'}
-            </h3>
+            </h5>
             {items.length === 0 ? (
-                <p className="text-gray-500 dark:text-gray-400 max-w-md mb-6">
+                <p className="text-gray-500 dark:text-[#7B7C95] max-w-md mb-6">
                     {t('learningTable.startLearning') || 'Add your first learning item to get started'}
                 </p>
             ) : (
-                <p className="text-gray-500 dark:text-gray-400 max-w-md mb-6">
+                <p className="text-gray-500 dark:text-[#7B7C95] max-w-md mb-6">
                     {t('learningTable.adjustFilters') || 'Try adjusting your filters or search terms'}
                 </p>
             )}
             {items.length > 0 && (
                 <button
                     onClick={clearFilters}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
+                    className="mt-4 px-4 py-2 bg-transparent border border-[#666cff] hover:bg-[#666cff] text-[#666cff] hover:text-white text-md font-medium rounded-md transition-colors cursor-pointer"
                 >
                     {t('projects.resetFilters') || 'Reset filters'}
                 </button>

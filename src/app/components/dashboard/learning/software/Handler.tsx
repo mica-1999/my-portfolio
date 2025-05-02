@@ -2,12 +2,15 @@
 import { useState, useEffect } from "react";
 import { showToast } from "@/app/components/reusable/Toasters";
 import { useTheme } from "@/app/context/ThemeContext";
+import { LearningItem, LearningFilters } from "@/app/types/learning";
+import { useSession } from "next-auth/react";
 import Filters from "./Filters";
 import Items from "./Items";
-import { LearningItem, LearningFilters } from "@/app/types/learning";
 
 export default function Handler() {
     // State and Hooks
+    const { data: session } = useSession();
+    const userId = session?.user?.id || ""; // Assuming you have a user ID in the session
     const { savedTheme, t } = useTheme();
     const [filters, setFilters] = useState<LearningFilters>({ status: "", category: "", subcategories: [], timeRange: "", search: "" });
     const [learningItems, setLearningItems] = useState<LearningItem[]>([]);
@@ -16,94 +19,37 @@ export default function Handler() {
     // Fetch learning items data from API
     useEffect(() => {
         const fetchLearningItems = async () => {
+            // Don't make the API call if userId is empty
+            if (!userId) {
+                setLearningItems([]);
+                return;
+            }
+
             try {
-                // For now, we'll just use mock data
-                // Replace this with actual API call when ready
+                const response = await fetch(`/api/learning/software?userId=${userId}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json",
+                    },
+                });
 
-                // Mock data for development
-                const mockItems: LearningItem[] = [
-                    {
-                        id: "1",
-                        title: "React Fundamentals",
-                        description: "Learning the core concepts of React including components, props, and state management. Building reusable UI components and understanding the React component lifecycle.",
-                        status: "completed",
-                        category: "frontend",
-                        subcategories: ["react", "javascript"],
-                        startDate: "2023-01-15",
-                        endDate: "2023-03-20",
-                        resources: ["React Documentation", "Udemy Course: React - The Complete Guide", "React official tutorials"],
-                        notes: "Completed all exercises and built a sample project. Need to review Context API and hooks more thoroughly.",
-                        progress: 100
-                    },
-                    {
-                        id: "2",
-                        title: "Node.js Backend Development",
-                        description: "Building RESTful APIs with Express.js and MongoDB. Learning about middleware, authentication, and database integration.",
-                        status: "ongoing",
-                        category: "backend",
-                        subcategories: ["node", "express"],
-                        startDate: "2023-04-10",
-                        resources: ["Node.js Documentation", "YouTube: Node.js Crash Course", "Express.js Guide"],
-                        notes: "Currently working on authentication and authorization. JWT implementation is next.",
-                        progress: 65
-                    },
-                    {
-                        id: "3",
-                        title: "AWS Cloud Practitioner",
-                        description: "Studying for AWS Cloud Practitioner certification to gain fundamental knowledge of AWS cloud services and infrastructure.",
-                        status: "planned",
-                        category: "cloud",
-                        subcategories: ["aws"],
-                        startDate: "2023-06-01",
-                        resources: ["AWS Training and Certification", "Practice Exams", "AWS Documentation"],
-                        progress: 0
-                    },
-                    {
-                        id: "4",
-                        title: "CSS Grid & Flexbox Mastery",
-                        description: "Deepening understanding of modern CSS layout techniques to create responsive and flexible web designs.",
-                        status: "ongoing",
-                        category: "frontend",
-                        subcategories: ["css"],
-                        startDate: "2023-02-10",
-                        resources: ["CSS Tricks", "MDN Web Docs", "Frontend Masters course"],
-                        notes: "Completed grid basics, working on complex layout patterns",
-                        progress: 75
-                    },
-                    {
-                        id: "5",
-                        title: "TypeScript Advanced Types",
-                        description: "Exploring advanced TypeScript features like generics, utility types, mapped types, and type inference.",
-                        status: "paused",
-                        category: "programming",
-                        subcategories: ["typescript"],
-                        startDate: "2023-03-05",
-                        resources: ["TypeScript Documentation", "Programming TypeScript book"],
-                        notes: "Paused due to project priorities. Will resume next month.",
-                        progress: 40
-                    },
-                    {
-                        id: "6",
-                        title: "Docker Containerization",
-                        description: "Learning how to containerize applications using Docker for consistent development and deployment environments.",
-                        status: "ongoing",
-                        category: "devops",
-                        subcategories: ["docker"],
-                        startDate: "2023-05-12",
-                        resources: ["Docker Documentation", "Docker for Developers course"],
-                        notes: "Created first multi-container application with docker-compose",
-                        progress: 50
-                    }
-                ];
+                if (!response.ok && response.status === 404) {
+                    showToast("error", t('learningTable.notFound') || "Learning items not found.", savedTheme);
+                    return;
+                }
 
-                setLearningItems(mockItems);
+                const data = await response.json();
+                setLearningItems(Array.isArray(data) ? data : []);
+
             } catch (error) {
                 console.error("Error fetching learning items:", error);
                 showToast("error", t('learningTable.fetchError') || "Failed to fetch learning items. Please try again later.", savedTheme);
+                setLearningItems([]);
             }
         }
-        fetchLearningItems()
-    }, []);
+        fetchLearningItems();
+    }, [userId, savedTheme, t]); // Use userId in the dependency array instead of session
 
     // Clear all filters
     const clearFilters = () => {

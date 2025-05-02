@@ -2,21 +2,21 @@ import { useState, useRef } from 'react';
 import { useTheme } from "@/app/context/ThemeContext";
 import { useClickOutside } from '@/app/components/reusable/ClickOutsideDiv';
 import { FiltersProps } from '@/app/types/learning';
-import { categoryFilters, statusFilters, subcategoryFilters, timeRangeFilters } from '@/app/data/learningSoftwareData';
+import { categoryFilters, statusFilters, timeRangeFilters, getSubcategoriesByCategory } from '@/app/data/learningSoftwareData';
+import { useRouter } from 'next/navigation';
 
 export default function Filters({ filters, setFilters, clearFilters, setModalOpen }: FiltersProps) {
     // States & Hooks
     const { t } = useTheme();
+    const router = useRouter();
     const [openDropdown, setOpenDropdown] = useState('');
     const [subcategorySearchInput, setSubcategorySearchInput] = useState('');
 
-    // Create refs for each dropdown container
+    // Create refs & useClickOutside for dropdowns
     const statusDropdownRef = useRef<HTMLDivElement>(null);
     const categoryDropdownRef = useRef<HTMLDivElement>(null);
     const subcategoriesDropdownRef = useRef<HTMLDivElement>(null);
     const timeRangeDropdownRef = useRef<HTMLDivElement>(null);
-
-    // Use the click outside hook for each dropdown
     useClickOutside(statusDropdownRef, () => { if (openDropdown === 'status') setOpenDropdown(''); });
     useClickOutside(categoryDropdownRef, () => { if (openDropdown === 'category') setOpenDropdown(''); });
     useClickOutside(subcategoriesDropdownRef, () => { if (openDropdown === 'subcategories') setOpenDropdown(''); });
@@ -83,15 +83,20 @@ export default function Filters({ filters, setFilters, clearFilters, setModalOpe
         setFilters(prev => ({ ...prev, search: e.target.value }));
     };
 
+    // Get subcategories based on selected category
+    const categorySubcategories = getSubcategoriesByCategory(filters.category);
+
     // Filter subcategories based on search input and selected category
     const filteredSubcategories = subcategorySearchInput
-        ? subcategoryFilters.filter(
-            sub => sub.display.toLowerCase().includes(subcategorySearchInput.toLowerCase()) &&
-                (!filters.category || sub.category === filters.category)
+        ? categorySubcategories.filter(sub =>
+            sub.display.toLowerCase().includes(subcategorySearchInput.toLowerCase())
         )
-        : filters.category
-            ? subcategoryFilters.filter(sub => sub.category === filters.category)
-            : subcategoryFilters;
+        : categorySubcategories;
+
+    // Navigate to add new page
+    const handleAddNew = () => {
+        router.push('/pages/dashboard/softwareManage/addNew');
+    };
 
     return (
         <>
@@ -207,22 +212,35 @@ export default function Filters({ filters, setFilters, clearFilters, setModalOpe
                                     />
                                 </div>
                             </div>
-                            <ul className="max-h-60 overflow-auto rounded-md">
-                                {filteredSubcategories.map((option) => (
-                                    <li
-                                        key={option.value}
-                                        onClick={() => toggleSubcategory(option.value)}
-                                        className="px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#99C8FF] hover:text-[#30334E] dark:hover:text-[#282A42] flex items-center cursor-pointer"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            checked={filters.subcategories.includes(option.value)}
-                                            onChange={() => { }}
-                                            className="mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                        />
-                                        {option.display}
+
+                            {!filters.category && (
+                                <div className="p-3 text-sm text-gray-500 dark:text-gray-400 text-center border-b border-gray-200 dark:border-[#464963]">
+                                    {t('filters.selectCategoryFirst') || "Please select a category first"}
+                                </div>
+                            )}
+
+                            <ul className={`max-h-60 overflow-auto rounded-md ${!filters.category && 'hidden'}`}>
+                                {filteredSubcategories.length > 0 ? (
+                                    filteredSubcategories.map((option) => (
+                                        <li
+                                            key={option.value}
+                                            onClick={() => toggleSubcategory(option.value)}
+                                            className="px-3 py-2 text-gray-700 dark:text-gray-200 hover:bg-[#99C8FF] hover:text-[#30334E] dark:hover:text-[#282A42] flex items-center cursor-pointer"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={filters.subcategories.includes(option.value)}
+                                                onChange={() => { }}
+                                                className="mr-2 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                            />
+                                            {option.display}
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="px-3 py-2 text-gray-500 dark:text-gray-400 text-center">
+                                        {t('filters.noSubcategoriesFound') || "No subcategories found"}
                                     </li>
-                                ))}
+                                )}
                             </ul>
                         </div>
                     )}
@@ -321,7 +339,7 @@ export default function Filters({ filters, setFilters, clearFilters, setModalOpe
                         <button
                             className="px-6 h-[40px] bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors shadow-sm dark:bg-indigo-500 dark:hover:bg-indigo-600 cursor-pointer"
                             aria-label={t('filters.addNewLearning') || 'Add New Learning Item'}
-                            onClick={() => setModalOpen(true)}
+                            onClick={handleAddNew}
                         >
                             {t('filters.addNewLearning') || 'Add Learning Item'}
                         </button>

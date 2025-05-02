@@ -26,6 +26,7 @@ model User {
   BankAccount     BankAccount?
   UserProject     UserProject[]
   Timeline        Timeline[]
+  SoftwareNotes   SoftwareNotes[]
 
   @@index([email])
   @@index([username])
@@ -119,6 +120,96 @@ model Timeline {
   @@index([eventType])
 }
 
+model SoftwareNotes {
+  id            Int        @id @default(autoincrement())
+  userId        Int
+  title         String
+  description   String
+  status        NoteStatus @default(PLANNED)
+  category      String
+  subcategories String[]
+  complexity    Complexity @default(INTERMEDIATE)
+  startDate     DateTime?
+  endDate       DateTime?
+
+  // Learning resources
+  resources Resource[]
+  links     Link[]
+
+  // Content details
+  codeSnippets CodeSnippet[]
+  concepts     Concept[]
+
+  // Progress tracking
+  progress      Int     @default(0)
+  personalNotes String?
+
+  // Metadata
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  isPublic  Boolean  @default(false)
+
+  // Relations
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([category])
+}
+
+model Resource {
+  id    Int          @id @default(autoincrement())
+  type  ResourceType
+  title String
+  url   String?
+  notes String?
+
+  // Relations
+  softwareNoteId Int
+  softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
+
+  @@index([softwareNoteId])
+}
+
+model Link {
+  id          Int     @id @default(autoincrement())
+  title       String
+  url         String
+  description String?
+
+  // Relations
+  softwareNoteId Int
+  softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
+
+  @@index([softwareNoteId])
+}
+
+model CodeSnippet {
+  id          Int     @id @default(autoincrement())
+  title       String
+  language    String
+  code        String  @db.Text
+  explanation String? @db.Text
+
+  // Relations
+  softwareNoteId Int
+  softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
+
+  @@index([softwareNoteId])
+}
+
+model Concept {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+
+  // Relations
+  softwareNoteId Int
+  softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
+
+  @@index([softwareNoteId])
+}
+
 enum VisualTheme {
   Light
   Dark
@@ -164,4 +255,30 @@ enum TimelineEventType {
   NOTE_CREATED
   MESSAGE_SENT
   SYSTEM_NOTIFICATION
+}
+
+enum NoteStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  PAUSED
+  ABANDONED
+}
+
+enum Complexity {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum ResourceType {
+  DOCUMENTATION
+  ARTICLE
+  VIDEO
+  COURSE
+  BOOK
+  GITHUB_REPO
+  TUTORIAL
+  OTHER
 }
