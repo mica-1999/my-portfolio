@@ -1,3 +1,4 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client";
 import { useRef, useState } from "react";
 import { signOut } from "next-auth/react";
@@ -17,6 +18,7 @@ export default function Header() {
 
     useClickOutside(settingsRef, setDropdownOpen);
 
+    // Function to handle sign out
     const handleSignOut = async () => {
         try {
             await signOut({ callbackUrl: "/pages/login" });

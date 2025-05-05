@@ -1,3 +1,4 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client";
 import { useState } from 'react';
 import { BankDetails } from '@/app/types/dashmain';
@@ -6,7 +7,7 @@ import { useTheme } from '@/app/context/ThemeContext';
 
 export default function Banking({ bankDetails }: { bankDetails: BankDetails }) {
     // States & Hooks
-    const [hidden, setHidden] = useState(false);
+    const [hidden, setHidden] = useState(true);
     const { t } = useTheme(); // Get translation function from context
 
     return (

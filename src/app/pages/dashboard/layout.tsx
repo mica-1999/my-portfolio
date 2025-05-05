@@ -1,3 +1,4 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 import { Metadata } from "next";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
@@ -11,11 +12,7 @@ export const metadata: Metadata = {
     description: "Manage your portfolio content and settings",
 };
 
-export default async function DashboardLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode; }) {
     // Check if user is authenticated
     const session = await getServerSession(authOptions);
 

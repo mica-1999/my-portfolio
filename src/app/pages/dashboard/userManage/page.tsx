@@ -1,4 +1,5 @@
-import Handler from "@/app/components/dashboard/UserManagement/Handler"
+// REVIEWED: 2025-05-05 - Good to go ✅
+import Handler from "@/app/components/dashboard/user_management/Handler"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";

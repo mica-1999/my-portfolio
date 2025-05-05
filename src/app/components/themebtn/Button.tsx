@@ -1,6 +1,7 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client"
 import { useSession } from "next-auth/react";
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { useClickOutside } from "../reusable/ClickOutsideDiv";
 import { modeStyles, languageOptions } from "@/app/data/layoutData";
 import { useTheme } from "@/app/context/ThemeContext";

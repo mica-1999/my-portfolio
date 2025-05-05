@@ -1,3 +1,5 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
+
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -11,6 +13,7 @@ export default function Footer() {
     // States & hooks
     const [currentYear, setCurrentYear] = useState<string>(""); // Gets current year
 
+    // Set current year on component mount
     useEffect(() => {
         setCurrentYear(new Date().getFullYear().toString());
     }, []);

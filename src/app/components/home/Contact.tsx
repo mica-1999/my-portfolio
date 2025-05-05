@@ -1,14 +1,16 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
+
 "use client";
 import { useState, useRef, useEffect } from 'react';
-import { faqs } from '@/app/data/faqData';
 import { useTheme } from '@/app/context/ThemeContext';
 import { useSearchParams } from 'next/navigation';
 
 export default function Contact() {
+    // State & Hooks
     const { t } = useTheme();
-    const messageFormRef = useRef(null);
-    const [openFaq, setOpenFaq] = useState<number | null>(null);
-    const searchParams = useSearchParams();
+    const messageFormRef = useRef(null); // Ref for the contact form
+    const [openFaq, setOpenFaq] = useState<number | null>(null); // Open FAQ sections
+    const searchParams = useSearchParams(); // To scroll into form if present
 
     // Smooth scroll function
     const smoothScrollToForm = () => {
@@ -228,29 +230,85 @@ export default function Contact() {
                     <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-8 text-center">{t('contact.faq.title')}</h3>
 
                     <div className="max-w-3xl mx-auto divide-y divide-gray-200 dark:divide-gray-700">
-                        {faqs.map((faq, index) => (
+                        {/* Question 1 */}
+                        <div className="py-6 cursor-pointer">
                             <div
-                                key={index}
-                                className={`py-6 cursor-pointer`}
+                                className="flex justify-between items-center"
+                                onClick={() => toggleFaq(0)}
                             >
-                                <div
-                                    className="flex justify-between items-center"
-                                    onClick={() => toggleFaq(index)}
-                                >
-                                    <h4 className="text-lg font-medium text-gray-800 dark:text-white">
-                                        {t(`contact.faq.questions.${index}.question`) || faq.question}
-                                    </h4>
-                                    <span className="ml-6 flex-shrink-0">
-                                        <i className={`ri-${openFaq === index ? 'subtract' : 'add'}-line text-[#FF6B35] dark:text-[#666cff]`}></i>
-                                    </span>
-                                </div>
-                                <div className={`mt-3 overflow-hidden transition-all duration-300 ${openFaq === index ? 'max-h-96' : 'max-h-0'}`}>
-                                    <p className="text-gray-600 dark:text-gray-300">
-                                        {t(`contact.faq.questions.${index}.answer`) || faq.answer}
-                                    </p>
-                                </div>
+                                <h4 className="text-lg font-medium text-gray-800 dark:text-white">
+                                    {t('contact.faq.question1')}
+                                </h4>
+                                <span className="ml-6 flex-shrink-0">
+                                    <i className={`ri-${openFaq === 0 ? 'subtract' : 'add'}-line text-[#FF6B35] dark:text-[#666cff]`}></i>
+                                </span>
                             </div>
-                        ))}
+                            <div className={`mt-3 overflow-hidden transition-all duration-300 ${openFaq === 0 ? 'max-h-96' : 'max-h-0'}`}>
+                                <p className="text-gray-600 dark:text-gray-300">
+                                    {t('contact.faq.answer1')}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Question 2 */}
+                        <div className="py-6 cursor-pointer">
+                            <div
+                                className="flex justify-between items-center"
+                                onClick={() => toggleFaq(1)}
+                            >
+                                <h4 className="text-lg font-medium text-gray-800 dark:text-white">
+                                    {t('contact.faq.question2')}
+                                </h4>
+                                <span className="ml-6 flex-shrink-0">
+                                    <i className={`ri-${openFaq === 1 ? 'subtract' : 'add'}-line text-[#FF6B35] dark:text-[#666cff]`}></i>
+                                </span>
+                            </div>
+                            <div className={`mt-3 overflow-hidden transition-all duration-300 ${openFaq === 1 ? 'max-h-96' : 'max-h-0'}`}>
+                                <p className="text-gray-600 dark:text-gray-300">
+                                    {t('contact.faq.answer2')}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Question 3 */}
+                        <div className="py-6 cursor-pointer">
+                            <div
+                                className="flex justify-between items-center"
+                                onClick={() => toggleFaq(2)}
+                            >
+                                <h4 className="text-lg font-medium text-gray-800 dark:text-white">
+                                    {t('contact.faq.question3')}
+                                </h4>
+                                <span className="ml-6 flex-shrink-0">
+                                    <i className={`ri-${openFaq === 2 ? 'subtract' : 'add'}-line text-[#FF6B35] dark:text-[#666cff]`}></i>
+                                </span>
+                            </div>
+                            <div className={`mt-3 overflow-hidden transition-all duration-300 ${openFaq === 2 ? 'max-h-96' : 'max-h-0'}`}>
+                                <p className="text-gray-600 dark:text-gray-300">
+                                    {t('contact.faq.answer3')}
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Question 4 */}
+                        <div className="py-6 cursor-pointer">
+                            <div
+                                className="flex justify-between items-center"
+                                onClick={() => toggleFaq(3)}
+                            >
+                                <h4 className="text-lg font-medium text-gray-800 dark:text-white">
+                                    {t('contact.faq.question4')}
+                                </h4>
+                                <span className="ml-6 flex-shrink-0">
+                                    <i className={`ri-${openFaq === 3 ? 'subtract' : 'add'}-line text-[#FF6B35] dark:text-[#666cff]`}></i>
+                                </span>
+                            </div>
+                            <div className={`mt-3 overflow-hidden transition-all duration-300 ${openFaq === 3 ? 'max-h-96' : 'max-h-0'}`}>
+                                <p className="text-gray-600 dark:text-gray-300">
+                                    {t('contact.faq.answer4')}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

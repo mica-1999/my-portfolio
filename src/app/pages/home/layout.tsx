@@ -1,3 +1,11 @@
+/**
+ * Layout for home page and its subpages
+ * 
+ * Provides consistent navigation bar, footer, and styling for all pages
+ * in the home section.
+ */
+// REVIEWED: 2025-05-05 - Good to go ✅
+
 import type { Metadata } from "next";
 import Navbar from "@/app/components/home/Navbar";
 import Footer from "@/app/components/home/Footer";

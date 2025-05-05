@@ -1,9 +1,10 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client"
-import Banking from "./MainComps/Banking"
-import Stats from "./MainComps/Stats"
-import ProjectTable from "./MainComps/ProjectTable"
-import UsersTable from "./MainComps/UsersTable"
-import Timeline from "./MainComps/Timeline"
+import Banking from "./main_components/Banking"
+import Stats from "./main_components/Stats"
+import ProjectTable from "./main_components/ProjectTable"
+import UsersTable from "./main_components/UsersTable"
+import Timeline from "./main_components/Timeline"
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react"
 import { useTheme } from "@/app/context/ThemeContext"
@@ -13,7 +14,7 @@ import { BankDetails } from "@/app/types/dashmain"
 export default function Main() {
     // States & Hooks
     const { data: session } = useSession();
-    const { t, savedTheme } = useTheme();
+    const { savedTheme } = useTheme();
     const [bankDetails, setBankDetails] = useState<BankDetails>({ totalBalance: 0, depositThisMonth: 0, withdrawThisMonth: 0, });
     const [projects, setProjects] = useState([]);
     const [timeline, setTimeline] = useState([]);
@@ -23,7 +24,7 @@ export default function Main() {
         if (!session) return;
         const fetchBankDetails = async () => {
             try {
-                const response = await fetch(`/api/bankDetails?userId=${session?.user.id}`, {
+                const response = await fetch(`/api/bankDetails/${session?.user.id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -47,7 +48,6 @@ export default function Main() {
                 showToast("error", "Error fetching bank details. Please try again.", savedTheme);
             }
         }
-
         fetchBankDetails();
     }, [session]);
 
@@ -56,7 +56,7 @@ export default function Main() {
         if (!session) return;
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`/api/projects/personal?userId=${session?.user.id}`, {
+                const response = await fetch(`/api/projects/personal/${session?.user.id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -76,7 +76,6 @@ export default function Main() {
                 showToast("error", "Error fetching projects. Please try again.", savedTheme);
             }
         }
-
         fetchProjects();
     }, [session])
 
@@ -86,7 +85,7 @@ export default function Main() {
         if (!session) return;
         const fetchTimeline = async () => {
             try {
-                const response = await fetch(`/api/timeline?userId=${session?.user.id}`, {
+                const response = await fetch(`/api/timeline/${session?.user.id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

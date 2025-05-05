@@ -1,11 +1,15 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 
-export async function GET(req: Request) {
-    const url = new URL(req.url);
-    const userId = parseInt(url.searchParams.get("userId") || "");
+export async function GET(
+    _request: Request,
+    { params }: { params: { id: string } }
+) {
+    const userId = parseInt(params.id);
 
-    if (!userId) {
+    // Verify Parameter
+    if (!userId || isNaN(userId)) {
         return NextResponse.json({ error: "Invalid UserID" }, { status: 400 });
     }
 
@@ -41,16 +45,10 @@ export async function GET(req: Request) {
                 return transaction.type === "WITHDRAWAL" ? acc + transaction.amount : acc;
             }, 0);
 
-            return NextResponse.json({
-                totalBalance,
-                depositThisMonth,
-                withdrawThisMonth
-            });
+            return NextResponse.json({ totalBalance, depositThisMonth, withdrawThisMonth });
         }
-
     } catch (error) {
         console.error("Error fetching bank details:", error);
         return NextResponse.json({ error: "Error fetching bank details" }, { status: 500 });
-
     }
 }

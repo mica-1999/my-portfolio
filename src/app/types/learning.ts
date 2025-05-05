@@ -46,6 +46,8 @@ export interface LearningItem {
         url: string;
         description?: string;
     }[];
+
+    notes?: string;
 }
 
 // Define filters type

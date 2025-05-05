@@ -165,24 +165,14 @@ const translations = {
         },
         faq: {
             title: 'Preguntas Frecuentes',
-            questions: [
-                {
-                    question: '¿Qué servicios ofreces?',
-                    answer: 'Ofrezco servicios de desarrollo web incluyendo desarrollo frontend, diseño responsivo, soluciones de e-commerce, y mantenimiento y soporte continuo.'
-                },
-                {
-                    question: '¿Cuánto cuestan tus servicios?',
-                    answer: 'Los precios varían dependiendo del alcance del proyecto, complejidad y plazo. Ofrezco tarifas competitivas y proporcionaré un presupuesto detallado después de discutir tus requisitos específicos.'
-                },
-                {
-                    question: '¿Cuánto tiempo toma un proyecto típico?',
-                    answer: 'Los plazos de los proyectos varían según el alcance y la complejidad. Un sitio web simple puede tomar 2-4 semanas, mientras que las aplicaciones más complejas pueden tomar 2-3 meses o más. Proporcionaré una estimación de tiempo durante nuestra consulta.'
-                },
-                {
-                    question: '¿Proporcionas soporte continuo después del lanzamiento?',
-                    answer: 'Sí, ofrezco paquetes de mantenimiento y soporte continuos para asegurar que tu sitio permanezca seguro, actualizado y funcionando correctamente después del lanzamiento.'
-                }
-            ]
+            question1: '¿Qué servicios ofreces?',
+            answer1: 'Ofrezco servicios de desarrollo web incluyendo desarrollo frontend, diseño responsivo, soluciones de e-commerce, y mantenimiento y soporte continuo.',
+            question2: '¿Cuánto cuestan tus servicios?',
+            answer2: 'Los precios varían dependiendo del alcance del proyecto, complejidad y plazo. Ofrezco tarifas competitivas y proporcionaré un presupuesto detallado después de discutir tus requisitos específicos.',
+            question3: '¿Cuánto tiempo toma un proyecto típico?',
+            answer3: 'Los plazos de los proyectos varían según el alcance y la complejidad. Un sitio web simple puede tomar 2-4 semanas, mientras que las aplicaciones más complejas pueden tomar 2-3 meses o más. Proporcionaré una estimación de tiempo durante nuestra consulta.',
+            question4: '¿Proporcionas soporte continuo después del lanzamiento?',
+            answer4: 'Sí, ofrezco paquetes de mantenimiento y soporte continuos para asegurar que tu sitio permanezca seguro, actualizado y funcionando correctamente después del lanzamiento.'
         },
         cta: {
             title: '¿Listo para comenzar tu proyecto?',

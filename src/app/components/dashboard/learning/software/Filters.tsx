@@ -1,3 +1,5 @@
+// REVISED: 2025-05-05 - Good to go ✅
+"use client";
 import { useState, useRef } from 'react';
 import { useTheme } from "@/app/context/ThemeContext";
 import { useClickOutside } from '@/app/components/reusable/ClickOutsideDiv';
@@ -5,7 +7,7 @@ import { FiltersProps } from '@/app/types/learning';
 import { categoryFilters, statusFilters, timeRangeFilters, getSubcategoriesByCategory } from '@/app/data/learningSoftwareData';
 import { useRouter } from 'next/navigation';
 
-export default function Filters({ filters, setFilters, clearFilters, setModalOpen }: FiltersProps) {
+export default function Filters({ filters, setFilters, clearFilters }: FiltersProps) {
     // States & Hooks
     const { t } = useTheme();
     const router = useRouter();
@@ -94,9 +96,7 @@ export default function Filters({ filters, setFilters, clearFilters, setModalOpe
         : categorySubcategories;
 
     // Navigate to add new page
-    const handleAddNew = () => {
-        router.push('/pages/dashboard/softwareManage/addNew');
-    };
+    const handleAddNew = () => { router.push('/pages/dashboard/softwareManage/addNew'); };
 
     return (
         <>

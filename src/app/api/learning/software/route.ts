@@ -27,33 +27,6 @@ interface ConceptData {
     description: string;
 }
 
-export async function GET(req: Request) {
-    const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId") || "";
-
-    if (!userId) {
-        return NextResponse.json({ error: "User ID is required" }, { status: 400 });
-    }
-
-    try {
-        const learningItems = await prisma.softwareNotes.findMany({
-            where: {
-                userId: parseInt(userId),
-            },
-        });
-
-        if (!learningItems || learningItems.length === 0) {
-            return NextResponse.json({ error: "No learning items found" }, { status: 404 });
-        }
-
-        console.log("Learning items fetched successfully:", learningItems);
-        return NextResponse.json(learningItems, { status: 200 });
-    } catch (error) {
-        console.error("Error fetching learning items:", error);
-        return NextResponse.json({ error: "Failed to fetch learning items. Please try again later." }, { status: 500 });
-    }
-}
-
 export async function POST(req: Request) {
     const { userId, formData, resources, links, codeSnippets, concepts } = await req.json();
     console.log(formData);
@@ -117,27 +90,5 @@ export async function POST(req: Request) {
     } catch (error) {
         console.error("Error creating learning item:", error);
         return NextResponse.json({ error: "Failed to create learning item. Please try again later." }, { status: 500 });
-    }
-}
-
-export async function DELETE(req: Request) {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("cardId") || "";
-
-    if (!id) {
-        return NextResponse.json({ error: "Learning item ID is required" }, { status: 400 });
-    }
-
-    try {
-        const deletedItem = await prisma.softwareNotes.delete({
-            where: {
-                id: parseInt(id),
-            },
-        });
-
-        return NextResponse.json(deletedItem, { status: 200 });
-    } catch (error) {
-        console.error("Error deleting learning item:", error);
-        return NextResponse.json({ error: "Failed to delete learning item. Please try again later." }, { status: 500 });
     }
 }

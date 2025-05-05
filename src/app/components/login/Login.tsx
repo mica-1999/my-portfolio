@@ -1,3 +1,4 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client";
 import { useState } from 'react';
 import { useTheme } from '@/app/context/ThemeContext';
@@ -14,18 +15,12 @@ export default function Login() {
 
     // State & Hooks
     const { t, savedTheme } = useTheme();
-    const [form, setForm] = useState({
-        username: '',
-        password: '',
-        rememberMe: false,
-    });
+    const [form, setForm] = useState({ username: '', password: '', rememberMe: false, });
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     // Function to handle password visibility toggle
-    const togglePasswordVisibility = () => {
-        setIsPasswordVisible(!isPasswordVisible);
-    };
+    const togglePasswordVisibility = () => { setIsPasswordVisible(!isPasswordVisible); };
 
     // Function to handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
@@ -33,8 +28,7 @@ export default function Login() {
         setIsLoading(true);
         const { username, password, rememberMe } = form;
 
-        console.log(form)
-
+        // Check if username and password are provided
         if (!username || !password) {
             showToast('error', t('login.emptyFields'), savedTheme);
             setIsLoading(false);
@@ -57,6 +51,7 @@ export default function Login() {
                 setIsLoading(false);
             } else {
                 showToast('success', t('login.success'), savedTheme);
+                resetFields();
                 setIsLoading(false);
                 router.push('/pages/dashboard');
             }
@@ -70,11 +65,7 @@ export default function Login() {
 
     // Function to handle form reset
     const resetFields = () => {
-        setForm({
-            username: '',
-            password: '',
-            rememberMe: false,
-        });
+        setForm({ username: '', password: '', rememberMe: false });
         setIsPasswordVisible(false);
     };
 

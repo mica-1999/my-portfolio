@@ -1,38 +1,56 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client";
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from "@/app/context/ThemeContext";
+import { usePathname } from 'next/navigation';
 import { dashboardMenuData, appsAndPagesData, configsData } from '@/app/data/dashboardMenuData';
 
 export default function Sidebar() {
-    // States and Hooks
-    const [selectedMenu, setSelectedMenu] = useState(() => {
-        if (typeof window !== 'undefined') {
-            const storedMenu = localStorage.getItem('selectedMenu');
-            return storedMenu ? JSON.parse(storedMenu) : "Home";
-        }
-        return "Home";
-    });
-
-    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+    // Get the current pathname for active menu highlighting
+    const pathname = usePathname();
     const { t } = useTheme();
 
-    // Create a custom setter that updates both state and localStorage
-    const updateSelectedMenu = (menuTitle: string) => {
-        setSelectedMenu(menuTitle);
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('selectedMenu', JSON.stringify(menuTitle));
+    // Determine selected menu based on pathname
+    const findSelectedMenu = () => {
+        // Combine all menu data
+        const allMenuItems = [...dashboardMenuData, ...appsAndPagesData, ...configsData];
+
+        // First check direct matches
+        for (const item of allMenuItems) {
+            if ('/pages' + item.link === pathname) {
+                return item.title;
+            }
+
+            // Check sublinks if they exist
+            if ('sublinks' in item && item.sublinks) {
+                for (const sublink of item.sublinks) {
+                    if ('/pages' + sublink.link === pathname) {
+                        return sublink.title;
+                    }
+                }
+            }
         }
+
+        // Default to Home if no match found
+        return "Home";
     };
+
+    // State for selected menu based on pathname
+    const [selectedMenu, setSelectedMenu] = useState(findSelectedMenu);
+    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+    const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+    // Update selected menu when pathname changes
+    useEffect(() => {
+        setSelectedMenu(findSelectedMenu());
+    }, [pathname]);
 
     const toggleDropdown = (title: string) => {
         setActiveDropdown(activeDropdown === title ? null : title);
     };
 
-    const isDropdownOpen = (title: string) => {
-        return activeDropdown === title;
-    };
+    const isDropdownOpen = (title: string) => { return activeDropdown === title; };
 
     // Check if selected menu is inside a dropdown and open it automatically
     useEffect(() => {
@@ -134,7 +152,7 @@ export default function Sidebar() {
                                                                         : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                                     }
                                                                     rounded-[13px] transition-colors duration-200 px-3`}
-                                                                onClick={() => updateSelectedMenu(sublink.title)}
+                                                                onClick={() => setSelectedMenu(sublink.title)}
                                                             >
                                                                 <i className="ri-circle-fill text-[0.6rem] text-white ml-1"></i>
                                                                 <span className='ml-4'>{t(`sidebar.${sublink.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
@@ -154,7 +172,7 @@ export default function Sidebar() {
                                                     : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                 }
                                                 rounded-[13px] px-3 transition-colors duration-200`}
-                                            onClick={() => updateSelectedMenu(menuItem.title)}
+                                            onClick={() => setSelectedMenu(menuItem.title)}
                                         >
                                             <i className={`${menuItem.icon} text-xl`}></i>
                                             <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
@@ -213,7 +231,7 @@ export default function Sidebar() {
                                                                         : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                                     }
                                                                     rounded-[13px] transition-colors duration-200 px-3`}
-                                                                onClick={() => updateSelectedMenu(sublink.title)}
+                                                                onClick={() => setSelectedMenu(sublink.title)}
                                                             >
                                                                 <i className="ri-circle-fill text-[0.6rem] text-white ml-1"></i>
                                                                 <span className='ml-4'>{t(`sidebar.${sublink.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
@@ -233,7 +251,7 @@ export default function Sidebar() {
                                                     : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                                 }
                                                 rounded-[13px] px-3 transition-colors duration-200`}
-                                            onClick={() => updateSelectedMenu(menuItem.title)}
+                                            onClick={() => setSelectedMenu(menuItem.title)}
                                         >
                                             <i className={`${menuItem.icon} text-xl`}></i>
                                             <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase().replace(/\s+/g, '')}`)}</span>
@@ -261,7 +279,7 @@ export default function Sidebar() {
                                                 : "bg-transparent hover:bg-[#373951] text-[#d7d8ed] hover:text-white"
                                             }
                                             rounded-[13px] px-3 transition-colors duration-200`}
-                                        onClick={() => updateSelectedMenu(menuItem.title)}
+                                        onClick={() => setSelectedMenu(menuItem.title)}
                                     >
                                         <i className={`${menuItem.icon} text-xl`}></i>
                                         <span className='ml-2'>{t(`sidebar.${menuItem.title.toLowerCase()}`)}</span>
@@ -273,5 +291,5 @@ export default function Sidebar() {
                 </div>
             </div>
         </div>
-    )
+    );
 }

@@ -1,3 +1,4 @@
+// REVISED: 2025-05-05 - Now using path parameters for DELETE ✅
 import { useTheme } from "@/app/context/ThemeContext";
 import { useState } from "react";
 import Link from "next/link";
@@ -77,7 +78,7 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
     // Handle delete item action
     const handleDeleteItem = async (id: string) => {
         try {
-            const response = await fetch(`/api/learning/software?cardId=${id}`, {
+            const response = await fetch(`/api/learning/software/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -235,7 +236,7 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
                                             <ul className="list-disc list-inside space-y-1">
                                                 {item.resources.map((resource, index) => (
                                                     <li key={index} className="text-sm text-gray-600 dark:text-gray-400">
-                                                        {resource}
+                                                        {resource.title} {resource.url && <a href={resource.url} target="_blank" rel="noopener noreferrer" className="text-indigo-500 hover:underline">↗</a>}
                                                     </li>
                                                 ))}
                                             </ul>

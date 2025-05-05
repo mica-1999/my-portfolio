@@ -1,3 +1,4 @@
+// REVISED: 2025-05-05 - Exceptional implementation ✅
 "use client";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/app/context/ThemeContext";

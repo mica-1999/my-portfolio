@@ -15,8 +15,6 @@ const addSession = async (userId: number) => {
                 userid: userId
             }
         });
-
-        // Get the current timestamp
         const currentTimestamp = new Date();
 
         // If a session exists, update the timestamp
@@ -29,7 +27,6 @@ const addSession = async (userId: number) => {
                     updatedat: currentTimestamp
                 }
             });
-            console.log(`Updated session timestamp for user: ${userId}`);
         }
         // If no session exists, create a new one
         else {

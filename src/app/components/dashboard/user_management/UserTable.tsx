@@ -1,3 +1,4 @@
+// REVISED: 2025-05-05 - Updated API calls ✅
 "use client";
 import { useTheme } from '@/app/context/ThemeContext';
 import { User } from '@/app/types/dashmain';
@@ -71,14 +72,14 @@ export default function ManageUsersTable({ users = [], filters, clearFilters, se
     // Handle delete user
     const handleDeleteUser = async (userId: number) => {
         try {
-            const response = await fetch(`/api/users?userId=${userId}`, {
+            const response = await fetch(`/api/users/${userId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
 
-            if (!response.ok && response.status === 404) {
+            if (!response.ok) {
                 showToast("error", t("userManagement.userNotFound"), savedTheme);
                 return;
             }

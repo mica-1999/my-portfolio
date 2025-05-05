@@ -165,24 +165,14 @@ const translations = {
         },
         faq: {
             title: 'Frequently Asked Questions',
-            questions: [
-                {
-                    question: 'What services do you offer?',
-                    answer: 'I offer web development services including frontend development, responsive design, e-commerce solutions, and ongoing maintenance and support.'
-                },
-                {
-                    question: 'How much do your services cost?',
-                    answer: 'Pricing varies depending on project scope, complexity, and timeline. I offer competitive rates and will provide a detailed quote after discussing your specific requirements.'
-                },
-                {
-                    question: 'How long does a typical project take?',
-                    answer: 'Project timelines vary based on scope and complexity. A simple website might take 2-4 weeks, while more complex applications can take 2-3 months or more. Ill provide a timeline estimate during our consultation.'
-                },
-                {
-                    question: 'Do you provide ongoing support after launch?',
-                    answer: 'Yes, I offer ongoing maintenance and support packages to ensure your site remains secure, up-to-date, and functioning properly after launch.'
-                }
-            ]
+            question1: 'What services do you offer?',
+            answer1: 'I offer web development services including frontend development, responsive design, e-commerce solutions, and ongoing maintenance and support.',
+            question2: 'How much do your services cost?',
+            answer2: 'Pricing varies depending on project scope, complexity, and timeline. I offer competitive rates and will provide a detailed quote after discussing your specific requirements.',
+            question3: 'How long does a typical project take?',
+            answer3: 'Project timelines vary based on scope and complexity. A simple website might take 2-4 weeks, while more complex applications can take 2-3 months or more. I\'ll provide a timeline estimate during our consultation.',
+            question4: 'Do you provide ongoing support after launch?',
+            answer4: 'Yes, I offer ongoing maintenance and support packages to ensure your site remains secure, up-to-date, and functioning properly after launch.'
         },
         cta: {
             title: 'Ready to start your project?',

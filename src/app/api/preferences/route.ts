@@ -1,40 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 
-export async function GET(req: Request) {
-    // Get Parameters from request url
-    const url = new URL(req.url);
-    const userId = parseInt(url.searchParams.get("userId") || "");
-
-    // Verify Parameters
-    if (!userId) {
-        return NextResponse.json({ error: "Invalid UserID" }, { status: 400 });
-    }
-
-    try {
-        // DB Query for fetching user preferences
-        const preferences = await prisma.userPreferences.findUnique({
-            select: {
-                visualtheme: true,
-                language: true
-            },
-            where: {
-                userid: userId
-            }
-        });
-
-        if (!preferences) {
-            return NextResponse.json({ error: "Preferences not found" }, { status: 404 });
-        }
-        return NextResponse.json(preferences, { status: 200 });
-    }
-    catch (error) {
-        console.error("Error fetching preferences:", error);
-        return NextResponse.json({ error: "Error fetching preferences" }, { status: 500 });
-    }
-
-}
-
 export async function POST(req: Request) {
     // Get Parameters from request body
     const { userId } = await req.json();
@@ -85,6 +51,5 @@ export async function PUT(req: Request) {
         console.error("Error updating preferences:", error);
         return NextResponse.json({ error: "Error updating preferences" }, { status: 500 });
     }
-
 }
 

@@ -77,7 +77,7 @@ export default function ManageUsersTable({ projects = [], filters, clearFilters,
     // Handle delete project
     const handleDeleteProject = async (projectId: number) => {
         try {
-            const response = await fetch(`/api/projects?projectId=${projectId}`, {
+            const response = await fetch(`/api/projects/${projectId}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",

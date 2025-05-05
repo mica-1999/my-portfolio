@@ -1,3 +1,4 @@
+// REVISED: 2025-05-05 - Updated to use path parameter API ✅
 "use client"
 import { useState, useEffect } from "react";
 import { showToast } from "@/app/components/reusable/Toasters";
@@ -10,7 +11,7 @@ import Items from "./Items";
 export default function Handler() {
     // State and Hooks
     const { data: session } = useSession();
-    const userId = session?.user?.id || ""; // Assuming you have a user ID in the session
+    const userId = session?.user?.id || "";
     const { savedTheme, t } = useTheme();
     const [filters, setFilters] = useState<LearningFilters>({ status: "", category: "", subcategories: [], timeRange: "", search: "" });
     const [learningItems, setLearningItems] = useState<LearningItem[]>([]);
@@ -26,7 +27,7 @@ export default function Handler() {
             }
 
             try {
-                const response = await fetch(`/api/learning/software?userId=${userId}`, {
+                const response = await fetch(`/api/learning/software/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 "use client"
 import { createContext, useContext, useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
@@ -37,7 +38,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
             if (!session?.user?.id) return;
 
             try {
-                const response = await fetch(`/api/preferences?userId=${session.user.id}`, {
+                const response = await fetch(`/api/preferences/${session.user.id}`, {
                     method: "GET",
                     headers: { "Content-Type": "application/json" }
                 });

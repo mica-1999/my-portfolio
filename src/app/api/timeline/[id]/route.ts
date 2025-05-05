@@ -1,18 +1,22 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 
-export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get("userId");
+export async function GET(
+    _request: Request,
+    { params }: { params: { id: string } }
+) {
+    const userId = parseInt(params.id);
 
-    if (!userId) {
-        return NextResponse.json({ error: "User ID is required" }, { status: 400 });
+    // Verify Parameter
+    if (!userId || isNaN(userId)) {
+        return NextResponse.json({ error: "Invalid UserID" }, { status: 400 });
     }
 
     try {
         const timelineItems = await prisma.timeline.findMany({
             where: {
-                userId: parseInt(userId),
+                userId: userId,
             },
             orderBy: {
                 createdAt: 'desc',

@@ -1,3 +1,5 @@
+// REVIEWED: 2025-05-05 - Good to go ✅
+
 "use client";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -5,19 +7,17 @@ import { useState, useEffect } from 'react';
 import { useTheme } from '@/app/context/ThemeContext';
 
 export default function Navbar() {
-
     // State & Hooks
     const pathname = usePathname(); // Get active path
     const [scrolled, setScrolled] = useState(false); // Makes the navbar sticky when scrolled
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false); // Responsive menu state
-    const { t, savedTheme } = useTheme(); // Lang & Theme context
+    const { t } = useTheme(); // Lang & Theme context
 
     // Handle scroll effect
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);

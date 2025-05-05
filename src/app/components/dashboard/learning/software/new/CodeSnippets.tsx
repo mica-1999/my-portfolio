@@ -1,5 +1,6 @@
+// REVISED: 2025-05-05 - Great implementation ✅
 import React from 'react';
-import { CodeSnippetsProps } from '@/app/types/learnform'; // Adjust the import path as necessary
+import { CodeSnippetsProps } from '@/app/types/learnform';
 
 const CodeSnippets: React.FC<CodeSnippetsProps> = ({ codeSnippets, setCodeSnippets, errors }) => {
     // Handle code snippet changes
