@@ -286,7 +286,7 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
                                         )}
                                     </div>
                                     <Link
-                                        href={`/dashboard/learning/software/${item.id}`}
+                                        href={`/pages/dashboard/softwareManage/details/${item.id}`}
                                         className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 text-sm font-medium"
                                     >
                                         View Details

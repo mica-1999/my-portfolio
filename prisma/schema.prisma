@@ -8,43 +8,43 @@ datasource db {
 }
 
 model User {
-  id              Int              @id @default(autoincrement())
-  username        String           @unique
-  password        String
-  firstname       String
-  lastname        String
   email           String           @unique
-  phone           String?
   role            String           @default("viewer")
-  isactive        String           @default("pending")
-  lastlogin       DateTime?        @db.Timestamp(6)
   createdat       DateTime         @default(now()) @db.Timestamp(6)
+  firstname       String
+  isactive        String           @default("pending")
   job             String?
+  lastlogin       DateTime?        @db.Timestamp(6)
+  lastname        String
+  password        String
+  phone           String?
+  username        String           @unique
+  id              Int              @id @default(autoincrement())
   Address         Address?
-  Session         Session[]
-  UserPreferences UserPreferences?
   BankAccount     BankAccount?
-  UserProject     UserProject[]
-  Timeline        Timeline[]
+  Session         Session[]
   SoftwareNotes   SoftwareNotes[]
+  Timeline        Timeline[]
+  UserPreferences UserPreferences?
+  UserProject     UserProject[]
 
   @@index([email])
   @@index([username])
 }
 
 model UserPreferences {
-  id          Int         @id @default(autoincrement())
-  visualtheme VisualTheme @default(Light)
   language    Language    @default(English)
   userid      Int         @unique
+  visualtheme VisualTheme @default(Light)
+  id          Int         @id @default(autoincrement())
   User        User        @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model Session {
-  id        Int      @id @default(autoincrement())
   createdat DateTime @default(now()) @db.Timestamp(6)
   updatedat DateTime @default(now()) @db.Timestamp(6)
   userid    Int
+  id        Int      @id @default(autoincrement())
   User      User     @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@index([userid], map: "Session_userId_idx")
@@ -65,8 +65,8 @@ model BankAccount {
   id           Int           @id @default(autoincrement())
   balance      Float         @default(0)
   userId       Int           @unique
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   createdAt    DateTime      @default(now()) @db.Timestamp(6)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
   transactions Transaction[]
 }
 
@@ -76,8 +76,8 @@ model Transaction {
   type          TransactionType
   description   String?
   bankAccountId Int
-  bankAccount   BankAccount     @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
   createdAt     DateTime        @default(now()) @db.Timestamp(6)
+  bankAccount   BankAccount     @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
 
   @@index([bankAccountId])
   @@index([createdAt])
@@ -87,10 +87,10 @@ model Projects {
   id          Int           @id @default(autoincrement())
   name        String
   description String?
-  tags        String[]
-  state       ProjectState  @default(PLANNING)
   createdAt   DateTime      @default(now()) @db.Timestamp(6)
   updatedAt   DateTime      @default(now()) @db.Timestamp(6)
+  state       ProjectState  @default(PLANNING)
+  tags        String[]
   users       UserProject[]
 }
 
@@ -100,8 +100,8 @@ model UserProject {
   projectId Int
   role      ProjectRole @default(MEMBER)
   joinedAt  DateTime    @default(now()) @db.Timestamp(6)
-  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   project   Projects    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, projectId])
   @@index([userId])
@@ -121,36 +121,26 @@ model Timeline {
 }
 
 model SoftwareNotes {
-  id            Int        @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   userId        Int
   title         String
   description   String
-  status        NoteStatus @default(PLANNED)
+  status        NoteStatus    @default(PLANNED)
   category      String
   subcategories String[]
-  complexity    Complexity @default(INTERMEDIATE)
+  complexity    Complexity    @default(INTERMEDIATE)
   startDate     DateTime?
   endDate       DateTime?
-
-  // Learning resources
-  resources Resource[]
-  links     Link[]
-
-  // Content details
-  codeSnippets CodeSnippet[]
-  concepts     Concept[]
-
-  // Progress tracking
-  progress      Int     @default(0)
+  progress      Int           @default(0)
   personalNotes String?
-
-  // Metadata
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
-  isPublic  Boolean  @default(false)
-
-  // Relations
-  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime      @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime      @default(now()) @db.Timestamp(6)
+  isPublic      Boolean       @default(false)
+  codeSnippets  CodeSnippet[]
+  concepts      Concept[]
+  links         Link[]
+  resources     Resource[]
+  User          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([status])
@@ -158,13 +148,11 @@ model SoftwareNotes {
 }
 
 model Resource {
-  id    Int          @id @default(autoincrement())
-  type  ResourceType
-  title String
-  url   String?
-  notes String?
-
-  // Relations
+  id             Int           @id @default(autoincrement())
+  type           ResourceType
+  title          String
+  url            String?
+  notes          String?
   softwareNoteId Int
   softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
 
@@ -172,12 +160,10 @@ model Resource {
 }
 
 model Link {
-  id          Int     @id @default(autoincrement())
-  title       String
-  url         String
-  description String?
-
-  // Relations
+  id             Int           @id @default(autoincrement())
+  title          String
+  url            String
+  description    String?
   softwareNoteId Int
   softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
 
@@ -185,13 +171,11 @@ model Link {
 }
 
 model CodeSnippet {
-  id          Int     @id @default(autoincrement())
-  title       String
-  language    String
-  code        String  @db.Text
-  explanation String? @db.Text
-
-  // Relations
+  id             Int           @id @default(autoincrement())
+  title          String
+  language       String
+  code           String
+  explanation    String?
   softwareNoteId Int
   softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
 
@@ -199,11 +183,9 @@ model CodeSnippet {
 }
 
 model Concept {
-  id          Int    @id @default(autoincrement())
-  name        String
-  description String
-
-  // Relations
+  id             Int           @id @default(autoincrement())
+  name           String
+  description    String
   softwareNoteId Int
   softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
 
