@@ -22,18 +22,22 @@ export default function StickyButton() {
 
     // Function to handle confirmation of changes
     const handleSavedChanges = async () => {
+        if (!session?.user.id) {
+            showToast("error", t('themeSettings.notLoggedIn'), savedTheme);
+            return;
+        }
+
         try {
-            const response = await fetch("/api/preferences", {
+            const response = await fetch(`/api/preferences/${session.user.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    userId: session?.user.id,
                     visualTheme: theme,
                     language: language
                 })
-            })
+            });
 
             if (response.ok) {
                 // Save new theme and language to context        

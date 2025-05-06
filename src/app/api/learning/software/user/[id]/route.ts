@@ -1,12 +1,14 @@
-// REVISED: 2025-05-05 - Now using path parameters ✅
+// REVISED: 2025-05-05 - Now using path parameters correctly ✅
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 export async function GET(
     _request: Request,
-    { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
-    const userId = parseInt(params.id);
+    // Await the params object before destructuring
+    const { id } = await context.params;
+    const userId = parseInt(id);
 
     // Verify Parameter
     if (!userId || isNaN(userId)) {
@@ -28,30 +30,5 @@ export async function GET(
     } catch (error) {
         console.error("Error fetching learning items:", error);
         return NextResponse.json({ error: "Failed to fetch learning items. Please try again later." }, { status: 500 });
-    }
-}
-
-export async function DELETE(
-    _request: Request,
-    { params }: { params: { id: string } }
-) {
-    const itemId = parseInt(params.id);
-
-    // Verify Parameter
-    if (!itemId || isNaN(itemId)) {
-        return NextResponse.json({ error: "Invalid Learning Item ID" }, { status: 400 });
-    }
-
-    try {
-        const deletedItem = await prisma.softwareNotes.delete({
-            where: {
-                id: itemId,
-            },
-        });
-
-        return NextResponse.json(deletedItem, { status: 200 });
-    } catch (error) {
-        console.error("Error deleting learning item:", error);
-        return NextResponse.json({ error: "Failed to delete learning item. Please try again later." }, { status: 500 });
     }
 }

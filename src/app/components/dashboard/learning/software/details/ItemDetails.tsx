@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "@/app/context/ThemeContext";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { LearningItem } from "@/app/types/learning";
 import { getStatusColor, formatDate } from "@/app/components/reusable/Utils";
 import { showToast } from "@/app/components/reusable/Toasters";
@@ -11,7 +10,6 @@ import Link from "next/link";
 export default function ItemDetails({ id }: { id: string }) {
     // State and hooks
     const router = useRouter();
-    const { data: session } = useSession();
     const { savedTheme, t } = useTheme();
     const [item, setItem] = useState<LearningItem | null>(null);
     const [loading, setLoading] = useState(true);
@@ -25,7 +23,7 @@ export default function ItemDetails({ id }: { id: string }) {
 
             try {
                 setLoading(true);
-                const response = await fetch(`/api/learning/software/specific?itemId=${id}`);
+                const response = await fetch(`/api/learning/software/item/${id}`);
 
                 if (!response.ok) {
                     if (response.status === 404) {
@@ -58,7 +56,7 @@ export default function ItemDetails({ id }: { id: string }) {
         }
 
         try {
-            const response = await fetch(`/api/learning/software?cardId=${id}`, {
+            const response = await fetch(`/api/learning/software/item/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,9 +67,8 @@ export default function ItemDetails({ id }: { id: string }) {
                 showToast("error", "Failed to delete item. Please try again later.", savedTheme);
                 return;
             }
-
             showToast("success", "Item deleted successfully.", savedTheme);
-            router.push("/dashboard/learning/software");
+            router.push("/pages/dashboard/softwareManage");
         } catch (error) {
             console.error("Error deleting item:", error);
             showToast("error", "Failed to delete item. Please try again later.", savedTheme);
@@ -86,7 +83,7 @@ export default function ItemDetails({ id }: { id: string }) {
     // If loading
     if (loading) {
         return (
-            <div className="w-full mt-4 p-6 rounded-xl bg-white shadow-md dark:bg-[#30334E] flex justify-center items-center min-h-[300px]">
+            <div className="w-full mt-4 p-6 rounded-xl bg-white shadow-md dark:bg-[#30334E] flex items-center min-h-[300px]">
                 <div className="flex flex-col items-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
                     <p className="mt-4 text-gray-600 dark:text-gray-300">Loading details...</p>
@@ -108,7 +105,7 @@ export default function ItemDetails({ id }: { id: string }) {
                         We couldn't retrieve the details for this learning item.
                     </p>
                     <Link
-                        href="/dashboard/learning/software"
+                        href="/pages/dashboard/softwareManage"
                         className="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-md font-medium rounded-md transition-colors cursor-pointer"
                     >
                         Back to Learning Items

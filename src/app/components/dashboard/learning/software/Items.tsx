@@ -78,7 +78,7 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
     // Handle delete item action
     const handleDeleteItem = async (id: string) => {
         try {
-            const response = await fetch(`/api/learning/software/${id}`, {
+            const response = await fetch(`/api/learning/software/item/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -266,7 +266,7 @@ export default function Items({ items, filters, clearFilters, setItems }: ItemsP
                                         >
                                             Delete
                                         </button>
-                                        <Link href={`/dashboard/learning/software/${item.id}`} className="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition-colors">
+                                        <Link href={`/pages/dashboard/softwareManage/details/${item.id}`} className="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition-colors">
                                             View Details
                                         </Link>
                                     </div>

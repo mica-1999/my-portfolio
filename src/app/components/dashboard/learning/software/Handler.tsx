@@ -27,7 +27,7 @@ export default function Handler() {
             }
 
             try {
-                const response = await fetch(`/api/learning/software/${userId}`, {
+                const response = await fetch(`/api/learning/software/user/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
