@@ -388,6 +388,155 @@ const translations = {
         itemDeleted: "Item de aprendizagem eliminado com sucesso",
         errorDeletingItem: "Falha ao eliminar item de aprendizagem",
         fetchError: "Falha ao buscar itens de aprendizagem. Por favor, tente novamente mais tarde."
+    },
+    softwareForm: {
+        title: "Adicionar Novo Item de Aprendizagem",
+        basicInfo: {
+            title: "Título",
+            titlePlaceholder: "Insira o título do item de aprendizagem",
+            description: "Descrição",
+            descriptionPlaceholder: "Insira uma descrição",
+            status: "Estado",
+            statusPlanned: "Planeado",
+            statusInProgress: "Em Progresso",
+            statusCompleted: "Concluído",
+            statusOnHold: "Em Espera",
+            category: "Categoria",
+            selectCategory: "Selecione uma categoria",
+            subcategories: "Subcategorias",
+            selectSubcategories: "Selecione uma ou mais subcategorias",
+            complexity: "Complexidade",
+            complexityBeginner: "Iniciante",
+            complexityIntermediate: "Intermédio",
+            complexityAdvanced: "Avançado",
+            startDate: "Data de Início",
+            endDate: "Data de Conclusão",
+            progress: "Progresso",
+            progressPlaceholder: "Progresso de aprendizagem (0-100)",
+            personalNotes: "Notas Pessoais",
+            personalNotesPlaceholder: "Adicione quaisquer notas pessoais ou lembretes",
+            isPublic: "Tornar este item público",
+            isPublicHelp: "Itens públicos podem ser vistos por outros utilizadores"
+        },
+        additionalContent: "Adicionar conteúdo adicional (opcional):",
+        sections: {
+            resources: "Recursos de Aprendizagem",
+            links: "Links Úteis",
+            codeSnippets: "Trechos de Código",
+            concepts: "Conceitos-Chave"
+        },
+        resources: {
+            title: "Recursos de Aprendizagem",
+            addResource: "Adicionar Recurso",
+            removeResource: "Remover Recurso",
+            resourceType: "Tipo de Recurso",
+            resourceTitle: "Título do Recurso",
+            resourceTitlePlaceholder: "Insira o título do recurso",
+            resourceUrl: "URL do Recurso (opcional)",
+            resourceUrlPlaceholder: "Insira o URL do recurso",
+            resourceNotes: "Notas",
+            resourceNotesPlaceholder: "Insira quaisquer notas sobre este recurso",
+            typeDocumentation: "Documentação",
+            typeTutorial: "Tutorial",
+            typeCourse: "Curso",
+            typeVideo: "Vídeo",
+            typeBook: "Livro",
+            typeArticle: "Artigo",
+            typeOther: "Outro"
+        },
+        links: {
+            title: "Links Úteis",
+            addLink: "Adicionar Link",
+            removeLink: "Remover Link",
+            linkTitle: "Título do Link",
+            linkTitlePlaceholder: "Insira o título do link",
+            linkUrl: "URL",
+            linkUrlPlaceholder: "Insira o URL",
+            linkDescription: "Descrição",
+            linkDescriptionPlaceholder: "Insira uma breve descrição"
+        },
+        codeSnippets: {
+            title: "Trechos de Código",
+            addSnippet: "Adicionar Trecho",
+            removeSnippet: "Remover Trecho",
+            snippetTitle: "Título do Trecho",
+            snippetTitlePlaceholder: "Insira o título do trecho",
+            language: "Linguagem",
+            code: "Código",
+            codePlaceholder: "Insira o código aqui",
+            explanation: "Explicação",
+            explanationPlaceholder: "Explique o que este código faz"
+        },
+        concepts: {
+            title: "Conceitos-Chave",
+            addConcept: "Adicionar Conceito",
+            removeConcept: "Remover Conceito",
+            conceptName: "Nome do Conceito",
+            conceptNamePlaceholder: "Insira o nome do conceito",
+            conceptDescription: "Descrição",
+            conceptDescriptionPlaceholder: "Explique este conceito"
+        },
+        formActions: {
+            cancel: "Cancelar",
+            reset: "Redefinir",
+            save: "Guardar Item de Aprendizagem",
+            saving: "A guardar..."
+        },
+        validation: {
+            required: "é obrigatório",
+            validUrl: "Por favor, insira um URL válido",
+            titleRequired: "O título é obrigatório",
+            descriptionRequired: "A descrição é obrigatória",
+            categoryRequired: "A categoria é obrigatória",
+            subcategoriesRequired: "Pelo menos uma subcategoria é obrigatória",
+            fixFormErrors: "Por favor, corrija os erros do formulário antes de submeter"
+        },
+        notifications: {
+            loginRequired: "Deve estar autenticado para adicionar itens de aprendizagem",
+            createSuccess: "Item de aprendizagem criado com sucesso",
+            createError: "Falha ao criar item de aprendizagem",
+            formReset: "O formulário foi redefinido"
+        }
+    },
+    softwareDetails: {
+        itemNotFound: "Item de aprendizagem não encontrado",
+        fetchError: "Falha ao obter detalhes do item",
+        errorOccurred: "Ocorreu um erro ao buscar os detalhes do item",
+        deleteConfirmation: "Tem certeza de que deseja eliminar este item de aprendizagem? Esta ação não pode ser desfeita.",
+        deleteError: "Falha ao eliminar item. Por favor, tente novamente mais tarde.",
+        deleteSuccess: "Item eliminado com sucesso.",
+        loading: "A carregar detalhes...",
+        retrievalError: "Não foi possível recuperar os detalhes deste item de aprendizagem.",
+        backToList: "Voltar para Itens de Aprendizagem",
+        tabs: {
+            overview: "Visão Geral",
+            resources: "Recursos",
+            codeSnippets: "Trechos de Código",
+            concepts: "Conceitos",
+            links: "Links"
+        },
+        description: "Descrição",
+        personalNotes: "Notas Pessoais",
+        progress: "Progresso",
+        subcategories: "Subcategorias",
+        startDate: "Data de Início",
+        endDate: "Data de Conclusão",
+        actions: {
+            delete: "Eliminar",
+            edit: "Editar"
+        },
+        resourcesTitle: "Recursos de Aprendizagem",
+        resource: "Recurso",
+        visitResource: "Visitar Recurso",
+        noResources: "Não há recursos disponíveis para este item de aprendizagem.",
+        codeSnippetsTitle: "Trechos de Código",
+        snippet: "Trecho",
+        noCodeSnippets: "Não há trechos de código disponíveis para este item de aprendizagem.",
+        conceptsTitle: "Conceitos-Chave",
+        noConcepts: "Nenhum conceito definido para este item de aprendizagem.",
+        linksTitle: "Links Úteis",
+        visitLink: "Visitar Link",
+        noLinks: "Não há links disponíveis para este item de aprendizagem."
     }
 }
 

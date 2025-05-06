@@ -1,12 +1,14 @@
-// REVIEWED: 2025-05-05 - Good to go ✅
+// REVISED: 2025-05-05 - Updated to use awaited context ✅
 import { NextResponse } from "next/server";
 import { prisma } from '@/lib/prisma';
 
 export async function GET(
     _request: Request,
-    { params }: { params: { id: string } }
+    context: { params: { id: string } }
 ) {
-    const userId = parseInt(params.id);
+    // Await the params object before destructuring
+    const { id } = await context.params;
+    const userId = parseInt(id);
 
     // Verify Parameter
     if (!userId || isNaN(userId)) {

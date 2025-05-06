@@ -49,7 +49,7 @@ export default function Main() {
             }
         }
         fetchBankDetails();
-    }, [session]);
+    }, [session, savedTheme]);
 
     // Fetch Projects Details
     useEffect(() => {
@@ -77,7 +77,7 @@ export default function Main() {
             }
         }
         fetchProjects();
-    }, [session])
+    }, [session, savedTheme])
 
 
     // Fetch Timeline Details
@@ -107,7 +107,7 @@ export default function Main() {
         }
 
         fetchTimeline();
-    }, [session])
+    }, [session, savedTheme])
 
     // Fetch Users Details
     useEffect(() => {
@@ -136,7 +136,7 @@ export default function Main() {
         }
 
         fetchUsers();
-    }, [session])
+    }, [session, savedTheme])
 
 
     return (

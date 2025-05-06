@@ -1,8 +1,11 @@
 // REVISED: 2025-05-05 - Great implementation ✅
 import React from 'react';
 import { LinksProps } from '@/app/types/learnform';
+import { useTheme } from '@/app/context/ThemeContext';
 
 const Links: React.FC<LinksProps> = ({ links, setLinks, errors }) => {
+    const { t } = useTheme();
+
     // Handle link changes
     const handleLinkChange = (index: number, field: string, value: string) => {
         const updatedLinks = [...links];
@@ -25,7 +28,7 @@ const Links: React.FC<LinksProps> = ({ links, setLinks, errors }) => {
     return (
         <div className="bg-gray-50 dark:bg-[#282A42] p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-medium text-gray-800 dark:text-white">Links</h3>
+                <h3 className="text-lg font-medium text-gray-800 dark:text-white">{t('softwareForm.links.title')}</h3>
                 <button
                     type="button"
                     onClick={addLink}
@@ -34,14 +37,14 @@ const Links: React.FC<LinksProps> = ({ links, setLinks, errors }) => {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                     </svg>
-                    Add Link
+                    {t('softwareForm.links.addLink')}
                 </button>
             </div>
 
             {links.map((link, index) => (
                 <div key={`link-${index}`} className="mb-4 p-3 border border-gray-200 dark:border-gray-700 rounded-md">
                     <div className="flex justify-between items-center mb-2">
-                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Link #{index + 1}</h4>
+                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('softwareForm.links.title')} #{index + 1}</h4>
                         {links.length > 1 && (
                             <button
                                 type="button"
@@ -57,41 +60,41 @@ const Links: React.FC<LinksProps> = ({ links, setLinks, errors }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                                Title *
+                                {t('softwareForm.links.linkTitle')} *
                             </label>
                             <input
                                 type="text"
                                 value={link.title}
                                 onChange={e => handleLinkChange(index, 'title', e.target.value)}
                                 className={`peer w-full px-3 py-2 border ${errors[`link_${index}_title`] ? 'border-red-500 border-2' : 'border-gray-300 dark:border-gray-600'} rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400`}
-                                placeholder="Link title"
+                                placeholder={t('softwareForm.links.linkTitlePlaceholder')}
                             />
                             {errors[`link_${index}_title`] && <p className="mt-1 text-sm text-red-500">{errors[`link_${index}_title`]}</p>}
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                                URL *
+                                {t('softwareForm.links.linkUrl')} *
                             </label>
                             <input
                                 type="text"
                                 value={link.url}
                                 onChange={e => handleLinkChange(index, 'url', e.target.value)}
                                 className={`peer w-full px-3 py-2 border ${errors[`link_${index}_url`] ? 'border-red-500 border-2' : 'border-gray-300 dark:border-gray-600'} rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400`}
-                                placeholder="https://example.com"
+                                placeholder={t('softwareForm.links.linkUrlPlaceholder')}
                             />
                             {errors[`link_${index}_url`] && <p className="mt-1 text-sm text-red-500">{errors[`link_${index}_url`]}</p>}
                         </div>
                     </div>
                     <div className="mt-3">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                            Description
+                            {t('softwareForm.links.linkDescription')}
                         </label>
                         <input
                             type="text"
                             value={link.description || ''}
                             onChange={e => handleLinkChange(index, 'description', e.target.value)}
                             className="peer w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400"
-                            placeholder="Brief description of this link"
+                            placeholder={t('softwareForm.links.linkDescriptionPlaceholder')}
                         />
                     </div>
                 </div>

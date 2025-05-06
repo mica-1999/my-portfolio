@@ -1,9 +1,10 @@
-// REVISED: 2025-05-05 - Great implementation ✅
 import React from 'react';
 import { ResourcesProps } from '@/app/types/learnform';
-
+import { useTheme } from '@/app/context/ThemeContext';
 
 const Resources: React.FC<ResourcesProps> = ({ resources, setResources, errors }) => {
+    const { t } = useTheme();
+
     // Handle resource changes
     const handleResourceChange = (index: number, field: string, value: string) => {
         const updatedResources = [...resources];
@@ -23,10 +24,24 @@ const Resources: React.FC<ResourcesProps> = ({ resources, setResources, errors }
         }
     };
 
+    // Map resource types to translation keys
+    const getResourceTypeLabel = (type: string) => {
+        const typeMap: Record<string, string> = {
+            "DOCUMENTATION": t('softwareForm.resources.typeDocumentation'),
+            "ARTICLE": t('softwareForm.resources.typeArticle'),
+            "VIDEO": t('softwareForm.resources.typeVideo'),
+            "COURSE": t('softwareForm.resources.typeCourse'),
+            "BOOK": t('softwareForm.resources.typeBook'),
+            "TUTORIAL": t('softwareForm.resources.typeTutorial'),
+            "OTHER": t('softwareForm.resources.typeOther')
+        };
+        return typeMap[type] || type;
+    };
+
     return (
         <div className="bg-gray-50 dark:bg-[#282A42] p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-medium text-gray-800 dark:text-white">Resources</h3>
+                <h3 className="text-lg font-medium text-gray-800 dark:text-white">{t('softwareForm.resources.title')}</h3>
                 <button
                     type="button"
                     onClick={addResource}
@@ -35,14 +50,14 @@ const Resources: React.FC<ResourcesProps> = ({ resources, setResources, errors }
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                     </svg>
-                    Add Resource
+                    {t('softwareForm.resources.addResource')}
                 </button>
             </div>
 
             {resources.map((resource, index) => (
                 <div key={`resource-${index}`} className="mb-4 p-3 border border-gray-200 dark:border-gray-700 rounded-md">
                     <div className="flex justify-between items-center mb-2">
-                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Resource #{index + 1}</h4>
+                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('softwareForm.resources.title')} #{index + 1}</h4>
                         {resources.length > 1 && (
                             <button
                                 type="button"
@@ -58,60 +73,60 @@ const Resources: React.FC<ResourcesProps> = ({ resources, setResources, errors }
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                                Type
+                                {t('softwareForm.resources.resourceType')}
                             </label>
                             <select
                                 value={resource.type}
                                 onChange={e => handleResourceChange(index, 'type', e.target.value)}
                                 className="peer w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400"
                             >
-                                <option value="DOCUMENTATION">Documentation</option>
-                                <option value="ARTICLE">Article</option>
-                                <option value="VIDEO">Video</option>
-                                <option value="COURSE">Course</option>
-                                <option value="BOOK">Book</option>
+                                <option value="DOCUMENTATION">{t('softwareForm.resources.typeDocumentation')}</option>
+                                <option value="ARTICLE">{t('softwareForm.resources.typeArticle')}</option>
+                                <option value="VIDEO">{t('softwareForm.resources.typeVideo')}</option>
+                                <option value="COURSE">{t('softwareForm.resources.typeCourse')}</option>
+                                <option value="BOOK">{t('softwareForm.resources.typeBook')}</option>
                                 <option value="GITHUB_REPO">GitHub Repository</option>
-                                <option value="TUTORIAL">Tutorial</option>
-                                <option value="OTHER">Other</option>
+                                <option value="TUTORIAL">{t('softwareForm.resources.typeTutorial')}</option>
+                                <option value="OTHER">{t('softwareForm.resources.typeOther')}</option>
                             </select>
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                                Title *
+                                {t('softwareForm.resources.resourceTitle')} *
                             </label>
                             <input
                                 type="text"
                                 value={resource.title}
                                 onChange={e => handleResourceChange(index, 'title', e.target.value)}
                                 className={`peer w-full px-3 py-2 border ${errors[`resource_${index}_title`] ? 'border-red-500 border-2' : 'border-gray-300 dark:border-gray-600'} rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400`}
-                                placeholder="Resource title"
+                                placeholder={t('softwareForm.resources.resourceTitlePlaceholder')}
                             />
                             {errors[`resource_${index}_title`] && <p className="mt-1 text-sm text-red-500">{errors[`resource_${index}_title`]}</p>}
                         </div>
                     </div>
                     <div className="mt-3">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                            URL
+                            {t('softwareForm.resources.resourceUrl')}
                         </label>
                         <input
                             type="text"
                             value={resource.url || ''}
                             onChange={e => handleResourceChange(index, 'url', e.target.value)}
                             className={`peer w-full px-3 py-2 border ${errors[`resource_${index}_url`] ? 'border-red-500 border-2' : 'border-gray-300 dark:border-gray-600'} rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400`}
-                            placeholder="https://example.com"
+                            placeholder={t('softwareForm.resources.resourceUrlPlaceholder')}
                         />
                         {errors[`resource_${index}_url`] && <p className="mt-1 text-sm text-red-500">{errors[`resource_${index}_url`]}</p>}
                     </div>
                     <div className="mt-3">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                            Notes
+                            {t('softwareForm.resources.resourceNotes')}
                         </label>
                         <input
                             type="text"
                             value={resource.notes || ''}
                             onChange={e => handleResourceChange(index, 'notes', e.target.value)}
                             className="peer w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400"
-                            placeholder="Additional notes about this resource"
+                            placeholder={t('softwareForm.resources.resourceNotesPlaceholder')}
                         />
                     </div>
                 </div>

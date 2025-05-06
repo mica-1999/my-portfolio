@@ -21,7 +21,7 @@ export default function Contact() {
             const endPosition = element.getBoundingClientRect().top + window.scrollY + yOffset;
 
             const duration = 1000;
-            let startTime = performance.now();
+            const startTime = performance.now();
 
             const animateScroll = (currentTime: number) => {
                 const elapsedTime = currentTime - startTime;

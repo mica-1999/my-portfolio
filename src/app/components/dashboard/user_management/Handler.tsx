@@ -40,7 +40,7 @@ export default function Handler() {
             }
         }
         fetchUsers();
-    }, [])
+    }, [savedTheme, t]);
 
     // Clear all filters
     const clearFilters = () => {

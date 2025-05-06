@@ -27,9 +27,9 @@ export default function ItemDetails({ id }: { id: string }) {
 
                 if (!response.ok) {
                     if (response.status === 404) {
-                        setError("Learning item not found");
+                        setError(t('softwareDetails.itemNotFound'));
                     } else {
-                        setError("Failed to fetch item details");
+                        setError(t('softwareDetails.fetchError'));
                     }
                     return;
                 }
@@ -38,20 +38,20 @@ export default function ItemDetails({ id }: { id: string }) {
                 setItem(data);
             } catch (error) {
                 console.error("Error fetching item details:", error);
-                setError("An error occurred while fetching the item details");
+                setError(t('softwareDetails.errorOccurred'));
             } finally {
                 setLoading(false);
             }
         };
 
         fetchItemDetails();
-    }, [id]);
+    }, [id, t]);
 
     // Handle delete item
     const handleDeleteItem = async () => {
         if (!item) return;
 
-        if (!window.confirm("Are you sure you want to delete this learning item? This action cannot be undone.")) {
+        if (!window.confirm(t('softwareDetails.deleteConfirmation'))) {
             return;
         }
 
@@ -64,14 +64,14 @@ export default function ItemDetails({ id }: { id: string }) {
             });
 
             if (!response.ok) {
-                showToast("error", "Failed to delete item. Please try again later.", savedTheme);
+                showToast("error", t('softwareDetails.deleteError'), savedTheme);
                 return;
             }
-            showToast("success", "Item deleted successfully.", savedTheme);
+            showToast("success", t('softwareDetails.deleteSuccess'), savedTheme);
             router.push("/pages/dashboard/softwareManage");
         } catch (error) {
             console.error("Error deleting item:", error);
-            showToast("error", "Failed to delete item. Please try again later.", savedTheme);
+            showToast("error", t('softwareDetails.deleteError'), savedTheme);
         }
     };
 
@@ -86,7 +86,7 @@ export default function ItemDetails({ id }: { id: string }) {
             <div className="w-full mt-4 p-6 rounded-xl bg-white shadow-md dark:bg-[#30334E] flex items-center min-h-[300px]">
                 <div className="flex flex-col items-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-                    <p className="mt-4 text-gray-600 dark:text-gray-300">Loading details...</p>
+                    <p className="mt-4 text-gray-600 dark:text-gray-300">{t('softwareDetails.loading')}</p>
                 </div>
             </div>
         );
@@ -99,16 +99,16 @@ export default function ItemDetails({ id }: { id: string }) {
                 <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
                     <i className="ri-error-warning-line text-[3rem] text-red-500"></i>
                     <h5 className="mt-3 text-gray-700 dark:text-gray-300 text-[1.25rem] font-medium">
-                        {error || "Item not found"}
+                        {error || t('softwareDetails.itemNotFound')}
                     </h5>
                     <p className="text-gray-500 dark:text-[#7B7C95] max-w-md mb-6">
-                        We couldn't retrieve the details for this learning item.
+                        {t('softwareDetails.retrievalError')}
                     </p>
                     <Link
                         href="/pages/dashboard/softwareManage"
                         className="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-md font-medium rounded-md transition-colors cursor-pointer"
                     >
-                        Back to Learning Items
+                        {t('softwareDetails.backToList')}
                     </Link>
                 </div>
             </div>
@@ -158,7 +158,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                         >
-                            Overview
+                            {t('softwareDetails.tabs.overview')}
                         </button>
                         <button
                             onClick={() => setActiveTab('resources')}
@@ -167,7 +167,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                         >
-                            Resources
+                            {t('softwareDetails.tabs.resources')}
                         </button>
                         <button
                             onClick={() => setActiveTab('codeSnippets')}
@@ -176,7 +176,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                         >
-                            Code Snippets
+                            {t('softwareDetails.tabs.codeSnippets')}
                         </button>
                         <button
                             onClick={() => setActiveTab('concepts')}
@@ -185,7 +185,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                         >
-                            Concepts
+                            {t('softwareDetails.tabs.concepts')}
                         </button>
                         <button
                             onClick={() => setActiveTab('links')}
@@ -194,7 +194,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
                                 }`}
                         >
-                            Links
+                            {t('softwareDetails.tabs.links')}
                         </button>
                     </nav>
                 </div>
@@ -206,14 +206,14 @@ export default function ItemDetails({ id }: { id: string }) {
                         <div className="space-y-6">
                             {/* Description */}
                             <div>
-                                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Description</h2>
+                                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('softwareDetails.description')}</h2>
                                 <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
                             </div>
 
                             {/* Personal Notes */}
                             {item.personalNotes && (
                                 <div>
-                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Personal Notes</h2>
+                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('softwareDetails.personalNotes')}</h2>
                                     <div className="bg-gray-50 dark:bg-[#282A42] rounded-lg p-4">
                                         <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{item.personalNotes}</p>
                                     </div>
@@ -223,7 +223,7 @@ export default function ItemDetails({ id }: { id: string }) {
                             {/* Progress */}
                             <div>
                                 <div className="flex justify-between items-center mb-1">
-                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Progress</h2>
+                                    <h2 className="text-lg font-semibold text-gray-800 dark:text-white">{t('softwareDetails.progress')}</h2>
                                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{item.progress}%</span>
                                 </div>
                                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-4">
@@ -236,7 +236,7 @@ export default function ItemDetails({ id }: { id: string }) {
 
                             {/* Subcategories */}
                             <div>
-                                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Subcategories</h2>
+                                <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('softwareDetails.subcategories')}</h2>
                                 <div className="flex flex-wrap gap-2">
                                     {item.subcategories.map((subcategory, index) => (
                                         <span key={index} className="px-3 py-1 text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded">
@@ -249,12 +249,12 @@ export default function ItemDetails({ id }: { id: string }) {
                             {/* Dates */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="p-4 bg-gray-50 dark:bg-[#282A42] rounded-lg">
-                                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Start Date</h3>
+                                    <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('softwareDetails.startDate')}</h3>
                                     <p className="text-gray-800 dark:text-white">{formatDate(item.startDate)}</p>
                                 </div>
                                 {item.endDate && (
                                     <div className="p-4 bg-gray-50 dark:bg-[#282A42] rounded-lg">
-                                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">End Date</h3>
+                                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{t('softwareDetails.endDate')}</h3>
                                         <p className="text-gray-800 dark:text-white">{formatDate(item.endDate)}</p>
                                     </div>
                                 )}
@@ -266,13 +266,13 @@ export default function ItemDetails({ id }: { id: string }) {
                                     onClick={handleDeleteItem}
                                     className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded transition-colors"
                                 >
-                                    Delete
+                                    {t('softwareDetails.actions.delete')}
                                 </button>
                                 <button
                                     onClick={handleEdit}
                                     className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded transition-colors"
                                 >
-                                    Edit
+                                    {t('softwareDetails.actions.edit')}
                                 </button>
                             </div>
                         </div>
@@ -281,7 +281,7 @@ export default function ItemDetails({ id }: { id: string }) {
                     {/* Resources Tab */}
                     {activeTab === 'resources' && (
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Learning Resources</h2>
+                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">{t('softwareDetails.resourcesTitle')}</h2>
 
                             {item.resources && item.resources.length > 0 ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -289,7 +289,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                         <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                                             <div className="flex items-center gap-2 mb-1">
                                                 <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-xs text-gray-700 dark:text-gray-300 rounded">
-                                                    {resource.type || "Resource"}
+                                                    {resource.type || t('softwareDetails.resource')}
                                                 </span>
                                                 <h3 className="font-medium text-gray-800 dark:text-white">{resource.title}</h3>
                                             </div>
@@ -305,7 +305,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                                     rel="noopener noreferrer"
                                                     className="text-indigo-600 dark:text-indigo-400 hover:underline text-sm inline-flex items-center"
                                                 >
-                                                    Visit Resource
+                                                    {t('softwareDetails.visitResource')}
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                     </svg>
@@ -316,7 +316,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 </div>
                             ) : (
                                 <div className="bg-gray-50 dark:bg-[#282A42] rounded-lg p-6 text-center">
-                                    <p className="text-gray-500 dark:text-gray-400">No resources available for this learning item.</p>
+                                    <p className="text-gray-500 dark:text-gray-400">{t('softwareDetails.noResources')}</p>
                                 </div>
                             )}
                         </div>
@@ -325,14 +325,14 @@ export default function ItemDetails({ id }: { id: string }) {
                     {/* Code Snippets Tab */}
                     {activeTab === 'codeSnippets' && (
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Code Snippets</h2>
+                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">{t('softwareDetails.codeSnippetsTitle')}</h2>
 
                             {item.codeSnippets && item.codeSnippets.length > 0 ? (
                                 <div className="space-y-6">
                                     {item.codeSnippets.map((snippet, index) => (
                                         <div key={index} className="rounded-lg overflow-hidden">
                                             <div className="bg-gray-800 text-white p-3 flex justify-between items-center">
-                                                <span>{snippet.title || `Snippet ${index + 1}`}</span>
+                                                <span>{snippet.title || `${t('softwareDetails.snippet')} ${index + 1}`}</span>
                                                 <span className="text-xs px-2 py-1 bg-gray-700 rounded">{snippet.language || 'code'}</span>
                                             </div>
                                             <pre className="bg-gray-900 text-gray-300 p-4 overflow-x-auto">
@@ -348,7 +348,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 </div>
                             ) : (
                                 <div className="bg-gray-50 dark:bg-[#282A42] rounded-lg p-6 text-center">
-                                    <p className="text-gray-500 dark:text-gray-400">No code snippets available for this learning item.</p>
+                                    <p className="text-gray-500 dark:text-gray-400">{t('softwareDetails.noCodeSnippets')}</p>
                                 </div>
                             )}
                         </div>
@@ -357,7 +357,7 @@ export default function ItemDetails({ id }: { id: string }) {
                     {/* Concepts Tab */}
                     {activeTab === 'concepts' && (
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Key Concepts</h2>
+                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">{t('softwareDetails.conceptsTitle')}</h2>
 
                             {item.concepts && item.concepts.length > 0 ? (
                                 <div className="space-y-4">
@@ -370,7 +370,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 </div>
                             ) : (
                                 <div className="bg-gray-50 dark:bg-[#282A42] rounded-lg p-6 text-center">
-                                    <p className="text-gray-500 dark:text-gray-400">No concepts defined for this learning item.</p>
+                                    <p className="text-gray-500 dark:text-gray-400">{t('softwareDetails.noConcepts')}</p>
                                 </div>
                             )}
                         </div>
@@ -379,7 +379,7 @@ export default function ItemDetails({ id }: { id: string }) {
                     {/* Links Tab */}
                     {activeTab === 'links' && (
                         <div>
-                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Useful Links</h2>
+                            <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">{t('softwareDetails.linksTitle')}</h2>
 
                             {item.links && item.links.length > 0 ? (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -395,7 +395,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                                 rel="noopener noreferrer"
                                                 className="inline-flex items-center text-indigo-600 dark:text-indigo-400 hover:underline"
                                             >
-                                                Visit Link
+                                                {t('softwareDetails.visitLink')}
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                 </svg>
@@ -405,7 +405,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                 </div>
                             ) : (
                                 <div className="bg-gray-50 dark:bg-[#282A42] rounded-lg p-6 text-center">
-                                    <p className="text-gray-500 dark:text-gray-400">No links available for this learning item.</p>
+                                    <p className="text-gray-500 dark:text-gray-400">{t('softwareDetails.noLinks')}</p>
                                 </div>
                             )}
                         </div>

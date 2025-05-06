@@ -26,7 +26,7 @@ export default function Login() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        const { username, password, rememberMe } = form;
+        const { username, password } = form;
 
         // Check if username and password are provided
         if (!username || !password) {

@@ -1,8 +1,11 @@
 // REVISED: 2025-05-05 - Great implementation ✅
 import React from 'react';
 import { CodeSnippetsProps } from '@/app/types/learnform';
+import { useTheme } from '@/app/context/ThemeContext';
 
 const CodeSnippets: React.FC<CodeSnippetsProps> = ({ codeSnippets, setCodeSnippets, errors }) => {
+    const { t } = useTheme();
+
     // Handle code snippet changes
     const handleCodeSnippetChange = (index: number, field: string, value: string) => {
         const updatedSnippets = [...codeSnippets];
@@ -25,7 +28,7 @@ const CodeSnippets: React.FC<CodeSnippetsProps> = ({ codeSnippets, setCodeSnippe
     return (
         <div className="bg-gray-50 dark:bg-[#282A42] p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-medium text-gray-800 dark:text-white">Code Snippets</h3>
+                <h3 className="text-lg font-medium text-gray-800 dark:text-white">{t('softwareForm.codeSnippets.title')}</h3>
                 <button
                     type="button"
                     onClick={addCodeSnippet}
@@ -34,14 +37,14 @@ const CodeSnippets: React.FC<CodeSnippetsProps> = ({ codeSnippets, setCodeSnippe
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
                     </svg>
-                    Add Code Snippet
+                    {t('softwareForm.codeSnippets.addSnippet')}
                 </button>
             </div>
 
             {codeSnippets.map((snippet, index) => (
                 <div key={`snippet-${index}`} className="mb-4 p-3 border border-gray-200 dark:border-gray-700 rounded-md">
                     <div className="flex justify-between items-center mb-2">
-                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Code Snippet #{index + 1}</h4>
+                        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('softwareForm.codeSnippets.title')} #{index + 1}</h4>
                         {codeSnippets.length > 1 && (
                             <button
                                 type="button"
@@ -57,20 +60,20 @@ const CodeSnippets: React.FC<CodeSnippetsProps> = ({ codeSnippets, setCodeSnippe
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                                Title *
+                                {t('softwareForm.codeSnippets.snippetTitle')} *
                             </label>
                             <input
                                 type="text"
                                 value={snippet.title}
                                 onChange={e => handleCodeSnippetChange(index, 'title', e.target.value)}
                                 className={`peer w-full px-3 py-2 border ${errors[`snippet_${index}_title`] ? 'border-red-500 border-2' : 'border-gray-300 dark:border-gray-600'} rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400`}
-                                placeholder="Snippet title"
+                                placeholder={t('softwareForm.codeSnippets.snippetTitlePlaceholder')}
                             />
                             {errors[`snippet_${index}_title`] && <p className="mt-1 text-sm text-red-500">{errors[`snippet_${index}_title`]}</p>}
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                                Language
+                                {t('softwareForm.codeSnippets.language')}
                             </label>
                             <input
                                 type="text"
@@ -83,27 +86,27 @@ const CodeSnippets: React.FC<CodeSnippetsProps> = ({ codeSnippets, setCodeSnippe
                     </div>
                     <div className="mt-3">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                            Code *
+                            {t('softwareForm.codeSnippets.code')} *
                         </label>
                         <textarea
                             value={snippet.code}
                             onChange={e => handleCodeSnippetChange(index, 'code', e.target.value)}
                             rows={5}
                             className={`peer w-full px-3 py-2 border ${errors[`snippet_${index}_code`] ? 'border-red-500 border-2' : 'border-gray-300 dark:border-gray-600'} rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white font-mono dark:focus:border-indigo-400`}
-                            placeholder="Paste your code here..."
+                            placeholder={t('softwareForm.codeSnippets.codePlaceholder')}
                         ></textarea>
                         {errors[`snippet_${index}_code`] && <p className="mt-1 text-sm text-red-500">{errors[`snippet_${index}_code`]}</p>}
                     </div>
                     <div className="mt-3">
                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 peer-focus:text-indigo-600 dark:peer-focus:text-indigo-400">
-                            Explanation
+                            {t('softwareForm.codeSnippets.explanation')}
                         </label>
                         <textarea
                             value={snippet.explanation || ''}
                             onChange={e => handleCodeSnippetChange(index, 'explanation', e.target.value)}
                             rows={3}
                             className="peer w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-0 focus:border-indigo-500 focus:border-2 dark:bg-[#30334E] dark:text-white dark:focus:border-indigo-400"
-                            placeholder="Explain what this code does..."
+                            placeholder={t('softwareForm.codeSnippets.explanationPlaceholder')}
                         ></textarea>
                     </div>
                 </div>

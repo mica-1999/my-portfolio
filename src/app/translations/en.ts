@@ -388,6 +388,155 @@ const translations = {
         itemDeleted: "Learning item deleted successfully",
         errorDeletingItem: "Failed to delete learning item",
         fetchError: "Failed to fetch learning items. Please try again later."
+    },
+    softwareForm: {
+        title: "Add New Learning Item",
+        basicInfo: {
+            title: "Title",
+            titlePlaceholder: "Enter the learning item title",
+            description: "Description",
+            descriptionPlaceholder: "Enter a description",
+            status: "Status",
+            statusPlanned: "Planned",
+            statusInProgress: "In Progress",
+            statusCompleted: "Completed",
+            statusOnHold: "On Hold",
+            category: "Category",
+            selectCategory: "Select a category",
+            subcategories: "Subcategories",
+            selectSubcategories: "Select one or more subcategories",
+            complexity: "Complexity",
+            complexityBeginner: "Beginner",
+            complexityIntermediate: "Intermediate",
+            complexityAdvanced: "Advanced",
+            startDate: "Start Date",
+            endDate: "End Date",
+            progress: "Progress",
+            progressPlaceholder: "Learning progress (0-100)",
+            personalNotes: "Personal Notes",
+            personalNotesPlaceholder: "Add any personal notes or reminders",
+            isPublic: "Make this item public",
+            isPublicHelp: "Public items can be viewed by other users"
+        },
+        additionalContent: "Add additional content (optional):",
+        sections: {
+            resources: "Learning Resources",
+            links: "Useful Links",
+            codeSnippets: "Code Snippets",
+            concepts: "Key Concepts"
+        },
+        resources: {
+            title: "Learning Resources",
+            addResource: "Add Resource",
+            removeResource: "Remove Resource",
+            resourceType: "Resource Type",
+            resourceTitle: "Resource Title",
+            resourceTitlePlaceholder: "Enter resource title",
+            resourceUrl: "Resource URL (optional)",
+            resourceUrlPlaceholder: "Enter resource URL",
+            resourceNotes: "Notes",
+            resourceNotesPlaceholder: "Enter any notes about this resource",
+            typeDocumentation: "Documentation",
+            typeTutorial: "Tutorial",
+            typeCourse: "Course",
+            typeVideo: "Video",
+            typeBook: "Book",
+            typeArticle: "Article",
+            typeOther: "Other"
+        },
+        links: {
+            title: "Useful Links",
+            addLink: "Add Link",
+            removeLink: "Remove Link",
+            linkTitle: "Link Title",
+            linkTitlePlaceholder: "Enter link title",
+            linkUrl: "URL",
+            linkUrlPlaceholder: "Enter URL",
+            linkDescription: "Description",
+            linkDescriptionPlaceholder: "Enter a brief description"
+        },
+        codeSnippets: {
+            title: "Code Snippets",
+            addSnippet: "Add Snippet",
+            removeSnippet: "Remove Snippet",
+            snippetTitle: "Snippet Title",
+            snippetTitlePlaceholder: "Enter snippet title",
+            language: "Language",
+            code: "Code",
+            codePlaceholder: "Enter code here",
+            explanation: "Explanation",
+            explanationPlaceholder: "Explain what this code does"
+        },
+        concepts: {
+            title: "Key Concepts",
+            addConcept: "Add Concept",
+            removeConcept: "Remove Concept",
+            conceptName: "Concept Name",
+            conceptNamePlaceholder: "Enter concept name",
+            conceptDescription: "Description",
+            conceptDescriptionPlaceholder: "Explain this concept"
+        },
+        formActions: {
+            cancel: "Cancel",
+            reset: "Reset",
+            save: "Save Learning Item",
+            saving: "Saving..."
+        },
+        validation: {
+            required: "is required",
+            validUrl: "Please enter a valid URL",
+            titleRequired: "Title is required",
+            descriptionRequired: "Description is required",
+            categoryRequired: "Category is required",
+            subcategoriesRequired: "At least one subcategory is required",
+            fixFormErrors: "Please fix the form errors before submitting"
+        },
+        notifications: {
+            loginRequired: "You must be logged in to add learning items",
+            createSuccess: "Learning item created successfully",
+            createError: "Failed to create learning item",
+            formReset: "Form has been reset"
+        }
+    },
+    softwareDetails: {
+        itemNotFound: "Learning item not found",
+        fetchError: "Failed to fetch item details",
+        errorOccurred: "An error occurred while fetching the item details",
+        deleteConfirmation: "Are you sure you want to delete this learning item? This action cannot be undone.",
+        deleteError: "Failed to delete item. Please try again later.",
+        deleteSuccess: "Item deleted successfully.",
+        loading: "Loading details...",
+        retrievalError: "We couldn't retrieve the details for this learning item.",
+        backToList: "Back to Learning Items",
+        tabs: {
+            overview: "Overview",
+            resources: "Resources",
+            codeSnippets: "Code Snippets",
+            concepts: "Concepts",
+            links: "Links"
+        },
+        description: "Description",
+        personalNotes: "Personal Notes",
+        progress: "Progress",
+        subcategories: "Subcategories",
+        startDate: "Start Date",
+        endDate: "End Date",
+        actions: {
+            delete: "Delete",
+            edit: "Edit"
+        },
+        resourcesTitle: "Learning Resources",
+        resource: "Resource",
+        visitResource: "Visit Resource",
+        noResources: "No resources available for this learning item.",
+        codeSnippetsTitle: "Code Snippets",
+        snippet: "Snippet",
+        noCodeSnippets: "No code snippets available for this learning item.",
+        conceptsTitle: "Key Concepts",
+        noConcepts: "No concepts defined for this learning item.",
+        linksTitle: "Useful Links",
+        visitLink: "Visit Link",
+        noLinks: "No links available for this learning item."
     }
 }
 

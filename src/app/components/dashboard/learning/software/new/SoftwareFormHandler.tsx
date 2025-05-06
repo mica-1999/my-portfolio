@@ -20,7 +20,7 @@ export default function SoftwareFormHandler() {
     // State & hooks
     const router = useRouter();
     const { data: session } = useSession();
-    const { savedTheme } = useTheme();
+    const { savedTheme, t } = useTheme();
     const userId = session?.user?.id || "";
 
     // Main form state
@@ -95,42 +95,42 @@ export default function SoftwareFormHandler() {
         const newErrors: { [key: string]: string } = {};
 
         // Validate required fields
-        if (!formData.title) newErrors.title = "Title is required";
-        if (!formData.description) newErrors.description = "Description is required";
-        if (!formData.category) newErrors.category = "Category is required";
-        if (formData.subcategories.length === 0) newErrors.subcategories = "At least one subcategory is required";
+        if (!formData.title) newErrors.title = t('softwareForm.validation.titleRequired');
+        if (!formData.description) newErrors.description = t('softwareForm.validation.descriptionRequired');
+        if (!formData.category) newErrors.category = t('softwareForm.validation.categoryRequired');
+        if (formData.subcategories.length === 0) newErrors.subcategories = t('softwareForm.validation.subcategoriesRequired');
 
         // Validate resources if section is toggled on
         if (showResources) {
             resources.forEach((resource, index) => {
-                if (!resource.title) newErrors[`resource_${index}_title`] = "Resource title is required";
+                if (!resource.title) newErrors[`resource_${index}_title`] = `${t('softwareForm.resources.resourceTitle')} ${t('softwareForm.validation.required')}`;
                 if (resource.url && !isValidUrl(resource.url))
-                    newErrors[`resource_${index}_url`] = "Please enter a valid URL";
+                    newErrors[`resource_${index}_url`] = t('softwareForm.validation.validUrl');
             });
         }
 
         // Validate links if section is toggled on
         if (showLinks) {
             links.forEach((link, index) => {
-                if (!link.title) newErrors[`link_${index}_title`] = "Link title is required";
-                if (!link.url) newErrors[`link_${index}_url`] = "URL is required";
-                else if (!isValidUrl(link.url)) newErrors[`link_${index}_url`] = "Please enter a valid URL";
+                if (!link.title) newErrors[`link_${index}_title`] = `${t('softwareForm.links.linkTitle')} ${t('softwareForm.validation.required')}`;
+                if (!link.url) newErrors[`link_${index}_url`] = `${t('softwareForm.links.linkUrl')} ${t('softwareForm.validation.required')}`;
+                else if (!isValidUrl(link.url)) newErrors[`link_${index}_url`] = t('softwareForm.validation.validUrl');
             });
         }
 
         // Validate code snippets if section is toggled on
         if (showCodeSnippets) {
             codeSnippets.forEach((snippet, index) => {
-                if (!snippet.title) newErrors[`snippet_${index}_title`] = "Title is required";
-                if (!snippet.code) newErrors[`snippet_${index}_code`] = "Code is required";
+                if (!snippet.title) newErrors[`snippet_${index}_title`] = `${t('softwareForm.codeSnippets.snippetTitle')} ${t('softwareForm.validation.required')}`;
+                if (!snippet.code) newErrors[`snippet_${index}_code`] = `${t('softwareForm.codeSnippets.code')} ${t('softwareForm.validation.required')}`;
             });
         }
 
         // Validate concepts if section is toggled on
         if (showConcepts) {
             concepts.forEach((concept, index) => {
-                if (!concept.name) newErrors[`concept_${index}_name`] = "Concept name is required";
-                if (!concept.description) newErrors[`concept_${index}_description`] = "Description is required";
+                if (!concept.name) newErrors[`concept_${index}_name`] = `${t('softwareForm.concepts.conceptName')} ${t('softwareForm.validation.required')}`;
+                if (!concept.description) newErrors[`concept_${index}_description`] = `${t('softwareForm.concepts.conceptDescription')} ${t('softwareForm.validation.required')}`;
             });
         }
 
@@ -143,12 +143,12 @@ export default function SoftwareFormHandler() {
         e.preventDefault();
 
         if (!userId) {
-            showToast("error", "You must be logged in to add learning items", savedTheme);
+            showToast("error", t('softwareForm.notifications.loginRequired'), savedTheme);
             return;
         }
 
         if (!validateForm()) {
-            showToast("error", "Please fix the form errors before submitting", savedTheme);
+            showToast("error", t('softwareForm.validation.fixFormErrors'), savedTheme);
             return;
         }
 
@@ -186,14 +186,14 @@ export default function SoftwareFormHandler() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || "Failed to create learning item");
+                throw new Error(errorData.message || t('softwareForm.notifications.createError'));
             }
 
-            showToast("success", "Learning item created successfully", savedTheme);
+            showToast("success", t('softwareForm.notifications.createSuccess'), savedTheme);
             router.push("/pages/dashboard/softwareManage");
         } catch (error) {
             console.error("Error creating learning item:", error);
-            showToast("error", (error as Error).message || "Failed to create learning item", savedTheme);
+            showToast("error", (error as Error).message || t('softwareForm.notifications.createError'), savedTheme);
         } finally {
             setIsSubmitting(false);
         }
@@ -232,7 +232,7 @@ export default function SoftwareFormHandler() {
         setErrors({});
 
         // Show confirmation toast
-        showToast("info", "Form has been reset", savedTheme);
+        showToast("info", t('softwareForm.notifications.formReset'), savedTheme);
     };
 
     // Go back to listing page
@@ -280,7 +280,7 @@ export default function SoftwareFormHandler() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2 text-gray-600 dark:text-[#D7D8ED]" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-[#d7d8ed]">Add New Learning Item</h2>
+                    <h2 className="text-xl font-semibold text-gray-800 dark:text-[#d7d8ed]">{t('softwareForm.title')}</h2>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
@@ -297,12 +297,12 @@ export default function SoftwareFormHandler() {
                     {/* Additional sections toggle buttons */}
                     <div className="flex flex-wrap gap-3 pt-4 pb-2 border-t border-gray-200 dark:border-gray-700">
                         <h3 className="w-full mb-2 text-md font-medium text-gray-700 dark:text-gray-300">
-                            Add additional content (optional):
+                            {t('softwareForm.additionalContent')}
                         </h3>
-                        <ToggleButton section="resources" isVisible={showResources} label="Learning Resources" />
-                        <ToggleButton section="links" isVisible={showLinks} label="Useful Links" />
-                        <ToggleButton section="codeSnippets" isVisible={showCodeSnippets} label="Code Snippets" />
-                        <ToggleButton section="concepts" isVisible={showConcepts} label="Key Concepts" />
+                        <ToggleButton section="resources" isVisible={showResources} label={t('softwareForm.sections.resources')} />
+                        <ToggleButton section="links" isVisible={showLinks} label={t('softwareForm.sections.links')} />
+                        <ToggleButton section="codeSnippets" isVisible={showCodeSnippets} label={t('softwareForm.sections.codeSnippets')} />
+                        <ToggleButton section="concepts" isVisible={showConcepts} label={t('softwareForm.sections.concepts')} />
                     </div>
 
                     {/* Resources Section (conditionally rendered) */}
@@ -348,21 +348,21 @@ export default function SoftwareFormHandler() {
                             onClick={handleCancel}
                             className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-[#30334E] hover:bg-gray-50 dark:hover:bg-[#393C6A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Cancel
+                            {t('softwareForm.formActions.cancel')}
                         </button>
                         <button
                             type="button"
                             onClick={resetForm}
                             className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-[#30334E] hover:bg-gray-50 dark:hover:bg-[#393C6A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            Reset
+                            {t('softwareForm.formActions.reset')}
                         </button>
                         <button
                             type="submit"
                             disabled={isSubmitting}
                             className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
                         >
-                            {isSubmitting ? 'Saving...' : 'Save Learning Item'}
+                            {isSubmitting ? t('softwareForm.formActions.saving') : t('softwareForm.formActions.save')}
                         </button>
                     </div>
                 </form>

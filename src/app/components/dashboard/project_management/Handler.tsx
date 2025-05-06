@@ -47,7 +47,7 @@ export default function Handler() {
             }
         }
         fetchProjects()
-    }, []);
+    }, [savedTheme, t]);
 
     // Clear all filters
     const clearFilters = () => {
