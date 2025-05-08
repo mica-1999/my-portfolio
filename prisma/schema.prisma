@@ -140,6 +140,7 @@ model SoftwareNotes {
   concepts      Concept[]
   links         Link[]
   resources     Resource[]
+  images        Image[] // Add this line to connect images
   User          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
@@ -186,6 +187,19 @@ model Concept {
   id             Int           @id @default(autoincrement())
   name           String
   description    String
+  softwareNoteId Int
+  softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
+
+  @@index([softwareNoteId])
+}
+
+model Image {
+  id             Int           @id @default(autoincrement())
+  title          String?
+  description    String?
+  path           String
+  altText        String?
+  uploadedAt     DateTime      @default(now()) @db.Timestamp(6)
   softwareNoteId Int
   softwareNote   SoftwareNotes @relation(fields: [softwareNoteId], references: [id], onDelete: Cascade)
 

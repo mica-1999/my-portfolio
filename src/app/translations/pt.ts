@@ -423,7 +423,8 @@ const translations = {
             resources: "Recursos de Aprendizagem",
             links: "Links Úteis",
             codeSnippets: "Trechos de Código",
-            concepts: "Conceitos-Chave"
+            concepts: "Conceitos-Chave",
+            images: "Imagens"
         },
         resources: {
             title: "Recursos de Aprendizagem",
@@ -475,6 +476,20 @@ const translations = {
             conceptNamePlaceholder: "Insira o nome do conceito",
             conceptDescription: "Descrição",
             conceptDescriptionPlaceholder: "Explique este conceito"
+        },
+        images: {
+            addImage: "Adicionar Imagem",
+            removeImage: "Remover Imagem",
+            image: "Imagem",
+            title: "Título da Imagem",
+            titlePlaceholder: "Insira o título da imagem",
+            altText: "Texto Alternativo",
+            altTextPlaceholder: "Descreva a imagem para acessibilidade",
+            description: "Descrição",
+            descriptionPlaceholder: "Adicione uma descrição para esta imagem",
+            clickToUpload: "Clique para carregar",
+            supportedFormats: "SVG, PNG, JPG ou GIF (máx. 5MB)",
+            guidelines: "As imagens devem ser claras e relevantes para o tópico de aprendizagem. Para melhores resultados, use imagens com menos de 5MB."
         },
         formActions: {
             cancel: "Cancelar",

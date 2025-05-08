@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface Resource {
     type: string;
     title: string;
@@ -44,6 +46,22 @@ export interface CodeSnippet {
 export interface CodeSnippetsProps {
     codeSnippets: CodeSnippet[];
     setCodeSnippets: React.Dispatch<React.SetStateAction<CodeSnippet[]>>;
+    errors: { [key: string]: string };
+}
+
+export interface ImagesProps {
+    images: {
+        file: File | null;
+        title: string;
+        description: string;
+        altText: string;
+    }[];
+    setImages: Dispatch<SetStateAction<{
+        file: File | null;
+        title: string;
+        description: string;
+        altText: string;
+    }[]>>;
     errors: { [key: string]: string };
 }
 

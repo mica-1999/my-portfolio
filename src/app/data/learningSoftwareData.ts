@@ -17,6 +17,7 @@ export const categoryFilters = [
     { value: 'security', display: 'Security' },
     { value: 'frontend', display: 'Frontend' },
     { value: 'backend', display: 'Backend' },
+    { value: 'fullstack', display: 'Full Stack' },
     { value: 'mobile', display: 'Mobile Development' },
     { value: 'ai', display: 'AI/Machine Learning' },
 ];
@@ -42,6 +43,7 @@ export const programmingSubcategories = [
     { value: 'dsa', display: 'Data Structures & Algorithms' },
     { value: 'functional', display: 'Functional Programming' },
     { value: 'oop', display: 'Object-Oriented Programming' },
+    { value: 'react', display: 'React' },
 ];
 
 export const networkingSubcategories = [
@@ -59,6 +61,18 @@ export const networkingSubcategories = [
     { value: 'sdn', display: 'Software-Defined Networking' },
     { value: 'nat', display: 'Network Address Translation' },
     { value: 'network-monitoring', display: 'Network Monitoring' },
+    { value: 'ftp', display: 'FTP/SFTP' },
+    { value: 'smtp', display: 'SMTP' },
+    { value: 'imap', display: 'IMAP/POP3' },
+    { value: 'ssh', display: 'SSH' },
+    { value: 'ldap', display: 'LDAP' },
+    { value: 'sip', display: 'SIP' },
+    { value: 'ssl-tls', display: 'SSL/TLS' },
+    { value: 'tcp', display: 'TCP' },
+    { value: 'udp', display: 'UDP' },
+    { value: 'ip', display: 'IP Protocol' },
+    { value: 'icmp', display: 'ICMP' },
+    { value: 'arp', display: 'ARP' },
 ];
 
 export const databaseSubcategories = [
@@ -79,6 +93,8 @@ export const databaseSubcategories = [
     { value: 'db-sharding', display: 'Database Sharding' },
     { value: 'db-replication', display: 'Database Replication' },
     { value: 'orm', display: 'ORM' },
+    { value: 'prisma', display: 'Prisma' },
+    { value: 'mongoose', display: 'Mongoose' },
 ];
 
 export const devopsSubcategories = [
@@ -185,6 +201,28 @@ export const backendSubcategories = [
     { value: 'websockets', display: 'WebSockets' },
     { value: 'authentication', display: 'Authentication' },
     { value: 'caching', display: 'Caching Strategies' },
+    { value: 'prisma', display: 'Prisma' },
+    { value: 'mongoose', display: 'Mongoose' },
+];
+
+export const fullstackSubcategories = [
+    { value: 'nextjs', display: 'Next.js' },
+    { value: 'nuxtjs', display: 'Nuxt.js' },
+    { value: 'mern', display: 'MERN Stack' },
+    { value: 'mean', display: 'MEAN Stack' },
+    { value: 'jamstack', display: 'JAMstack' },
+    { value: 'lamp', display: 'LAMP Stack' },
+    { value: 'ruby-on-rails', display: 'Ruby on Rails' },
+    { value: 'django-fullstack', display: 'Django Full Stack' },
+    { value: 'laravel-fullstack', display: 'Laravel Full Stack' },
+    { value: 'asp-net-fullstack', display: 'ASP.NET Full Stack' },
+    { value: 'spring-fullstack', display: 'Spring Full Stack' },
+    { value: 'graphql-fullstack', display: 'GraphQL Full Stack' },
+    { value: 'apollo', display: 'Apollo' },
+    { value: 'remix', display: 'Remix' },
+    { value: 'sveltekit', display: 'SvelteKit' },
+    { value: 'blitz', display: 'Blitz.js' },
+    { value: 'redwood', display: 'RedwoodJS' },
 ];
 
 export const mobileSubcategories = [
@@ -235,7 +273,7 @@ export const subcategoryFilters = [
     { value: 'csharp', display: 'C#', category: 'programming' },
     { value: 'html', display: 'HTML', category: 'frontend' },
     { value: 'css', display: 'CSS', category: 'frontend' },
-    { value: 'react', display: 'React', category: 'frontend' },
+    { value: 'react', display: 'React', category: 'programming' },
     { value: 'angular', display: 'Angular', category: 'frontend' },
     { value: 'vue', display: 'Vue.js', category: 'frontend' },
     { value: 'next', display: 'Next.js', category: 'frontend' },
@@ -254,6 +292,18 @@ export const subcategoryFilters = [
     { value: 'flutter', display: 'Flutter', category: 'mobile' },
     { value: 'tensorflow', display: 'TensorFlow', category: 'ai' },
     { value: 'pytorch', display: 'PyTorch', category: 'ai' },
+    { value: 'nextjs', display: 'Next.js', category: 'fullstack' },
+    { value: 'mern', display: 'MERN Stack', category: 'fullstack' },
+    { value: 'jamstack', display: 'JAMstack', category: 'fullstack' },
+    { value: 'prisma', display: 'Prisma', category: 'database' },
+    { value: 'mongoose', display: 'Mongoose', category: 'database' },
+    { value: 'ssl-tls', display: 'SSL/TLS', category: 'security' },
+    { value: 'ssl-tls', display: 'SSL/TLS', category: 'networking' },
+    { value: 'tcp', display: 'TCP', category: 'networking' },
+    { value: 'udp', display: 'UDP', category: 'networking' },
+    { value: 'ip', display: 'IP Protocol', category: 'networking' },
+    { value: 'icmp', display: 'ICMP', category: 'networking' },
+    { value: 'arp', display: 'ARP', category: 'networking' },
 ];
 
 export const timeRangeFilters = [
@@ -291,6 +341,8 @@ export const getSubcategoriesByCategory = (category: string) => {
             return frontendSubcategories;
         case 'backend':
             return backendSubcategories;
+        case 'fullstack':
+            return fullstackSubcategories;
         case 'mobile':
             return mobileSubcategories;
         case 'ai':

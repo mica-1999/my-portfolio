@@ -15,6 +15,7 @@ import Resources from './Resources';
 import Links from './Links';
 import CodeSnippets from './CodeSnippets';
 import KeyConcepts from './KeyConcepts';
+import Images from './Images';
 
 export default function SoftwareFormHandler() {
     // State & hooks
@@ -43,12 +44,14 @@ export default function SoftwareFormHandler() {
     const [links, setLinks] = useState([{ title: "", url: "", description: "" }]);
     const [codeSnippets, setCodeSnippets] = useState([{ title: "", language: "javascript", code: "", explanation: "" }]);
     const [concepts, setConcepts] = useState([{ name: "", description: "" }]);
+    // Removed image state
 
     // Section toggle states
     const [showResources, setShowResources] = useState(false);
     const [showLinks, setShowLinks] = useState(false);
     const [showCodeSnippets, setShowCodeSnippets] = useState(false);
     const [showConcepts, setShowConcepts] = useState(false);
+    const [showImages, setShowImages] = useState(false); // Kept for UI purposes
 
     // Form submission state
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -134,6 +137,8 @@ export default function SoftwareFormHandler() {
             });
         }
 
+        // Removed image validation
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -155,9 +160,10 @@ export default function SoftwareFormHandler() {
         setIsSubmitting(true);
 
         try {
-            const payload = {
+            // Prepare data for API request - now using JSON instead of FormData
+            const requestData = {
                 userId,
-                formData: {  // <-- Wrap all form fields in a formData object
+                formData: {
                     title: formData.title,
                     description: formData.description,
                     status: formData.status,
@@ -173,7 +179,8 @@ export default function SoftwareFormHandler() {
                 resources: showResources ? resources.filter(r => r.title.trim() !== "") : [],
                 links: showLinks ? links.filter(l => l.title.trim() !== "" && l.url.trim() !== "") : [],
                 codeSnippets: showCodeSnippets ? codeSnippets.filter(c => c.title.trim() !== "" && c.code.trim() !== "") : [],
-                concepts: showConcepts ? concepts.filter(c => c.name.trim() !== "" && c.description.trim() !== "") : [],
+                concepts: showConcepts ? concepts.filter(c => c.name.trim() !== "" && c.description.trim() !== "") : []
+                // Removed images data
             };
 
             const response = await fetch("/api/learning/software", {
@@ -181,7 +188,7 @@ export default function SoftwareFormHandler() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(requestData),
             });
 
             if (!response.ok) {
@@ -221,12 +228,14 @@ export default function SoftwareFormHandler() {
         setLinks([{ title: "", url: "", description: "" }]);
         setCodeSnippets([{ title: "", language: "javascript", code: "", explanation: "" }]);
         setConcepts([{ name: "", description: "" }]);
+        // Removed images reset
 
         // Turn off additional sections
         setShowResources(false);
         setShowLinks(false);
         setShowCodeSnippets(false);
         setShowConcepts(false);
+        setShowImages(false);
 
         // Clear any errors
         setErrors({});
@@ -254,6 +263,9 @@ export default function SoftwareFormHandler() {
                 break;
             case 'concepts':
                 setShowConcepts(prev => !prev);
+                break;
+            case 'images':
+                setShowImages(prev => !prev);
                 break;
         }
     };
@@ -303,6 +315,7 @@ export default function SoftwareFormHandler() {
                         <ToggleButton section="links" isVisible={showLinks} label={t('softwareForm.sections.links')} />
                         <ToggleButton section="codeSnippets" isVisible={showCodeSnippets} label={t('softwareForm.sections.codeSnippets')} />
                         <ToggleButton section="concepts" isVisible={showConcepts} label={t('softwareForm.sections.concepts')} />
+                        <ToggleButton section="images" isVisible={showImages} label={t('softwareForm.sections.images')} />
                     </div>
 
                     {/* Resources Section (conditionally rendered) */}
@@ -339,6 +352,29 @@ export default function SoftwareFormHandler() {
                             setConcepts={setConcepts}
                             errors={errors}
                         />
+                    )}
+
+                    {/* Images Section - Kept UI but with placeholder functionality */}
+                    {showImages && (
+                        <div className="bg-gray-50 dark:bg-[#282A42] p-4 rounded-lg">
+                            <div className="flex justify-between items-center mb-4">
+                                <h3 className="text-lg font-medium text-gray-800 dark:text-white">{t('softwareForm.images.title')}</h3>
+                                <div className="text-sm italic text-gray-500 dark:text-gray-400">
+                                    {t('softwareForm.images.comingSoon')}
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
+                                <svg className="w-12 h-12 text-gray-400 dark:text-gray-500 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                </svg>
+                                <p className="text-base text-gray-500 dark:text-gray-400">
+                                    {t('softwareForm.images.uploadFeatureNotAvailable')}
+                                </p>
+                                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                    {t('softwareForm.images.featureInDevelopment')}
+                                </p>
+                            </div>
+                        </div>
                     )}
 
                     {/* Form Actions */}

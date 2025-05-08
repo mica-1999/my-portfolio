@@ -20,6 +20,9 @@ export async function GET(
             where: {
                 userId: userId,
             },
+            orderBy: {
+                title: "asc",
+            }
         });
 
         if (!learningItems || learningItems.length === 0) {

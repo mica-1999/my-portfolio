@@ -207,7 +207,7 @@ export default function ItemDetails({ id }: { id: string }) {
                             {/* Description */}
                             <div>
                                 <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{t('softwareDetails.description')}</h2>
-                                <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+                                <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line">{item.description}</p>
                             </div>
 
                             {/* Personal Notes */}
@@ -295,7 +295,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                             </div>
 
                                             {resource.notes && (
-                                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-2">{resource.notes}</p>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 mb-2 whitespace-pre-line">{resource.notes}</p>
                                             )}
 
                                             {resource.url && (
@@ -336,11 +336,11 @@ export default function ItemDetails({ id }: { id: string }) {
                                                 <span className="text-xs px-2 py-1 bg-gray-700 rounded">{snippet.language || 'code'}</span>
                                             </div>
                                             <pre className="bg-gray-900 text-gray-300 p-4 overflow-x-auto">
-                                                <code>{snippet.code}</code>
+                                                <code className="whitespace-pre">{snippet.code}</code>
                                             </pre>
                                             {snippet.explanation && (
                                                 <div className="bg-gray-100 dark:bg-gray-800 p-3 text-sm text-gray-700 dark:text-gray-300">
-                                                    {snippet.explanation}
+                                                    <p className="whitespace-pre-line">{snippet.explanation}</p>
                                                 </div>
                                             )}
                                         </div>
@@ -364,7 +364,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                     {item.concepts.map((concept, index) => (
                                         <div key={index} className="bg-white dark:bg-[#282A42] p-5 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                                             <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-2">{concept.name}</h3>
-                                            <p className="text-gray-600 dark:text-gray-300">{concept.description}</p>
+                                            <p className="text-gray-600 dark:text-gray-300 whitespace-pre-line">{concept.description}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -387,7 +387,7 @@ export default function ItemDetails({ id }: { id: string }) {
                                         <div key={index} className="p-4 bg-white dark:bg-[#282A42] border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
                                             <h3 className="font-medium text-gray-800 dark:text-white mb-1">{link.title}</h3>
                                             {link.description && (
-                                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{link.description}</p>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 whitespace-pre-line">{link.description}</p>
                                             )}
                                             <a
                                                 href={link.url}
