@@ -21,7 +21,7 @@ export async function GET(
                 userId: userId,
             },
             orderBy: {
-                title: "asc",
+                createdAt: "desc",
             }
         });
 
